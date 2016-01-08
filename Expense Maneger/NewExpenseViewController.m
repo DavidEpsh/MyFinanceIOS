@@ -1,0 +1,105 @@
+//
+//  NewExpenseViewController.m
+//  Expense Maneger
+//
+//  Created by Admin on 12/24/15.
+//  Copyright © 2015 elena. All rights reserved.
+//
+
+#import "NewExpenseViewController.h"
+#import "Model.h"
+
+@interface NewExpenseViewController ()
+
+@end
+
+@implementation NewExpenseViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"New Expense";
+    
+//    expenses = [[NSMutableArray alloc] init];
+
+    
+    datePicker = [[UIDatePicker alloc]init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.date setInputView:datePicker];
+    
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolBar setTintColor:[UIColor grayColor]];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(ShowSelectedDate)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    [self.date setInputAccessoryView:toolBar];
+    
+   /*
+    NSArray* data = [[Model instance] getExpenses];
+    
+    Expense* exp = [[Expense alloc] init];
+    
+    [[Model instance] addExpense:exp];
+    
+    data = [[Model instance] getExpenses];
+    */
+}
+
+-(void)ShowSelectedDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd/mm/yyyy"];
+    self.date.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    [self.date resignFirstResponder];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (IBAction)takePicture:(id)sender {
+}
+
+- (IBAction)cancelBtn:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)Save:(id)sender {
+    NSArray* data = [[Model instance] getExpenses];
+    Expense* exp = [[Expense alloc] init];
+   [[Model instance] addExpense:exp];
+    data = [[Model instance] getExpenses];
+    
+    exp.exname = self.expenseName.text;
+    exp.excategory = self.category.text;
+    exp.examount = self.amount;
+  //  NSString *myString = [examount stringValue];
+    
+    exp.exdate = self.date.text ;
+    [self.delegate onSave:exp];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+@synthesize expenseName;
+@synthesize category;
+@synthesize amount;
+@synthesize date;
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
+    [theTextField resignFirstResponder];
+    return YES;
+}
+
+
+@end
+

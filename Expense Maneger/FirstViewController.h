@@ -2,7 +2,7 @@
 //  FirstViewController.h
 //  Expense Maneger
 //
-//  Created by Admin on 12/24/15.
+//  Created by Admin on 12/26/15.
 //  Copyright © 2015 elena. All rights reserved.
 //
 
@@ -10,6 +10,4 @@
 
 @interface FirstViewController : UIViewController
 
-
 @end
-
