@@ -40,8 +40,6 @@
         
         [ExpenseSql createTable:database];
         [LastUpdateSql createTable:database];
-
-        
         
         //Creating tables (first time - in "Model")
         char* errormsg;
@@ -50,6 +48,18 @@
         
         if(res != SQLITE_OK){
             NSLog(@"ERROR: failed creating EXPENSES table");
+        }
+        
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS SHEETS (SHEET_ID TEXT PRIMARY KEY, SHEET_NAME TEXT)", NULL, NULL, &errormsg);
+        
+        if(res != SQLITE_OK){
+            NSLog(@"ERROR: failed creating SHEETS table");
+        }
+        
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USER_SHEETS (USER_NAME TEXT, SHEET_ID TEXT, FOREIGN KEY(SHEET_ID) REFERENCES SHEETS(SHEET_ID) PRIMARY KEY(USER_NAME, SHEET_ID))", NULL, NULL, &errormsg);
+        
+        if(res != SQLITE_OK){
+            NSLog(@"ERROR: failed creating USER_SHEETS table");
         }
     }
     return  self;

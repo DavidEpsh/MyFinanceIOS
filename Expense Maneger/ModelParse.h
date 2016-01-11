@@ -13,5 +13,7 @@
 @interface ModelParse : NSObject <ModelProtocol>
 
 -(NSArray*)getExpensesFromDate:(NSString*)date;
+-(NSArray*)getAllRelevantExpenses;
+-(NSString*)getCurrentUser;
 
 @end

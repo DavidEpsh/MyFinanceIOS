@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "Model.h"
+#import "ModelParse.h"
+#import "ModelSql.h"
 
 @interface LoginViewController ()
 
@@ -53,6 +55,7 @@
             [self performSegueWithIdentifier:@"toApp" sender:self];
         }
     }];
+    
     
 }
 

@@ -22,6 +22,15 @@ static NSString* currUser;
     return self;
 }
 
+-(NSString*)getCurrentUser{
+    PFUser* user = [PFUser currentUser];
+    if (user != nil) {
+        return user.username;
+    }else{
+        return nil;
+    }
+}
+
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
     NSError* error;
     PFUser* puser = [PFUser logInWithUsername:user password:pwd error:&error];
@@ -50,6 +59,8 @@ static NSString* currUser;
     obj[@"eximage"] = exp.eximage;
     obj[@"userName"] = exp.userName;
     obj[@"sheetIt"] = exp.sheetId;
+    obj[@"isRepeating"] = exp.sheetId;
+    obj[@"isSaved"] = exp.sheetId;
     [obj save];
 }
 
@@ -98,9 +109,23 @@ static NSString* currUser;
     return expense;
 }
 
+-(NSArray*)getAllRelevantExpenses{
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
+    
+    NSArray* res = [query findObjects];
+    for (PFObject* obj in res) {
+        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
+        [array addObject:expense];
+    }
+    return array;
+    
+}
+
 -(NSArray*)getExpenses{
     NSMutableArray* array = [[NSMutableArray alloc] init];
     PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
+    
     NSArray* res = [query findObjects];
     for (PFObject* obj in res) {
         Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
