@@ -21,7 +21,7 @@
 +(NSString*)getLastUpdateDate:(sqlite3*)database;
 +(void)setLastUpdateDate:(sqlite3*)database date:(NSString*)date;
 +(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses;
-+(nullable instancetype)currentUser;
+//+(nullable instancetype)currentUser;
 
 
 @end

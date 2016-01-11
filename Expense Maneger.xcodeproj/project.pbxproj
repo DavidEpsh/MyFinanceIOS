@@ -38,6 +38,10 @@
 		841E4DAB1C318988005D38CB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 841E4DAA1C318988005D38CB /* libz.tbd */; };
 		843ED9161C3D41E100672C73 /* ModelParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ED9151C3D41E100672C73 /* ModelParse.m */; };
 		843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ED9181C3E9DCE00672C73 /* ExpenseTableViewCell.m */; };
+		84501A7F1C4447B3003EB227 /* TakePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84501A7E1C4447B3003EB227 /* TakePictureViewController.m */; };
+		84501A811C444F90003EB227 /* photo-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 84501A801C444F90003EB227 /* photo-7.png */; };
+		847CC1481C4421C60067BF5B /* home-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 847CC1471C4421C60067BF5B /* home-7.png */; };
+		847CC14A1C4423440067BF5B /* airplane-symbol-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 847CC1491C4423440067BF5B /* airplane-symbol-7.png */; };
 		84E242331C411B390079B736 /* troll.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242321C411B390079B736 /* troll.jpg */; };
 		84E242351C411B440079B736 /* messi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242341C411B440079B736 /* messi.jpg */; };
 		84E242371C411B4A0079B736 /* BeautifulCat.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 84E242361C411B4A0079B736 /* BeautifulCat.JPG */; };
@@ -111,6 +115,11 @@
 		843ED9151C3D41E100672C73 /* ModelParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelParse.m; sourceTree = "<group>"; };
 		843ED9171C3E9DCE00672C73 /* ExpenseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseTableViewCell.h; sourceTree = "<group>"; };
 		843ED9181C3E9DCE00672C73 /* ExpenseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseTableViewCell.m; sourceTree = "<group>"; };
+		84501A7D1C4447B3003EB227 /* TakePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePictureViewController.h; sourceTree = "<group>"; };
+		84501A7E1C4447B3003EB227 /* TakePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePictureViewController.m; sourceTree = "<group>"; };
+		84501A801C444F90003EB227 /* photo-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-7.png"; sourceTree = "<group>"; };
+		847CC1471C4421C60067BF5B /* home-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-7.png"; sourceTree = "<group>"; };
+		847CC1491C4423440067BF5B /* airplane-symbol-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airplane-symbol-7.png"; sourceTree = "<group>"; };
 		84E242321C411B390079B736 /* troll.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = troll.jpg; sourceTree = "<group>"; };
 		84E242341C411B440079B736 /* messi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = messi.jpg; sourceTree = "<group>"; };
 		84E242361C411B4A0079B736 /* BeautifulCat.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BeautifulCat.JPG; sourceTree = "<group>"; };
@@ -198,6 +207,8 @@
 				840502BD1C2C12E8004D4A69 /* NewExpenseViewController.m */,
 				84E2423A1C4184BF0079B736 /* LoginViewController.h */,
 				84E2423B1C4184BF0079B736 /* LoginViewController.m */,
+				84501A7D1C4447B3003EB227 /* TakePictureViewController.h */,
+				84501A7E1C4447B3003EB227 /* TakePictureViewController.m */,
 			);
 			path = "Expense Maneger";
 			sourceTree = "<group>";
@@ -255,6 +266,9 @@
 		840502B41C2C0674004D4A69 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				84501A801C444F90003EB227 /* photo-7.png */,
+				847CC1491C4423440067BF5B /* airplane-symbol-7.png */,
+				847CC1471C4421C60067BF5B /* home-7.png */,
 				841E4D931C306928005D38CB /* plus-simple-7.png */,
 				840502B71C2C06DC004D4A69 /* connect-arrow-left-right-7.png */,
 				840502B51C2C0694004D4A69 /* business-bag-7.png */,
@@ -358,6 +372,7 @@
 				TargetAttributes = {
 					840502731C2BE9B4004D4A69 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 4EY86X7BXT;
 					};
 					8405028F1C2BE9B5004D4A69 = {
 						CreatedOnToolsVersion = 7.1;
@@ -394,8 +409,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84501A811C444F90003EB227 /* photo-7.png in Resources */,
 				840502B61C2C0694004D4A69 /* business-bag-7.png in Resources */,
 				84E242351C411B440079B736 /* messi.jpg in Resources */,
+				847CC1481C4421C60067BF5B /* home-7.png in Resources */,
 				840502B81C2C06DC004D4A69 /* connect-arrow-left-right-7.png in Resources */,
 				8405028A1C2BE9B5004D4A69 /* LaunchScreen.storyboard in Resources */,
 				840502871C2BE9B5004D4A69 /* Assets.xcassets in Resources */,
@@ -404,6 +421,7 @@
 				841E4D941C306928005D38CB /* plus-simple-7.png in Resources */,
 				84E242391C411B530079B736 /* funny.jpg in Resources */,
 				84E242331C411B390079B736 /* troll.jpg in Resources */,
+				847CC14A1C4423440067BF5B /* airplane-symbol-7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +452,7 @@
 				840502B31C2BEDE1004D4A69 /* Expense.m in Sources */,
 				840502BE1C2C12E8004D4A69 /* NewExpenseViewController.m in Sources */,
 				840502791C2BE9B4004D4A69 /* main.m in Sources */,
+				84501A7F1C4447B3003EB227 /* TakePictureViewController.m in Sources */,
 				843ED9161C3D41E100672C73 /* ModelParse.m in Sources */,
 				840502AF1C2BEAC4004D4A69 /* Model.m in Sources */,
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
@@ -581,15 +600,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Expense Maneger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elena.Expense-Maneger";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -597,15 +619,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Expense Maneger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elena.Expense-Maneger";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

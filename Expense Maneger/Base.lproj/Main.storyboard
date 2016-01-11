@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tr9-lu-SEE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tr9-lu-SEE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -20,11 +20,12 @@
                     <connections>
                         <segue destination="2Li-3J-Kb3" kind="relationship" relationship="viewControllers" id="0qd-ZL-DPN"/>
                         <segue destination="Qf4-vC-Oct" kind="relationship" relationship="viewControllers" id="jSu-M8-8bY"/>
+                        <segue destination="XdE-1N-JvV" kind="relationship" relationship="viewControllers" id="0ZX-q5-JN4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="-72"/>
+            <point key="canvasLocation" x="-1309" y="-24"/>
         </scene>
         <!--Other Users-->
         <scene sceneID="mMn-l7-vTw">
@@ -44,7 +45,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yWd-ex-zjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="496"/>
+            <point key="canvasLocation" x="-535" y="8"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="OE7-pc-Gts">
@@ -122,13 +123,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OBz-v8-qOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-921" y="-72"/>
+            <point key="canvasLocation" x="-1679" y="-24"/>
         </scene>
-        <!--Other Users-->
+        <!--Root View Controller-->
+        <scene sceneID="dfN-Db-DSZ">
+            <objects>
+                <tableViewController id="F2U-lO-bfn" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="kpW-be-ad0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellCell" id="zNu-sV-wPU">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zNu-sV-wPU" id="oHn-aw-Yz8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="F2U-lO-bfn" id="FTg-Iw-f6E"/>
+                            <outlet property="delegate" destination="F2U-lO-bfn" id="cf6-C2-b3F"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="lLV-RS-PYB"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ekl-bN-je2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-535" y="693"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="OwZ-oG-q4l">
+            <objects>
+                <navigationController id="XdE-1N-JvV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="home-7.png" id="IE8-oh-joK"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qd2-8R-WW4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="F2U-lO-bfn" kind="relationship" relationship="rootViewController" id="prO-5Q-TxY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vVz-qO-3fE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-899" y="693"/>
+        </scene>
+        <!--Trips-->
         <scene sceneID="kJD-g2-6iY">
             <objects>
                 <navigationController storyboardIdentifier="SecondViewController" id="Qf4-vC-Oct" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Other Users" image="connect-arrow-left-right-7.png" id="ohf-A6-1Ma"/>
+                    <tabBarItem key="tabBarItem" title="Trips" image="airplane-symbol-7.png" id="ohf-A6-1Ma"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VCN-bq-ntX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -140,12 +187,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxa-Ng-sLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="496"/>
+            <point key="canvasLocation" x="-914" y="8"/>
         </scene>
-        <!--My Finance-->
+        <!--My Account-->
         <scene sceneID="YeD-8u-lUi">
             <objects>
-                <tableViewController storyboardIdentifier="ExpenseTableViewController" id="bev-2x-Rr0" customClass="ExpenseTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExpenseTableViewController" id="bev-2x-Rr0" userLabel="My Account" customClass="ExpenseTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="113" sectionHeaderHeight="28" sectionFooterHeight="28" id="Snc-VJ-St0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -177,6 +224,11 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Rsc-ov-cLb">
+                                            <rect key="frame" x="55" y="41" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                        </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vme-Zi-QIb">
                                             <rect key="frame" x="143" y="62" width="144" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -185,11 +237,6 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Rsc-ov-cLb">
-                                            <rect key="frame" x="55" y="41" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                        </activityIndicatorView>
                                     </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -207,7 +254,7 @@
                             <outlet property="delegate" destination="bev-2x-Rr0" id="1sZ-3q-uvr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Finance" id="KUs-ca-iRM">
+                    <navigationItem key="navigationItem" title="My Account" id="KUs-ca-iRM">
                         <barButtonItem key="rightBarButtonItem" image="plus-simple-7.png" id="cUC-fo-A59">
                             <color key="tintColor" red="0.33051459849999998" green="0.59066771600000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -221,7 +268,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YW-OW-Lu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198" y="-474"/>
+            <point key="canvasLocation" x="-540" y="-622"/>
         </scene>
         <!--New Expense View Controller-->
         <scene sceneID="EcJ-uI-m5b">
@@ -322,7 +369,14 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OdP-W1-Un7"/>
+                    <navigationItem key="navigationItem" id="OdP-W1-Un7">
+                        <barButtonItem key="rightBarButtonItem" image="photo-7.png" id="A9K-Os-nfY">
+                            <connections>
+                                <action selector="toTakePhotoViewContr:" destination="hZM-uR-1Ra" id="Hyf-oI-sHt"/>
+                                <segue destination="tEZ-4D-eTi" kind="push" identifier="toTakePicture" id="58a-tT-aFE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="amount" destination="RhS-Nx-4Fn" id="fev-0W-GyB"/>
                         <outlet property="cancelBtn" destination="W3B-F6-xUM" id="Ucf-K0-HSa"/>
@@ -335,13 +389,53 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3r-4t-r34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576" y="-480"/>
+            <point key="canvasLocation" x="-196" y="-622"/>
         </scene>
-        <!--My Finance-->
+        <!--Take Picture View Controller-->
+        <scene sceneID="mRl-73-9ix">
+            <objects>
+                <viewController storyboardIdentifier="TakePictureViewController" id="tEZ-4D-eTi" customClass="TakePictureViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="np6-Sq-1Jg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Cdm-nE-Xla">
+                                <rect key="frame" x="122" y="69" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="tEZ-4D-eTi" eventType="touchUpInside" id="Gvu-rx-ELa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZZU-Br-DD4">
+                                <rect key="frame" x="112" y="107" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose Photo"/>
+                                <connections>
+                                    <action selector="choosePhoto:" destination="tEZ-4D-eTi" eventType="touchUpInside" id="cGS-4j-HOk"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FuO-DS-tRN">
+                                <rect key="frame" x="40" y="174" width="240" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qiw-TH-QWQ"/>
+                    <connections>
+                        <outlet property="imageViewPhoto" destination="FuO-DS-tRN" id="tGw-Jg-RiW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gV-cF-owN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="201" y="-622"/>
+        </scene>
+        <!--My Account-->
         <scene sceneID="9VN-Wx-DpF">
             <objects>
                 <navigationController storyboardIdentifier="FirstViewController" id="2Li-3J-Kb3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Finance" image="business-bag-7.png" id="cQQ-YD-vbY"/>
+                    <tabBarItem key="tabBarItem" title="My Account" image="business-bag-7.png" id="cQQ-YD-vbY"/>
                     <navigationItem key="navigationItem" id="GMH-au-xzb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EK1-TV-hna">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -354,12 +448,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xGV-hW-lY2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="-474"/>
+            <point key="canvasLocation" x="-914" y="-622"/>
         </scene>
     </scenes>
     <resources>
+        <image name="airplane-symbol-7.png" width="30" height="30"/>
         <image name="business-bag-7.png" width="30" height="30"/>
-        <image name="connect-arrow-left-right-7.png" width="29" height="30"/>
+        <image name="home-7.png" width="30" height="30"/>
+        <image name="photo-7.png" width="30" height="30"/>
         <image name="plus-simple-7.png" width="30" height="30"/>
     </resources>
 </document>

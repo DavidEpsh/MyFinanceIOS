@@ -39,4 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
+- (IBAction)toTakePhotoViewContr:(id)sender;
+
+
 @end

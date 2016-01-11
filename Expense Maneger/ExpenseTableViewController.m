@@ -21,8 +21,19 @@
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
     
-    self.title = [Model instance].user;
     
+    self.navigationItem.title = [Model instance].user;
+    
+    
+  /*
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    ExpenseTableViewController *myView = [[ExpenseTableViewController alloc]init];
+    [nav pushViewController:myView animated:NO];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"My Account" image:[UIImage imageNamed:@"business-bag-7.png"] tag:0];
+    nav.tabBarItem = item2;
+    UITabBarController *tbc = [[UITabBarController alloc]init];
+    tbc.viewControllers = [NSArray arrayWithObjects:nav, nil];
+ */
 
     expenses = [[NSArray alloc] init];
     [[Model instance] getExpensesAsynch:^(NSArray *stArray) {

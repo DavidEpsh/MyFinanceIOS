@@ -24,8 +24,7 @@
     
     datePicker = [[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    [self.date setInputView:datePicker];
-    
+    [self.date setInputView:datePicker];    
     UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     [toolBar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(ShowSelectedDate)];
@@ -55,13 +54,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
+#pragma mark - Navigation
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toTakePicture"]) {
+        toTakePictureViewConntroller nextVC = segue.destinationViewController;
+        nextVC.delegate = self;
 }
 */
 
@@ -103,5 +103,7 @@
 }
 
 
+- (IBAction)toTakePhotoViewContr:(id)sender {
+}
 @end
 
