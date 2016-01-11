@@ -17,4 +17,10 @@
 +(Expense*)getExpense:(sqlite3*)database exname:(NSString*)exname;
 +(NSArray*)getExpenses:(sqlite3*)database;
 
++(BOOL)createTable:(sqlite3*)database;
++(NSString*)getLastUpdateDate:(sqlite3*)database;
++(void)setLastUpdateDate:(sqlite3*)database date:(NSString*)date;
++(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses;
+
+
 @end

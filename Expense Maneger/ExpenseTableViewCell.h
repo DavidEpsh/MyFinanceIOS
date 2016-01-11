@@ -12,6 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *exName;
 @property (weak, nonatomic) IBOutlet UILabel *category;
+
+@property NSString* imageName;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

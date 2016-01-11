@@ -39,15 +39,13 @@
     Expense* exp = [[Expense alloc] init];
     
     [[Model instance] addExpense:exp];
-    
-    data = [[Model instance] getExpenses];
     */
 }
 
 -(void)ShowSelectedDate
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd/mm/yyyy"];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
     self.date.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
     [self.date resignFirstResponder];
 }
@@ -70,26 +68,31 @@
 - (IBAction)takePicture:(id)sender {
 }
 
-- (IBAction)cancelBtn:(id)sender {
+- (IBAction)cancelAct:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)Save:(id)sender {
-    NSArray* data = [[Model instance] getExpenses];
+- (IBAction)saveAct:(id)sender {
+   
     Expense* exp = [[Expense alloc] init];
-   [[Model instance] addExpense:exp];
-    data = [[Model instance] getExpenses];
+    [[Model instance] addExp:exp];
+    
+//    NSArray* data = [[Model instance] getExpenses];
     
     exp.exname = self.expenseName.text;
     exp.excategory = self.category.text;
-    exp.examount = self.amount;
-  //  NSString *myString = [examount stringValue];
     
-    exp.exdate = self.date.text ;
+    NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
+    st_examount = self.amount.text;
+
+    NSString* st_exdate = [NSString stringWithFormat:@"%@", exp.exdate];
+    st_exdate = self.date.text;
+    
     [self.delegate onSave:exp];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @synthesize expenseName;
 @synthesize category;
 @synthesize amount;

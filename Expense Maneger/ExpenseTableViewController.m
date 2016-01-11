@@ -9,7 +9,7 @@
 #import "ExpenseTableViewController.h"
 #import "ExpenseTableViewCell.h"
 #import "Model.h"
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 
 @interface ExpenseTableViewController ()
 
@@ -19,21 +19,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.activityIndicator startAnimating];
     
-//    self.expenses = [[NSMutableArray alloc] init];
-   
-    self.expenses = [[NSArray alloc] init];
+    self.title = [Model instance].user;
+    
+
+    expenses = [[NSArray alloc] init];
     [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
-        self.expenses = stArray;
+        expenses = stArray;
         [self.tableView reloadData];
         [self.activityIndicator stopAnimating];
         self.activityIndicator.hidden = YES;
-
     }];
-    [self.activityIndicator startAnimating];
+
     
 }
 
+ 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
@@ -48,7 +50,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.expenses.count;
+    return expenses.count;
 }
 /*
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,11 +62,29 @@
     
     ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"expenseCell" forIndexPath:indexPath];
     
-    Expense* exp = [self.expenses objectAtIndex:indexPath.row];
+    Expense* exp = [expenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
-//    cell.tag = indexPath.row;
-    
+ 
+    cell.imageName = exp.eximage;
+    cell.imageView.image = nil;
+    [cell.activityIndicator startAnimating];
+    if (exp.eximage != nil && ![exp.eximage isEqualToString:@""]) {
+        [[Model instance] getExpenseImage:exp block:^(UIImage *image) {
+            if ([cell.imageName isEqualToString:exp.eximage]){
+                cell.activityIndicator.hidden = YES;
+                if (image != nil) {
+                    cell.imageView.image = image;
+                    [cell.activityIndicator stopAnimating];
+                }else{
+                    cell.imageView.image = [UIImage imageNamed:@"messi.jpg"];
+                }
+            }
+        }];
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"troll.jpg"];
+    }
+ 
     return cell;
 }
 

@@ -20,6 +20,9 @@
 -(void)saveImage:(UIImage*)image withName:(NSString*)eximage;
 -(UIImage*)getImage:(NSString*)eximage;
 
+-(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
+-(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
+
 @end
 
 @protocol GetExpensesListener <NSObject>
@@ -29,17 +32,24 @@
 @end
 
 
-@interface Model : NSObject<ModelProtocol>{
-    id<ModelProtocol> modelImpl;
+@interface Model : NSObject{
+    id<ModelProtocol> parseModelImpl;
+    id<ModelProtocol> sqlModelImpl;
 }
+
+@property NSString* user;
 
 +(Model*)instance;
 
--(void)addExpense:(Expense*)exp;
+-(void)addExp:(Expense*)exp;
 
 -(void)getExpensesAsynch:(void(^)(NSArray*))blockListener;
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block;
 -(void)saveExpenseImage:(Expense*)exp image:(UIImage*)image block:(void(^)(NSError*))block;
+
+-(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
+-(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
+
 
 @end
 

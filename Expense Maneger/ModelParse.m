@@ -8,7 +8,7 @@
 
 #import "ModelParse.h"
 #import <Parse/Parse.h>
-
+ 
 @implementation ModelParse
 
 -(id)init{
@@ -19,6 +19,25 @@
     }
     return self;
 }
+
+-(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
+    NSError* error;
+    PFUser* puser = [PFUser logInWithUsername:user password:pwd error:&error];
+    if (error == nil && puser != nil) {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL)signup:(NSString*)user pwd:(NSString*)pwd{
+    NSError* error;
+    PFUser* puser = [PFUser user];
+    puser.username = user;
+    puser.password = pwd;
+    return [puser signUp:&error];
+}
+
+
 
 -(void)addExpense:(Expense*)exp{
     PFObject *obj = [PFObject objectWithClassName:@"Expense"];
@@ -57,9 +76,7 @@
     NSArray* res = [query findObjects];
     if (res.count == 1) {
         PFObject* obj = [res objectAtIndex:0];
-    expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];//Zarih Leyazer object shel Expense she me-toh ha-PFObject kibalti be-hazara
-    
-    
+    expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];//Zarih Leyazer object shel Expense she me-toh ha-PFObject kibalti be-hazar
  /*
     NSArray* res = [query findObjects];
     if (res.count == 1) {
@@ -89,6 +106,20 @@
     return array;
 
 }
+-(NSArray*)getExpensesFromDate:(NSString*)date{
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    PFQuery* query = [PFQuery queryWithClassName:@"Expenses"];
+    NSDate* dated = [NSDate dateWithTimeIntervalSince1970:[date doubleValue]];
+    [query whereKey:@"updatedAt" greaterThanOrEqualTo:dated];
+    
+    NSArray* res = [query findObjects];
+    for (PFObject* obj in res) {
+        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];
+        [array addObject:expense];
+    }
+    return array;
+}
+
 
 -(void)updateExpense:(NSString*)exname{
    PFQuery* query = [PFQuery queryWithClassName:@"Expenses"];
@@ -104,6 +135,29 @@
     }
 }
 
+-(void)saveImage:(UIImage*)image withName:(NSString*)eximage{
+    NSData* imageData = UIImageJPEGRepresentation(image,0);
+    
+    PFFile* file = [PFFile fileWithName:eximage data:imageData];
+    PFObject* fileobj = [PFObject objectWithClassName:@"Images"];
+    fileobj[@"eximage"] = eximage;
+    fileobj[@"file"] = file;
+    [fileobj save];
+}
+
+-(UIImage*)getImage:(NSString*)eximage{
+    PFQuery* query = [PFQuery queryWithClassName:@"Images"];
+    [query whereKey:@"eximage" equalTo:eximage];
+    NSArray* res = [query findObjects];
+    UIImage* image = nil;
+    if (res.count == 1) {
+        PFObject* imObj = [res objectAtIndex:0];
+        PFFile* file = imObj[@"file"];
+        NSData* data = [file getData];
+        image = [UIImage imageWithData:data];
+    }
+    return image;
+}
 
 
 @end

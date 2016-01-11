@@ -10,6 +10,8 @@
 
 @implementation ExpenseTableViewCell
 
+@synthesize imageView;
+
 - (void)awakeFromNib {
     // Initialization code
 }

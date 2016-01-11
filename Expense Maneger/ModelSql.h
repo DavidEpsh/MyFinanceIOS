@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "Model.h"
+#import "Expense.h"
 
 @interface ModelSql : NSObject<ModelProtocol>{
 
    sqlite3* database;
 }
+
+-(NSString*)getExpensesLastUpdateDate;
+-(void)setExpensesLastUpdateDate:(NSString*)date;
+-(void)updateExpenses:(NSArray*)expenses;
 
 @end

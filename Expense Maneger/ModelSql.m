@@ -8,6 +8,8 @@
 
 #import "ModelSql.h"
 #import "ExpenseSql.h"
+#import "LastUpdateSql.h"
+
 
 @implementation ModelSql
 
@@ -23,8 +25,7 @@
         NSURL* directoryUrl = [paths objectAtIndex:0];
         
         NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.db"];
-        
-        
+
         //Open the database
         NSString* filePath = [fileUrl path];
         
@@ -36,6 +37,10 @@
             NSLog(@"ERROR: fail to open db");
             database = nil;
         }
+        
+        [ExpenseSql createTable:database];
+        [LastUpdateSql createTable:database];
+
         
         
         //Creating tables (first time - in "Model")
@@ -65,5 +70,25 @@
     return [ExpenseSql getExpenses:database];
 }
 
+-(NSString*)getExpensesLastUpdateDate{
+    return [ExpenseSql getLastUpdateDate:database];
+}
+
+-(void)setExpensesLastUpdateDate:(NSString*)date{
+    [ExpenseSql setLastUpdateDate:database date:date];
+}
+
+-(void)updateExpenses:(NSArray*)expenses{
+    [ExpenseSql updateExpenses:database expenses:expenses];
+}
+
+
+-(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
+    return  NO;
+}
+
+-(BOOL)Signup:(NSString*)user pwd:(NSString*)pwd{
+    return  NO;
+}
 
 @end

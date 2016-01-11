@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Model.h"
+#import <UIKit/UIKit.h>
 
 @interface ModelParse : NSObject <ModelProtocol>
+
+-(NSArray*)getExpensesFromDate:(NSString*)date;
 
 @end

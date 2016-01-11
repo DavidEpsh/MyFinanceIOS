@@ -9,12 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "NewExpenseViewController.h"
 
-@interface ExpenseTableViewController : UITableViewController<NewExpenseDelegate>
-
-//@property NSMutableArray* data;
-
-@property NSArray* expenses;
-
+@interface ExpenseTableViewController : UITableViewController<NewExpenseDelegate>{
+   NSArray* expenses;
+}
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

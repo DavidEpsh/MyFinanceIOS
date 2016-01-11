@@ -24,20 +24,19 @@
 
 @property id<NewExpenseDelegate> delegate;
 
-
 @property (weak, nonatomic) IBOutlet UITextField *expenseName;
-
 @property (weak, nonatomic) IBOutlet UITextField *category;
-
 @property (weak, nonatomic) IBOutlet UITextField *amount;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *date;
 
 - (IBAction)takePicture:(id)sender;
 
-- (IBAction)cancelBtn:(id)sender;
+- (IBAction)cancelAct:(id)sender;
 
-- (IBAction)Save:(id)sender;
+- (IBAction)saveAct:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *takePicturBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 @end
