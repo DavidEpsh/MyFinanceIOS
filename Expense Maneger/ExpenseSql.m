@@ -23,12 +23,17 @@ static NSString* EXPENSE_NAME = @"NAME";
 static NSString* EXPENSE_CATEGORY = @"CATEGORY";
 static NSString* EXPENSE_AMOUNT = @"AMOUNT";
 static NSString* EXPENSE_DATE = @"DATE";
-static NSString* EXPENSE_IMAGE = @"IMAGE_NAME";
+static NSString* EXPENSE_IMAGE = @"EXPENSE_IMAGE";
+static NSString* USER_NAME = @"USER_NAME";
+static NSString* SHEET_ID = @"SHEET_ID";
+static NSString* IS_REPEATING = @"IS_REPEATING";
+static NSString* IS_SAVED = @"IS_SAVED";
+
 
 +(BOOL)createTable:(sqlite3*)database{
     char* errormsg;
     
-    NSString* sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",EXPENSE_TABLE,TIMEINMILLISECOND,EXPENSE_NAME,EXPENSE_CATEGORY,EXPENSE_AMOUNT,EXPENSE_DATE,EXPENSE_IMAGE];
+    NSString* sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ INTEGER , %@ INTEGER)",EXPENSE_TABLE,TIMEINMILLISECOND,EXPENSE_NAME,EXPENSE_CATEGORY,EXPENSE_AMOUNT,EXPENSE_DATE,EXPENSE_IMAGE, USER_NAME, SHEET_ID, IS_REPEATING, IS_SAVED];
     int res = sqlite3_exec(database, [sql UTF8String], NULL, NULL, &errormsg);
     if(res != SQLITE_OK){
         NSLog(@"ERROR: failed creating EXPENSES table");
@@ -49,23 +54,22 @@ static NSString* EXPENSE_IMAGE = @"IMAGE_NAME";
 
 +(void)addExpense:(sqlite3 *)database exp:(Expense*)exp{
     sqlite3_stmt *statment;
-    NSString* query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@,%@,%@,%@,%@,%@) values (?,?,?,?,?,?);",EXPENSE_TABLE,TIMEINMILLISECOND,EXPENSE_NAME,EXPENSE_CATEGORY,EXPENSE_AMOUNT,EXPENSE_DATE,EXPENSE_IMAGE];
+    NSString* query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@,%@,%@,%@,%@,%@,%@,%@,%@,%@) values (?,?,?,?,?,?,?,?,?,?);",EXPENSE_TABLE,TIMEINMILLISECOND,EXPENSE_NAME,EXPENSE_CATEGORY,EXPENSE_AMOUNT,EXPENSE_DATE,EXPENSE_IMAGE, USER_NAME, SHEET_ID, IS_REPEATING, IS_SAVED];
     
   
     if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
         
         NSString* st_timeInMillisecond = [NSString stringWithFormat:@"%@", exp.timeInMillisecond];
         sqlite3_bind_text(statment, 1, [st_timeInMillisecond UTF8String],-1,NULL);
-        
         sqlite3_bind_text(statment, 2, [exp.exname UTF8String],-1,NULL);
         sqlite3_bind_text(statment, 3, [exp.excategory UTF8String],-1,NULL);
-      
-        sqlite3_bind_double(statment, 4, [exp.examount doubleValue]);
-        
-        NSString* st_exdate = [NSString stringWithFormat:@"%@", exp.exdate];
-        sqlite3_bind_text(statment, 5, [st_exdate UTF8String],-1,NULL);
-        
+        sqlite3_bind_int(statment, 4, [exp.examount intValue]);
+        sqlite3_bind_text(statment, 5, [exp.exdate UTF8String],-1,NULL);
         sqlite3_bind_text(statment, 6, [exp.eximage UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 7, [exp.userName UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 8, [exp.sheetId UTF8String],-1,NULL);
+        sqlite3_bind_int(statment, 9, [exp.isRepeating intValue]);
+        sqlite3_bind_int(statment, 10, [exp.isSaved intValue]);
         if(sqlite3_step(statment) == SQLITE_DONE){
             return;
         }
@@ -88,19 +92,21 @@ static NSString* EXPENSE_IMAGE = @"IMAGE_NAME";
     if (sqlite3_prepare_v2(database,"SELECT * from EXPENSES;", -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
             
-            NSNumber* timeInMillisecond = [NSNumber numberWithLong:(long)sqlite3_column_text(statment,0)];
+            NSString* timeInMillisecond = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
             NSString* exname = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,1)];
             NSString* excategory = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,2)];
-            
-            NSNumber* examount = [NSNumber numberWithDouble:(double)sqlite3_column_double(statment,3)];
+            NSNumber* examount = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,3)];
             NSString* exdate = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,4)];
             NSString* eximage = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,5)];
+            NSString* userName = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,6)];
+            NSString* sheetId = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,7)];
+            NSNumber* isRepeating = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,8)];
+            NSNumber* isSaved = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,9)];
+            //NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];
+            //[dateFormat setDateFormat:@"dd/MM/yyyy"];
+            //NSString* my_exdate = [dateFormat dateFromString:exdate];
             
-            NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];
-            [dateFormat setDateFormat:@"dd/MM/yyyy"];
-            NSDate* my_exdate = [dateFormat dateFromString:exdate];
-            
-            Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:my_exdate eximage:eximage];
+            Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:exdate eximage:eximage userName:userName sheetId:sheetId isRepeating:isRepeating isSaved:isSaved];
             [data addObject:exp];
         }
     }else{

@@ -10,7 +10,7 @@
 
 @implementation Expense
 
--(id)init:(NSNumber*)timeInMillisecond exname:(NSString*)exname excategory:(NSString*)excategory examount:(NSNumber*)examount exdate:(NSDate*)exdate eximage:(NSString*)eximage{
+-(id)init:(NSString*)timeInMillisecond exname:(NSString*)exname excategory:(NSString*)excategory examount:(NSNumber*)examount exdate:(NSString*)exdate eximage:(NSString*)eximage userName:(NSString*)userName sheetId:(NSString*)sheetId isRepeating:(NSNumber*)isRepeating isSaved:(NSNumber*)isSaved {
     self = [super init];
     if (self){
         _timeInMillisecond = timeInMillisecond;
@@ -19,6 +19,10 @@
         _examount = examount;
         _exdate = exdate;
         _eximage = eximage;
+        _userName = userName;
+        _sheetId = sheetId;
+        _isRepeating = isRepeating;
+        _isSaved = isSaved;
     }
     return  self;
 }

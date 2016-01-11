@@ -47,6 +47,8 @@
     obj[@"examount"] = exp.examount;
     obj[@"exdate"] = exp.exdate;
     obj[@"eximage"] = exp.eximage;
+    obj[@"userName"] = exp.userName;
+    obj[@"sheetIt"] = exp.sheetId;
     [obj save];
 }
 
@@ -68,7 +70,7 @@
     
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* comps = [calendar components:NSCalendarUnitYearForWeekOfYear |NSCalendarUnitYear |NSCalendarUnitMonth|NSCalendarUnitWeekOfMonth |NSCalendarUnitWeekday fromDate:exdate];
-    [comps setWeekday:2]; // 2: monday
+    [comps setWeekday:1]; // 2: monday
     NSDate *firstDayOfTheWeek = [calendar dateFromComponents:comps];
     [comps setWeekday:7]; // 7: saturday
     NSDate *lastDayOfTheWeek = [calendar dateFromComponents:comps];
@@ -76,7 +78,7 @@
     NSArray* res = [query findObjects];
     if (res.count == 1) {
         PFObject* obj = [res objectAtIndex:0];
-    expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];//Zarih Leyazer object shel Expense she me-toh ha-PFObject kibalti be-hazar
+    expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];//Zarih Leyazer object shel Expense she me-toh ha-PFObject kibalti be-hazar
  /*
     NSArray* res = [query findObjects];
     if (res.count == 1) {
@@ -100,7 +102,7 @@
     PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
     NSArray* res = [query findObjects];
     for (PFObject* obj in res) {
-        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];
+        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
         [array addObject:expense];
     }
     return array;
@@ -114,7 +116,7 @@
     
     NSArray* res = [query findObjects];
     for (PFObject* obj in res) {
-        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]];
+        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
         [array addObject:expense];
     }
     return array;

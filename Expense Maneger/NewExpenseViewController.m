@@ -77,7 +77,6 @@
     Expense* exp = [[Expense alloc] init];
     [[Model instance] addExp:exp];
     
-//    NSArray* data = [[Model instance] getExpenses];
     
     exp.exname = self.expenseName.text;
     exp.excategory = self.category.text;

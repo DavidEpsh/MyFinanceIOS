@@ -46,7 +46,7 @@
         //Creating tables (first time - in "Model")
         char* errormsg;
         
-        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS EXPENSES (TIMEINMILLISECOND TIMESTAMP(8) PRIMARY KEY, NAME TEXT, CATEGORY TEXT, AMOUNT, DATE TEXT, IMAGE_NAME TEXT)", NULL, NULL, &errormsg);
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS EXPENSES (TIMEINMILLISECOND TEXT PRIMARY KEY, NAME TEXT, CATEGORY TEXT, AMOUNT INTEGER, DATE TEXT, IMAGE_NAME TEXT, USER_NAME TEXT, SHEET_ID TEXT, IS_REPEATING INTEGER, IS_SAVED INTEGER)", NULL, NULL, &errormsg);
         
         if(res != SQLITE_OK){
             NSLog(@"ERROR: failed creating EXPENSES table");
