@@ -30,7 +30,7 @@ static Model* instance = nil;
     if (self) {
         sqlModelImpl = [[ModelSql alloc] init];
         parseModelImpl = [[ModelParse alloc] init];
-//       _user = [parseModelImpl getCurrentUser];
+        _user = [parseModelImpl getCurrentUser];
 
     }
     return self;

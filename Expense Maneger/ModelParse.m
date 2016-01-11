@@ -8,7 +8,9 @@
 
 #import "ModelParse.h"
 #import <Parse/Parse.h>
- 
+
+static NSString* currUser;
+
 @implementation ModelParse
 
 -(id)init{
@@ -36,7 +38,6 @@
     puser.password = pwd;
     return [puser signUp:&error];
 }
-
 
 
 -(void)addExpense:(Expense*)exp{
@@ -111,8 +112,7 @@
 -(NSArray*)getExpensesFromDate:(NSString*)date{
     NSMutableArray* array = [[NSMutableArray alloc] init];
     PFQuery* query = [PFQuery queryWithClassName:@"Expenses"];
-    NSDate* dated = [NSDate dateWithTimeIntervalSince1970:[date doubleValue]];
-    [query whereKey:@"updatedAt" greaterThanOrEqualTo:dated];
+    [query whereKey:@"updatedAt" greaterThanOrEqualTo:date];
     
     NSArray* res = [query findObjects];
     for (PFObject* obj in res) {

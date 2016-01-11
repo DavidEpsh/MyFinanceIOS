@@ -53,6 +53,7 @@
             [self performSegueWithIdentifier:@"toApp" sender:self];
         }
     }];
+    
 }
 
 - (IBAction)signup:(id)sender {

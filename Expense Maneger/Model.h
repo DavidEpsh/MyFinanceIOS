@@ -22,6 +22,7 @@
 
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
+-(NSString*)getCurrentUser;
 
 @end
 

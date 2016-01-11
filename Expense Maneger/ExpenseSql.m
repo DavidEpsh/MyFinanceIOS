@@ -81,6 +81,7 @@ static NSString* IS_SAVED = @"IS_SAVED";
 +(void)deleteExpense:(sqlite3 *)database exp:(Expense *)exp{
 }
 
+
 +(Expense*)getExpense:(sqlite3 *)database exname:(NSString *)exname{
     return nil;
 }
@@ -88,8 +89,10 @@ static NSString* IS_SAVED = @"IS_SAVED";
 +(NSArray*)getExpenses:(sqlite3 *)database{
     NSMutableArray* data = [[NSMutableArray alloc] init];
     sqlite3_stmt *statment;
- 
-    if (sqlite3_prepare_v2(database,"SELECT * from EXPENSES;", -1,&statment,nil) == SQLITE_OK){
+    NSString* userName = [Model.userName].userName
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@'",USER_NAME] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
             
             NSString* timeInMillisecond = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
