@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
             endingLineNumber = "94"
-            landmarkName = "+getExpenses:"
+            landmarkName = "+getExpense:exname:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
             endingLineNumber = "79"
-            landmarkName = "-addExpense:"
+            landmarkName = "-updateExpense:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
