@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewExpenseViewController.h"
+#import "PNChart.h"
 
 @interface ExpenseTableViewController : UITableViewController<NewExpenseDelegate>{
    NSArray* expenses;

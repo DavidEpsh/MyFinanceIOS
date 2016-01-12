@@ -10,7 +10,6 @@
 		63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4232D1C44F3AC0095B620 /* AccountsSql.m */; };
 		63E423301C45013D0095B620 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E4232F1C45013D0095B620 /* UIKit.framework */; };
 		63E423321C4501FA0095B620 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E423311C4501FA0095B620 /* Foundation.framework */; };
-		63E423361C4512A70095B620 /* ValidateEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E423351C4512A70095B620 /* ValidateEmail.m */; };
 		840502791C2BE9B4004D4A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840502781C2BE9B4004D4A69 /* main.m */; };
 		8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405027B1C2BE9B4004D4A69 /* AppDelegate.m */; };
 		840502851C2BE9B4004D4A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840502831C2BE9B4004D4A69 /* Main.storyboard */; };
@@ -78,8 +77,6 @@
 		63E4232D1C44F3AC0095B620 /* AccountsSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsSql.m; sourceTree = "<group>"; };
 		63E4232F1C45013D0095B620 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		63E423311C4501FA0095B620 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		63E423341C4512A70095B620 /* ValidateEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateEmail.h; sourceTree = "<group>"; };
-		63E423351C4512A70095B620 /* ValidateEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateEmail.m; sourceTree = "<group>"; };
 		840502741C2BE9B4004D4A69 /* Expense Maneger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Maneger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840502781C2BE9B4004D4A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8405027A1C2BE9B4004D4A69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -184,15 +181,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		63E423331C4512880095B620 /* custom */ = {
-			isa = PBXGroup;
-			children = (
-				63E423341C4512A70095B620 /* ValidateEmail.h */,
-				63E423351C4512A70095B620 /* ValidateEmail.m */,
-			);
-			name = custom;
-			sourceTree = "<group>";
-		};
 		8405026B1C2BE9B4004D4A69 = {
 			isa = PBXGroup;
 			children = (
@@ -219,7 +207,6 @@
 		840502761C2BE9B4004D4A69 /* Expense Maneger */ = {
 			isa = PBXGroup;
 			children = (
-				63E423331C4512880095B620 /* custom */,
 				84DE7E471C411A0E0098E85E /* graphics */,
 				840502B41C2C0674004D4A69 /* images */,
 				840502B01C2BEAD3004D4A69 /* Model */,
@@ -551,7 +538,6 @@
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
 				84E2423C1C4184BF0079B736 /* LoginViewController.m in Sources */,
 				63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */,
-				63E423361C4512A70095B620 /* ValidateEmail.m in Sources */,
 				840502BB1C2C11D1004D4A69 /* ExpenseTableViewController.m in Sources */,
 				840502C31C2DD328004D4A69 /* ModelSql.m in Sources */,
 				840502C61C2DD5E3004D4A69 /* ExpenseSql.m in Sources */,
