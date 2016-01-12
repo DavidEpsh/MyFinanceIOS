@@ -23,5 +23,6 @@
 +(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses;
 +(void)updateExpense:(sqlite3*)database expense:(Expense *)expense;
 +(nullable instancetype)currentUser;
++(void)addSheet:(sqlite3*)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId;
 
 @end

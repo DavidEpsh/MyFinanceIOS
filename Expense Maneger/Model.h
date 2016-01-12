@@ -16,7 +16,7 @@
 -(void)deleteExpense:(Expense*)exp;
 -(Expense*)getExpense:(NSString*)exname;
 -(NSArray*)getExpenses;
-
+-(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 -(void)saveImage:(UIImage*)image withName:(NSString*)eximage;
 -(UIImage*)getImage:(NSString*)eximage;
 

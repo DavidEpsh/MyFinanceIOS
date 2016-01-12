@@ -104,43 +104,9 @@
     return  NO;
 }
 
-// Adding Sheets
-+(void)addSheet:(sqlite3 *)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId{
-    
-    if([ModelSql hasSheetId:database sheetId:sheetId]){
-        
-    }else{
-        sqlite3_stmt *statment;
-        
-        const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from SHEETS WHERE SHEET_ID = '%@'", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
-        
-        if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
-            while(sqlite3_step(statment) == SQLITE_ROW){
-                sqlite3_bind_text(statment, 1, [sheetId UTF8String], -1, NULL);
-                sqlite3_bind_text(statment, 2, [sheetName UTF8String], -1, NULL);
-            }
-        }else{
-            NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
-        }
-    }
+-(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId{
+    [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
 }
-
-+(BOOL)hasSheetId:(sqlite3*)database sheetId:(NSString*)sheetId{
-    sqlite3_stmt *statment;
-    
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from SHEETS WHERE SHEET_ID = '%@'", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
-    
-    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
-        while(sqlite3_step(statment) == SQLITE_ROW){
-            return true;
-        }
-    }else{
-        NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
-        return nil;
-    }
-    return false;
-}
-// Adding sheets
 
 
 

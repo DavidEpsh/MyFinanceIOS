@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4232D1C44F3AC0095B620 /* AccountsSql.m */; };
 		840502791C2BE9B4004D4A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840502781C2BE9B4004D4A69 /* main.m */; };
 		8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405027B1C2BE9B4004D4A69 /* AppDelegate.m */; };
 		840502851C2BE9B4004D4A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840502831C2BE9B4004D4A69 /* Main.storyboard */; };
@@ -64,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63E4232C1C44F3AC0095B620 /* AccountsSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsSql.h; sourceTree = "<group>"; };
+		63E4232D1C44F3AC0095B620 /* AccountsSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsSql.m; sourceTree = "<group>"; };
 		840502741C2BE9B4004D4A69 /* Expense Maneger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Maneger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840502781C2BE9B4004D4A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8405027A1C2BE9B4004D4A69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				840502C21C2DD328004D4A69 /* ModelSql.m */,
 				840502C41C2DD5E3004D4A69 /* ExpenseSql.h */,
 				840502C51C2DD5E3004D4A69 /* ExpenseSql.m */,
+				63E4232C1C44F3AC0095B620 /* AccountsSql.h */,
+				63E4232D1C44F3AC0095B620 /* AccountsSql.m */,
 				843ED9141C3D41E100672C73 /* ModelParse.h */,
 				843ED9151C3D41E100672C73 /* ModelParse.m */,
 				84E2423D1C41A2180079B736 /* LastUpdateSql.h */,
@@ -438,6 +443,7 @@
 				840502AF1C2BEAC4004D4A69 /* Model.m in Sources */,
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
 				84E2423C1C4184BF0079B736 /* LoginViewController.m in Sources */,
+				63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */,
 				840502BB1C2C11D1004D4A69 /* ExpenseTableViewController.m in Sources */,
 				840502C31C2DD328004D4A69 /* ModelSql.m in Sources */,
 				840502C61C2DD5E3004D4A69 /* ExpenseSql.m in Sources */,
