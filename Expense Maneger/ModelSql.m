@@ -65,7 +65,7 @@
     return  self;
 }
 
--(void)addExpense:(Expense *)exp{
+-(void)addExpense:(Expense*)exp withParse:(BOOL)withParse{
     [ExpenseSql addExpense:database exp:exp];
 }
 -(void)deleteExpense:(Expense *)exp{

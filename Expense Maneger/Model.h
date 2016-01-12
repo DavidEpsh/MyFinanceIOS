@@ -12,7 +12,7 @@
 
 @protocol ModelProtocol <NSObject>
 
--(void)addExpense:(Expense*)exp;
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)deleteExpense:(Expense*)exp;
 -(Expense*)getExpense:(NSString*)exname;
 -(NSArray*)getExpenses;
@@ -45,9 +45,8 @@
 
 +(Model*)instance;
 
--(void)addExp:(Expense*)exp;
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
-
 -(void)updateExpense:(Expense*)exp;
 -(void)getExpensesAsynch:(void(^)(NSArray*))blockListener;
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block;

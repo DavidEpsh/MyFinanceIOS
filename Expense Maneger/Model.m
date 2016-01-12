@@ -78,9 +78,11 @@ static Model* instance = nil;
     [parseModelImpl updateExpense:exp];
 }
 
--(void)addExp:(Expense*)exp{
-    [sqlModelImpl addExpense:exp];
-    [parseModelImpl addExpense:exp];
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse{
+    [sqlModelImpl addExp:exp withParse:NO];
+    if (withParse) {
+        [parseModelImpl addExp:exp withParse:NO];
+    }
 }
 
 

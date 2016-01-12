@@ -1,10 +1,3 @@
-//
-//  ModelParse.m
-//  Expense Maneger
-//
-//  Created by Admin on 1/6/16.
-//  Copyright © 2016 elena. All rights reserved.
-//
 
 #import "ModelParse.h"
 #import <Parse/Parse.h>
@@ -27,7 +20,7 @@ static NSString* EXPENSE_AMOUNT = @"examount";
 static NSString* EXPENSE_DATE = @"exdate";
 static NSString* EXPENSE_IMAGE = @"eximage";
 static NSString* USER_NAME = @"userName";
-static NSString* SHEET_ID = @"sheetIt";
+static NSString* SHEET_ID = @"sheetId";
 static NSString* IS_REPEATING = @"isRepeating";
 static NSString* IS_SAVED = @"isSaved";
 
@@ -69,7 +62,7 @@ static NSString* IS_SAVED = @"isSaved";
 }
 
 
--(void)addExpense:(Expense*)exp{
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse{
     PFObject *obj = [PFObject objectWithClassName:@"Expense"];
     obj[@"timeInMillisecond"] = exp.timeInMillisecond;
     obj[@"exname"] = exp.exname;
@@ -78,10 +71,10 @@ static NSString* IS_SAVED = @"isSaved";
     obj[@"exdate"] = exp.exdate;
     obj[@"eximage"] = exp.eximage;
     obj[@"userName"] = exp.userName;
-    obj[@"sheetIt"] = exp.sheetId;
-    obj[@"isRepeating"] = exp.sheetId;
-    obj[@"isSaved"] = exp.sheetId;
-    [obj save];
+    obj[@"sheetId"] = exp.sheetId;
+    obj[@"isRepeating"] = exp.isRepeating;
+    obj[@"isSaved"] = exp.isSaved;
+    [obj saveInBackground];
 }
 
 -(void)deleteExpense:(Expense*)exp{
@@ -121,38 +114,51 @@ static NSString* IS_SAVED = @"isSaved";
         //long operation
         NSMutableArray* arrayUserNames = [[NSMutableArray alloc] init];
         NSMutableArray* arraySheetId = [[NSMutableArray alloc] init];
-    currUser = [Model instance].user;
+    
+        currUser = [Model instance].user;
 
         PFQuery* queryFindUsersSheets = [PFQuery queryWithClassName:USERS_SHEETS_TABLE];
         [queryFindUsersSheets whereKey:USER_NAME equalTo:currUser];
         [queryFindUsersSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             //Now we got all USERS_SHEETS -> Get all expense + get all sheets
-            if (error != NULL) {
-            for (PFObject* object in objects){
-                [arrayUserNames addObject:object[USER_NAME]];
-                [arraySheetId addObject:SHEET_ID];
+            if (error == nil) {
+                if (objects  == nil || [objects count] == 0) {
+                    [ModelParse addUserSheetsToParse:currUser sheetId:currUser];
+                    [arrayUserNames addObject:currUser];
+                    [arraySheetId addObject:currUser];
+                }else{
+                    for (PFObject* object in objects){
+                        [arrayUserNames addObject:object[USER_NAME]];
+                        [arraySheetId addObject:SHEET_ID];
+                    }
             }
             
             PFQuery* queryExpenses = [PFQuery queryWithClassName:EXPENSE_TABLE];
             [queryExpenses whereKey:USER_NAME containedIn:arrayUserNames];
+            [queryExpenses whereKey:SHEET_ID containedIn:arraySheetId];
             [queryExpenses findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 //Now we got all Expenses -> inserting to SQL
-                if (error != NULL) {
+                if (error == nil) {
 
                     for (PFObject* obj in objects){
                         Expense* expense = nil;
                         expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]   userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
                     
-                        [[Model instance] addExp:expense];
+                        [[Model instance] addExp:expense withParse:NO];
                     }
                     
-                    PFQuery* queryFindSheets = [PFQuery queryWithClassName:USERS_SHEETS_TABLE];
+                    PFQuery* queryFindSheets = [PFQuery queryWithClassName:SHEETS_TABLE];
                     [queryFindSheets whereKey:SHEET_ID containedIn:arraySheetId];
                     [queryFindSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                        if(error != NULL){
+                        if(error == nil){
+                            if (objects == nil || [objects count] == 0) {
+                                [[Model instance]addSheet:@"My Account" sheetId:currUser];
+                                [ModelParse addSheet:@"My Account" sheetId:currUser];
+                            }
                             for(PFObject* obj in objects){
                                 [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID]];
                             }
+                            
                         }
                     }];
                     
@@ -167,14 +173,14 @@ static NSString* IS_SAVED = @"isSaved";
         }];
     }
 
--(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
++(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:SHEETS_TABLE];
     obj[SHEET_ID] = sheetId;
     obj[SHEET_NAME] = sheetName;
     [obj saveInBackground];
 }
 
--(void)addUserSheetsToParse:(NSString*)userNmae sheetId:(NSString*)sheetId{
++(void)addUserSheetsToParse:(NSString*)userNmae sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:USERS_SHEETS_TABLE];
     obj[SHEET_ID] = sheetId;
     obj[USER_NAME] = userNmae;
@@ -234,9 +240,9 @@ static NSString* IS_SAVED = @"isSaved";
             obj[@"exdate"] = exp.exdate;
             obj[@"eximage"] = exp.eximage;
             obj[@"userName"] = exp.userName;
-            obj[@"sheetIt"] = exp.sheetId;
-            obj[@"isRepeating"] = exp.sheetId;
-            obj[@"isSaved"] = exp.sheetId;
+            obj[@"sheetId"] = exp.sheetId;
+            obj[@"isRepeating"] = exp.isRepeating;
+            obj[@"isSaved"] = exp.isSaved;
             [obj saveInBackground];
         }
     }];

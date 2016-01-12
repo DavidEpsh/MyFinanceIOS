@@ -77,15 +77,6 @@
 }
 
 - (IBAction)saveAct:(id)sender {
-   
-    Expense* exp = [[Expense alloc] init];
-    [[Model instance] addExp:exp];
-    
-    exp.exname = self.expenseName.text;
-    exp.excategory = self.category.text;
-    
-    NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
-    st_examount = self.amount.text;
 
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
     NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
@@ -96,7 +87,7 @@
     
     Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Account" isRepeating:@(0) isSaved:@(1)];
     
-    [[Model instance]addExp:exp];
+    [[Model instance]addExp:exp withParse:true];
     [self.delegate onSave:exp];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -28,16 +28,6 @@
     expenses = [[NSArray alloc] init];
     
     expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
-    
-        self.navigationItem.title = [Model instance].user;
-//    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
-//        expenses = stArray;
-//        [self.tableView reloadData];
-//        [self.activityIndicator stopAnimating];
-//        self.activityIndicator.hidden = YES;
-//    }];
-
-    
 }
 
  
