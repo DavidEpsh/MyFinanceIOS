@@ -36,12 +36,14 @@
  */
 
     expenses = [[NSArray alloc] init];
-    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
-        expenses = stArray;
-        [self.tableView reloadData];
-        [self.activityIndicator stopAnimating];
-        self.activityIndicator.hidden = YES;
-    }];
+    
+    
+//    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
+//        expenses = stArray;
+//        [self.tableView reloadData];
+//        [self.activityIndicator stopAnimating];
+//        self.activityIndicator.hidden = YES;
+//    }];
 
     
 }

@@ -24,7 +24,7 @@
         
         NSURL* directoryUrl = [paths objectAtIndex:0];
         
-        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.db"];
+        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.sqlite"];
 
         //Open the database
         NSString* filePath = [fileUrl path];
@@ -56,7 +56,7 @@
             NSLog(@"ERROR: failed creating SHEETS table");
         }
         
-        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USER_SHEETS (USER_NAME TEXT, SHEET_ID TEXT, FOREIGN KEY(SHEET_ID) REFERENCES SHEETS(SHEET_ID) PRIMARY KEY(USER_NAME, SHEET_ID))", NULL, NULL, &errormsg);
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USERS_SHEETS (USER_NAME TEXT, SHEET_ID TEXT, FOREIGN KEY(SHEET_ID) REFERENCES SHEETS(SHEET_ID) PRIMARY KEY(USER_NAME, SHEET_ID))", NULL, NULL, &errormsg);
         
         if(res != SQLITE_OK){
             NSLog(@"ERROR: failed creating USER_SHEETS table");
@@ -72,8 +72,8 @@
     [ExpenseSql deleteExpense:database exp:exp];
 }
 
--(Expense*)getExpense:(NSString *)exname{
-    return [ExpenseSql getExpense:database exname:exname];
+-(Expense*)getExpense:(NSString *)expenseId{
+    return [ExpenseSql getExpense:database exname:expenseId];
 }
 
 -(NSArray*)getExpenses{
@@ -92,6 +92,9 @@
     [ExpenseSql updateExpenses:database expenses:expenses];
 }
 
+-(void)updateExpense:(Expense *)expense{
+    [ExpenseSql updateExpense:database expense:expense];
+}
 
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
     return  NO;
@@ -100,5 +103,11 @@
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd{
     return  NO;
 }
+
+-(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId{
+    [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
+}
+
+
 
 @end

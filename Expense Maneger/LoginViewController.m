@@ -50,9 +50,13 @@
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
-        self.activityIndicator.hidden = YES;
         if (res) {
+            [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
+            [self.activityIndicator stopAnimating];
+            self.activityIndicator.hidden = YES;
             [self performSegueWithIdentifier:@"toApp" sender:self];
+                
+            }];
         }
     }];
     
