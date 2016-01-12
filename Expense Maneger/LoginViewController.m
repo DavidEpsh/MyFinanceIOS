@@ -50,7 +50,7 @@
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
     
-    if([LoginViewController validEmail:self.userTV.text] && self.PasswordTV.text.length > 4){
+    if([LoginViewController validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
 
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         if (res) {
@@ -75,12 +75,22 @@
 - (IBAction)signup:(id)sender {
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
+    
+    if([LoginViewController validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
+        
     [[Model instance] signup:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         self.activityIndicator.hidden = YES;
         if (res) {
             [self performSegueWithIdentifier:@"toApp" sender:self];
         }
     }];
+    }else if([LoginViewController validEmail:self.userTV.text] == NO){
+        self.activityIndicator.hidden = YES;
+        [LoginViewController makeToast:@"Incorrect Email"];
+    }else{
+        self.activityIndicator.hidden = YES;
+        [LoginViewController makeToast:@"Password must be more than 4 charaters"];
+    }
 }
 
 +(BOOL) validEmail:(NSString*) emailString {
