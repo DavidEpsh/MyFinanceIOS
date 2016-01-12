@@ -50,6 +50,7 @@
 		84D87A721C456D150041B915 /* TripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A711C456D150041B915 /* TripsTableViewCell.m */; };
 		84D87A781C4592300041B915 /* NewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A771C4592300041B915 /* NewTripViewController.m */; };
 		84D87A7B1C45941C0041B915 /* TripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7A1C45941C0041B915 /* TripsTableViewController.m */; };
+		84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */; };
 		84E242331C411B390079B736 /* troll.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242321C411B390079B736 /* troll.jpg */; };
 		84E242351C411B440079B736 /* messi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242341C411B440079B736 /* messi.jpg */; };
 		84E242371C411B4A0079B736 /* BeautifulCat.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 84E242361C411B4A0079B736 /* BeautifulCat.JPG */; };
@@ -142,6 +143,8 @@
 		84D87A771C4592300041B915 /* NewTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTripViewController.m; sourceTree = "<group>"; };
 		84D87A791C45941C0041B915 /* TripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsTableViewController.h; sourceTree = "<group>"; };
 		84D87A7A1C45941C0041B915 /* TripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsTableViewController.m; sourceTree = "<group>"; };
+		84D87A7C1C459F9F0041B915 /* TakePicture2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePicture2ViewController.h; sourceTree = "<group>"; };
+		84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePicture2ViewController.m; sourceTree = "<group>"; };
 		84E242321C411B390079B736 /* troll.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = troll.jpg; sourceTree = "<group>"; };
 		84E242341C411B440079B736 /* messi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = messi.jpg; sourceTree = "<group>"; };
 		84E242361C411B4A0079B736 /* BeautifulCat.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BeautifulCat.JPG; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 				84D87A711C456D150041B915 /* TripsTableViewCell.m */,
 				84D87A761C4592300041B915 /* NewTripViewController.h */,
 				84D87A771C4592300041B915 /* NewTripViewController.m */,
+				84D87A7C1C459F9F0041B915 /* TakePicture2ViewController.h */,
+				84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */,
 			);
 			name = TripsGroup;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				84501A7F1C4447B3003EB227 /* TakePictureViewController.m in Sources */,
 				84D87A721C456D150041B915 /* TripsTableViewCell.m in Sources */,
 				843ED9161C3D41E100672C73 /* ModelParse.m in Sources */,
+				84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */,
 				840502AF1C2BEAC4004D4A69 /* Model.m in Sources */,
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
 				84E2423C1C4184BF0079B736 /* LoginViewController.m in Sources */,
