@@ -51,6 +51,8 @@
 		84D87A781C4592300041B915 /* NewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A771C4592300041B915 /* NewTripViewController.m */; };
 		84D87A7B1C45941C0041B915 /* TripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7A1C45941C0041B915 /* TripsTableViewController.m */; };
 		84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */; };
+		84D87A821C45A4AC0041B915 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A811C45A4AC0041B915 /* HomeTableViewController.m */; };
+		84D87A851C45A5620041B915 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A841C45A5620041B915 /* HomeTableViewCell.m */; };
 		84E242331C411B390079B736 /* troll.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242321C411B390079B736 /* troll.jpg */; };
 		84E242351C411B440079B736 /* messi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E242341C411B440079B736 /* messi.jpg */; };
 		84E242371C411B4A0079B736 /* BeautifulCat.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 84E242361C411B4A0079B736 /* BeautifulCat.JPG */; };
@@ -145,6 +147,10 @@
 		84D87A7A1C45941C0041B915 /* TripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsTableViewController.m; sourceTree = "<group>"; };
 		84D87A7C1C459F9F0041B915 /* TakePicture2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePicture2ViewController.h; sourceTree = "<group>"; };
 		84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePicture2ViewController.m; sourceTree = "<group>"; };
+		84D87A801C45A4AC0041B915 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
+		84D87A811C45A4AC0041B915 /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
+		84D87A831C45A5620041B915 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		84D87A841C45A5620041B915 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		84E242321C411B390079B736 /* troll.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = troll.jpg; sourceTree = "<group>"; };
 		84E242341C411B440079B736 /* messi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = messi.jpg; sourceTree = "<group>"; };
 		84E242361C411B4A0079B736 /* BeautifulCat.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BeautifulCat.JPG; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 		840502761C2BE9B4004D4A69 /* Expense Maneger */ = {
 			isa = PBXGroup;
 			children = (
+				84D87A7F1C45A47B0041B915 /* HomeGroup */,
 				84D87A6F1C454D210041B915 /* AccountGroup */,
 				84D87A6E1C454CD50041B915 /* TripsGroup */,
 				84DE7E471C411A0E0098E85E /* graphics */,
@@ -354,6 +361,17 @@
 				84501A7E1C4447B3003EB227 /* TakePictureViewController.m */,
 			);
 			name = AccountGroup;
+			sourceTree = "<group>";
+		};
+		84D87A7F1C45A47B0041B915 /* HomeGroup */ = {
+			isa = PBXGroup;
+			children = (
+				84D87A801C45A4AC0041B915 /* HomeTableViewController.h */,
+				84D87A811C45A4AC0041B915 /* HomeTableViewController.m */,
+				84D87A831C45A5620041B915 /* HomeTableViewCell.h */,
+				84D87A841C45A5620041B915 /* HomeTableViewCell.m */,
+			);
+			name = HomeGroup;
 			sourceTree = "<group>";
 		};
 		84DE7E471C411A0E0098E85E /* graphics */ = {
@@ -581,11 +599,13 @@
 				84D87A721C456D150041B915 /* TripsTableViewCell.m in Sources */,
 				843ED9161C3D41E100672C73 /* ModelParse.m in Sources */,
 				84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */,
+				84D87A851C45A5620041B915 /* HomeTableViewCell.m in Sources */,
 				840502AF1C2BEAC4004D4A69 /* Model.m in Sources */,
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
 				84E2423C1C4184BF0079B736 /* LoginViewController.m in Sources */,
 				63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */,
 				84D87A7B1C45941C0041B915 /* TripsTableViewController.m in Sources */,
+				84D87A821C45A4AC0041B915 /* HomeTableViewController.m in Sources */,
 				840502BB1C2C11D1004D4A69 /* ExpenseTableViewController.m in Sources */,
 				840502C31C2DD328004D4A69 /* ModelSql.m in Sources */,
 				840502C61C2DD5E3004D4A69 /* ExpenseSql.m in Sources */,
