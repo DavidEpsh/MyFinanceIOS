@@ -21,9 +21,9 @@
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
     
-    self.title = [Model instance].user;
     
-
+    self.navigationItem.title = [Model instance].user;
+    
     expenses = [[NSArray alloc] init];
     
     

@@ -22,8 +22,7 @@
 +(NSString*)getLastUpdateDate:(sqlite3*)database;
 +(void)setLastUpdateDate:(sqlite3*)database date:(NSString*)date;
 +(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses;
-+(void)updateExpense:(sqlite3*)database expense:(Expense *)expense;
-+(nullable instancetype)currentUser;
-+(void)addSheet:(sqlite3*)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId;
+//+(nullable instancetype)currentUser;
+
 
 @end
