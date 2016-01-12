@@ -78,7 +78,7 @@
     Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Trip" isRepeating:@(0) isSaved:@(1)];
     
     [self.delegate onSave:exp];
-    [[Model instance]addExp:exp];
+    [[Model instance]addExp:exp withParse:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @synthesize expenseName;
