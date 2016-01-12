@@ -19,5 +19,7 @@
 -(NSString*)getExpensesLastUpdateDate;
 -(void)setExpensesLastUpdateDate:(NSString*)date;
 -(void)updateExpenses:(NSArray*)expenses;
+-(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
+-(void)updateExpense:(Expense *)expense;
 
 @end

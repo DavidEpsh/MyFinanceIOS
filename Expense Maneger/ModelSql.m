@@ -24,7 +24,7 @@
         
         NSURL* directoryUrl = [paths objectAtIndex:0];
         
-        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.db"];
+        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.sqlite"];
 
         //Open the database
         NSString* filePath = [fileUrl path];
@@ -56,7 +56,7 @@
             NSLog(@"ERROR: failed creating SHEETS table");
         }
         
-        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USER_SHEETS (USER_NAME TEXT, SHEET_ID TEXT, FOREIGN KEY(SHEET_ID) REFERENCES SHEETS(SHEET_ID) PRIMARY KEY(USER_NAME, SHEET_ID))", NULL, NULL, &errormsg);
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USERS_SHEETS (USER_NAME TEXT, SHEET_ID TEXT, FOREIGN KEY(SHEET_ID) REFERENCES SHEETS(SHEET_ID) PRIMARY KEY(USER_NAME, SHEET_ID))", NULL, NULL, &errormsg);
         
         if(res != SQLITE_OK){
             NSLog(@"ERROR: failed creating USER_SHEETS table");
@@ -72,8 +72,8 @@
     [ExpenseSql deleteExpense:database exp:exp];
 }
 
--(Expense*)getExpense:(NSString *)exname{
-    return [ExpenseSql getExpense:database exname:exname];
+-(Expense*)getExpense:(NSString *)expenseId{
+    return [ExpenseSql getExpense:database exname:expenseId];
 }
 
 -(NSArray*)getExpenses{
@@ -92,6 +92,9 @@
     [ExpenseSql updateExpenses:database expenses:expenses];
 }
 
+-(void)updateExpense:(Expense *)expense{
+    [ExpenseSql updateExpense:database expense:expense];
+}
 
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
     return  NO;
@@ -100,5 +103,45 @@
 -(BOOL)Signup:(NSString*)user pwd:(NSString*)pwd{
     return  NO;
 }
+
+// Adding Sheets
++(void)addSheet:(sqlite3 *)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId{
+    
+    if([ModelSql hasSheetId:database sheetId:sheetId]){
+        
+    }else{
+        sqlite3_stmt *statment;
+        
+        const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from SHEETS WHERE SHEET_ID = '%@'", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
+        
+        if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+            while(sqlite3_step(statment) == SQLITE_ROW){
+                sqlite3_bind_text(statment, 1, [sheetId UTF8String], -1, NULL);
+                sqlite3_bind_text(statment, 2, [sheetName UTF8String], -1, NULL);
+            }
+        }else{
+            NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
+        }
+    }
+}
+
++(BOOL)hasSheetId:(sqlite3*)database sheetId:(NSString*)sheetId{
+    sqlite3_stmt *statment;
+    
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from SHEETS WHERE SHEET_ID = '%@'", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            return true;
+        }
+    }else{
+        NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
+        return nil;
+    }
+    return false;
+}
+// Adding sheets
+
+
 
 @end

@@ -23,6 +23,8 @@
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
 -(NSString*)getCurrentUser;
+-(void)updateExpense:(Expense*)exp;
+
 
 @end
 
@@ -43,6 +45,7 @@
 +(Model*)instance;
 
 -(void)addExp:(Expense*)exp;
+-(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 
 -(void)getExpensesAsynch:(void(^)(NSArray*))blockListener;
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block;

@@ -74,9 +74,9 @@ static Model* instance = nil;
 }
 
 
--(void)addExpense:(Expense*)exp{
-    [sqlModelImpl addExpense:exp];
-    [parseModelImpl addExpense:exp];
+-(void)updateExpense:(Expense*)exp{
+    [sqlModelImpl updateExpense:exp];
+    [parseModelImpl updateExpense:exp];
 }
 -(void)addExp:(Expense*)exp{
     [sqlModelImpl addExpense:exp];
@@ -89,32 +89,26 @@ static Model* instance = nil;
     [parseModelImpl deleteExpense:exp];
 
 }
-/*
--(Expense*)getExpense:(NSString*)exname{
-    return [parseModelImpl getExpense:exname];
-}
 
-
--(NSArray*)getExpenses{
-    return [parseModelImpl getExpenses];
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
+    [sqlModelImpl addSheet:sheetName sheetId:sheetId];
 }
-*/
 
 //Block Asynch implementation
--(void)getExpensesAsynch:(void(^)(NSArray*))blockListener{
-    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-    
-    dispatch_async(myQueue, ^{
-        //long operation
-        NSArray* data = [parseModelImpl getExpenses];
-        
-        //end of long operation - update display in the main Q
-        dispatch_queue_t mainQ = dispatch_get_main_queue();
-        dispatch_async(mainQ, ^{
-            blockListener(data);
-        });
-    } );
-}
+//-(void)getExpensesAsynch:(void(^)(NSArray*))blockListener{
+//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
+//    
+//    dispatch_async(myQueue, ^{
+//        //long operation
+//        NSArray* data = [parseModelImpl getExpenses];
+//        
+//        //end of long operation - update display in the main Q
+//        dispatch_queue_t mainQ = dispatch_get_main_queue();
+//        dispatch_async(mainQ, ^{
+//            blockListener(data);
+//        });
+//    } );
+//}
 
 /*
 //Block Asynch implementation
@@ -146,17 +140,17 @@ static Model* instance = nil;
  //  } );
 }
 */
--(void)deleteExpense:(Expense*)exp block:(void(^)())block{
-    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-    
-    dispatch_async(myQueue, ^{
-        [parseModelImpl deleteExpense:exp];
-        dispatch_queue_t mainQ = dispatch_get_main_queue();
-        dispatch_async(mainQ, ^{
-            block();
-        });
-    } );
-}
+//-(void)deleteExpense:(Expense*)exp block:(void(^)())block{
+//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
+//    
+//    dispatch_async(myQueue, ^{
+//        [parseModelImpl deleteExpense:exp];
+//        dispatch_queue_t mainQ = dispatch_get_main_queue();
+//        dispatch_async(mainQ, ^{
+//            block();
+//        });
+//    } );
+//}
 
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block{
     dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);

@@ -80,18 +80,16 @@ static NSString* IS_SAVED = @"IS_SAVED";
 
 
 +(void)deleteExpense:(sqlite3 *)database exp:(Expense *)exp{
+    //TO DO
 }
 
 
-+(Expense*)getExpense:(sqlite3 *)database exname:(NSString *)exname{
-    return nil;
-}
-
-+(NSArray*)getExpenses:(sqlite3 *)database{
-    NSMutableArray* data = [[NSMutableArray alloc] init];
++(Expense*)getExpense:(sqlite3 *)database exname:(NSString *)expenseId{
     sqlite3_stmt *statment;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES"] cStringUsingEncoding:NSUTF8StringEncoding];
+    NSString* currUser = [Model instance].user;
+    
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE TIMEINMILLISECOND = '%@'",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
@@ -106,21 +104,19 @@ static NSString* IS_SAVED = @"IS_SAVED";
             NSString* sheetId = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,7)];
             NSNumber* isRepeating = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,8)];
             NSNumber* isSaved = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,9)];
-            //NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];
-            //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-            //NSString* my_exdate = [dateFormat dateFromString:exdate];
             
-            Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:exdate eximage:eximage userName:userName sheetId:sheetId isRepeating:isRepeating isSaved:isSaved];
-            [data addObject:exp];
+            return [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:exdate eximage:eximage userName:userName sheetId:sheetId isRepeating:isRepeating isSaved:isSaved];
+
         }
     }else{
         NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
         return nil;
     }
-    return data;
+    return nil;
 }
 
-+(NSArray*)getExpensesForMyAccount:(sqlite3 *)database{
+
++(NSArray*)getExpenses:(sqlite3 *)database{
     NSMutableArray* data = [[NSMutableArray alloc] init];
     sqlite3_stmt *statment;
 
@@ -160,6 +156,10 @@ static NSString* IS_SAVED = @"IS_SAVED";
         [ExpenseSql addExpense:database exp:exp];
     }
 }
+
++(void)updateExpense:(sqlite3*)database expense:(Expense *)expense{
+        //TO DO
+    }
 
 
 @end

@@ -14,14 +14,14 @@
 
 +(void)addExpense:(sqlite3*)database exp:(Expense*)exp;
 +(void)deleteExpense:(sqlite3*)database exp:(Expense*)exp;
-+(Expense*)getExpense:(sqlite3*)database exname:(NSString*)exname;
++(Expense*)getExpense:(sqlite3*)database exname:(NSString*)expenseId;
 +(NSArray*)getExpenses:(sqlite3*)database;
 
 +(BOOL)createTable:(sqlite3*)database;
 +(NSString*)getLastUpdateDate:(sqlite3*)database;
 +(void)setLastUpdateDate:(sqlite3*)database date:(NSString*)date;
 +(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses;
++(void)updateExpense:(sqlite3*)database expense:(Expense *)expense;
 +(nullable instancetype)currentUser;
-
 
 @end
