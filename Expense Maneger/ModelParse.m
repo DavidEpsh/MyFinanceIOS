@@ -86,7 +86,7 @@ static NSString* IS_SAVED = @"isSaved";
 
 -(void)deleteExpense:(Expense*)exp{
    PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
-    [query whereKey:@"timeInMillisecond" equalTo:exp.timeInMillisecond];
+    [query whereKey:TIMEINMILLISECOND equalTo:exp.timeInMillisecond];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         for (PFObject* object in objects){
             object[IS_SAVED] = @(0);
@@ -169,6 +169,20 @@ static NSString* IS_SAVED = @"isSaved";
     } );
 }
 
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
+    PFObject *obj = [PFObject objectWithClassName:SHEETS_TABLE];
+    obj[SHEET_ID] = sheetId;
+    obj[SHEET_NAME] = sheetName;
+    [obj saveInBackground];
+}
+
+-(void)addUserSheetsToParse:(NSString*)userNmae sheetId:(NSString*)sheetId{
+    PFObject *obj = [PFObject objectWithClassName:USERS_SHEETS_TABLE];
+    obj[SHEET_ID] = sheetId;
+    obj[USER_NAME] = userNmae;
+    [obj saveInBackground];
+}
+
 -(NSArray*)getAllRelevantExpenses{
     NSMutableArray* array = [[NSMutableArray alloc] init];
     PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
@@ -202,7 +216,7 @@ static NSString* IS_SAVED = @"isSaved";
     
     NSArray* res = [query findObjects];
     for (PFObject* obj in res) {
-        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
+        Expense* expense = [[Expense alloc] init:obj[TIMEINMILLISECOND] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
         [array addObject:expense];
     }
     return array;
