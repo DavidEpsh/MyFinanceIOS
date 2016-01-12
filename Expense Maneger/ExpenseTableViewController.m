@@ -24,23 +24,11 @@
     
     
     self.navigationItem.title = @"My Account";
-    
-<<<<<<< HEAD
 
-    
-//    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
-//        expenses = stArray;
-//        [self.tableView reloadData];
-//        [self.activityIndicator stopAnimating];
-//        self.activityIndicator.hidden = YES;
-//    }];
-
-    
-=======
     expenses = [[NSArray alloc] init];
     
     expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
->>>>>>> 185ec29a064b5c13a2f54376ab4d6b06dfbd7d19
+
 }
 
  

@@ -77,19 +77,7 @@
 }
 
 - (IBAction)saveAct:(id)sender {
-<<<<<<< HEAD
-   
-  //  Expense* exp = [[Expense alloc] init];
-//    [[Model instance] addExp:exp];
     
-  //  exp.exname = self.expenseName.text;
-    //exp.excategory = self.category.text;
-    
-  //  NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
-   // st_examount = self.amount.text;
-=======
->>>>>>> 185ec29a064b5c13a2f54376ab4d6b06dfbd7d19
-
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
     NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
     NSNumber* examount = [NSNumber numberWithInt:[self.amount.text intValue]];
