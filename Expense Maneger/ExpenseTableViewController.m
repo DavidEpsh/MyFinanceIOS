@@ -24,8 +24,7 @@
     
     self.navigationItem.title = [Model instance].user;
     
-    expenses = [[NSArray alloc] init];
-    
+
     
 //    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
 //        expenses = stArray;
@@ -59,7 +58,6 @@
     return 64;
 }
 */
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"expenseCell" forIndexPath:indexPath];

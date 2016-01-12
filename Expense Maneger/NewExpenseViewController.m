@@ -78,14 +78,14 @@
 
 - (IBAction)saveAct:(id)sender {
    
-    Expense* exp = [[Expense alloc] init];
-    [[Model instance] addExp:exp];
+  //  Expense* exp = [[Expense alloc] init];
+//    [[Model instance] addExp:exp];
     
-    exp.exname = self.expenseName.text;
-    exp.excategory = self.category.text;
+  //  exp.exname = self.expenseName.text;
+    //exp.excategory = self.category.text;
     
-    NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
-    st_examount = self.amount.text;
+  //  NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
+   // st_examount = self.amount.text;
 
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
     NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
@@ -114,6 +114,7 @@
 
 - (IBAction)toTakePhotoViewContr:(id)sender {
 }
+
 - (IBAction)checkBox:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (!nonchecked) {

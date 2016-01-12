@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewTripViewController.h"
+#import "PNChart.h"
+
 
 @interface TripsTableViewController : UITableViewController
+
+<NewTripDelegate>{
+    NSArray* expenses;
+}
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *toNewTripBtn;
 
 @end

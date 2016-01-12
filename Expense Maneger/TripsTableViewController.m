@@ -7,6 +7,9 @@
 //
 
 #import "TripsTableViewController.h"
+#import "TripsTableViewCell.h"
+#import "Model.h"
+#import <Parse/Parse.h>
 
 @interface TripsTableViewController ()
 
@@ -16,6 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.activityIndicator startAnimating];
+
+    self.navigationItem.title = [Model instance].user;
+//    expenses = [[NSArray alloc] init];
+
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -33,23 +43,51 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
-    return 0;
+    return expenses.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    TripsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tripsCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    Expense* exp = [expenses objectAtIndex:indexPath.row];
+    cell.trName.text = exp.exname;
+    cell.category.text = exp.excategory;
     
+    cell.imageName = exp.eximage;
+    cell.imageViewTrip.image = nil;
+    [cell.activityIndicator startAnimating];
+    if (exp.eximage != nil && ![exp.eximage isEqualToString:@""]) {
+        [[Model instance] getExpenseImage:exp block:^(UIImage *image) {
+            if ([cell.imageName isEqualToString:exp.eximage]){
+                cell.activityIndicator.hidden = YES;
+                if (image != nil) {
+                    cell.imageViewTrip.image = image;
+                    [cell.activityIndicator stopAnimating];
+                }
+                else{
+                    cell.imageViewTrip.image = [UIImage imageNamed:@"BeautifulCat.JPG"];
+                }
+            }
+        }];
+        
+    }else{
+        cell.imageViewTrip.image = [UIImage imageNamed:@"troll.jpg"];
+    }
+
     return cell;
 }
-*/
+
+
+-(void)onSave:(id)newExpense {
+    [self.tableView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.

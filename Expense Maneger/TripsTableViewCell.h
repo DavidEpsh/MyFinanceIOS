@@ -10,4 +10,15 @@
 
 @interface TripsTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewTrip;
+
+@property NSString* imageName;
+
+@property (weak, nonatomic) IBOutlet UILabel *trName;
+
+@property (weak, nonatomic) IBOutlet UILabel *category;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+
 @end
