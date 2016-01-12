@@ -156,8 +156,6 @@ static NSString* IS_SAVED = @"isSaved";
                     }];
                     
                 }
-                
-                
             }];
             
             dispatch_queue_t mainQ = dispatch_get_main_queue();

@@ -80,7 +80,15 @@ static NSString* IS_SAVED = @"IS_SAVED";
 
 
 +(void)deleteExpense:(sqlite3 *)database exp:(Expense *)exp{
-    //TO DO
+    sqlite3_stmt *statment;
+    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = '%@' WHERE TIMEINMILLISECOND = '%@'", @(0), exp.userName];
+    
+    if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
+        if(sqlite3_step(statment) == SQLITE_DONE){
+            return;
+        }
+    }
+    NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
 }
 
 
@@ -187,8 +195,29 @@ static NSString* IS_SAVED = @"IS_SAVED";
     }
 }
 
-+(void)updateExpense:(sqlite3*)database expense:(Expense *)expense{
-        //TO DO
++(void)updateExpense:(sqlite3*)database expense:(Expense *)exp{
+    sqlite3_stmt *statment;
+    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = '%@' WHERE TIMEINMILLISECOND = '%@'", @(0), exp.userName];
+    
+    if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
+            
+        sqlite3_bind_text(statment, 1, [exp.timeInMillisecond UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 2, [exp.exname UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 3, [exp.excategory UTF8String],-1,NULL);
+        sqlite3_bind_int(statment, 4, [exp.examount intValue]);
+        sqlite3_bind_text(statment, 5, [exp.exdate UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 6, [exp.eximage UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 7, [exp.userName UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 8, [exp.sheetId UTF8String],-1,NULL);
+        sqlite3_bind_int(statment, 9, [exp.isRepeating intValue]);
+        sqlite3_bind_int(statment, 10, [exp.isSaved intValue]);
+        
+        char* errmsg;
+        sqlite3_exec(database, "COMMIT", NULL, NULL, &errmsg);
+        return;
+        
+    }
+    NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
     }
 
 // Adding Sheets
