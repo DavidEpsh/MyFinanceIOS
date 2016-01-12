@@ -25,10 +25,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     nonchecked = [defaults boolForKey:@"boxIsChecked"];
     [self checkBoxBtn];
-    
-//    expenses = [[NSMutableArray alloc] init];
 
-    
     datePicker = [[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDate;
     [self.date setInputView:datePicker];    
@@ -38,14 +35,7 @@
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [self.date setInputAccessoryView:toolBar];
-    
-   /*
-    NSArray* data = [[Model instance] getExpenses];
-    
-    Expense* exp = [[Expense alloc] init];
-    
-    [[Model instance] addExpense:exp];
-    */
+
 }
 
 -(void)ShowSelectedDate
