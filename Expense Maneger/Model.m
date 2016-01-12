@@ -42,7 +42,6 @@ static Model* instance = nil;
     dispatch_async(myQueue, ^{
         //long operation
         BOOL res = [parseModelImpl login:user pwd:pwd];
-        
         if (res) {
             self.user = user;
         }
@@ -90,9 +89,26 @@ static Model* instance = nil;
     [parseModelImpl deleteExpense:exp];
 
 }
+-(NSString*)getCurrentUser{
+    return [parseModelImpl getCurrentUser];
+}
 
 -(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     [sqlModelImpl addSheet:sheetName sheetId:sheetId];
+}
+
+
+-(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block{
+    dispatch_queue_t myQueue = dispatch_queue_create("myQueueName", NULL);
+    
+    dispatch_async(myQueue, ^{
+        [parseModelImpl getAllRelevantExpensesAsync];
+        
+        dispatch_queue_t mainQ = dispatch_get_main_queue();
+        dispatch_async(mainQ, ^{
+            block(nil);
+        });
+    } );
 }
 
 //Block Asynch implementation

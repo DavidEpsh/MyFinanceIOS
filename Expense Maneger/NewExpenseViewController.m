@@ -8,6 +8,8 @@
 
 #import "NewExpenseViewController.h"
 #import "Model.h"
+#import "ModelSql.h"
+#import "ModelParse.h"
 
 @interface NewExpenseViewController ()
 
@@ -85,11 +87,17 @@
     NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
     st_examount = self.amount.text;
 
-    NSString* st_exdate = [NSString stringWithFormat:@"%@", exp.exdate];
-    st_exdate = self.date.text;
+    NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
+    NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
+    NSNumber* examount = [NSNumber numberWithInt:[self.amount.text intValue]];
+    NSString* st_exdate = [NSString stringWithFormat:@"%@", self.date.text];
+    NSString* currentUser = [[Model instance]getCurrentUser];
+    NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    
+    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Account" isRepeating:@(0) isSaved:@(1)];
     
     [self.delegate onSave:exp];
-    
+    [[Model instance]addExp:exp];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

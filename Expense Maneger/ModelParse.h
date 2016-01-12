@@ -14,7 +14,9 @@
 
 -(NSArray*)getExpensesFromDate:(NSString*)date;
 -(NSArray*)getAllRelevantExpenses;
+-(void)getAllRelevantExpensesAsync;
 -(NSString*)getCurrentUser;
 -(void)updateExpense:(Expense *)exp;
+-(void)addExpense:(Expense*)exp;
 
 @end
