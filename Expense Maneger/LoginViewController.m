@@ -54,10 +54,10 @@
 
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         if (res) {
-            [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
-            [self.activityIndicator stopAnimating];
-            self.activityIndicator.hidden = YES;
-            [self performSegueWithIdentifier:@"toApp" sender:self];
+            [[Model instance] getAllRelevantExpensesAsync:^(NSError* res){
+                [self.activityIndicator stopAnimating];
+                self.activityIndicator.hidden = YES;
+                [self performSegueWithIdentifier:@"toApp" sender:self];
             }];
         }
     }];

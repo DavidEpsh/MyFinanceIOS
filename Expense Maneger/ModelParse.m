@@ -115,12 +115,13 @@ static NSString* IS_SAVED = @"isSaved";
     return expense;
 }
 
--(void)getAllRelevantExpensesAsync:(void(^)(void))blockListener{
-    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-    dispatch_async(myQueue, ^{
+-(void)getAllRelevantExpensesAsync{
+//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
+//    dispatch_async(myQueue, ^{
         //long operation
         NSMutableArray* arrayUserNames = [[NSMutableArray alloc] init];
         NSMutableArray* arraySheetId = [[NSMutableArray alloc] init];
+    currUser = [Model instance].user;
 
         PFQuery* queryFindUsersSheets = [PFQuery queryWithClassName:USERS_SHEETS_TABLE];
         [queryFindUsersSheets whereKey:USER_NAME equalTo:currUser];
@@ -158,14 +159,13 @@ static NSString* IS_SAVED = @"isSaved";
                 }
             }];
             
-            dispatch_queue_t mainQ = dispatch_get_main_queue();
-            dispatch_async(mainQ, ^{
-                blockListener();
-            });
+//            dispatch_queue_t mainQ = dispatch_get_main_queue();
+//            dispatch_async(mainQ, ^{
+//                block();
+//            });
         }
         }];
-    } );
-}
+    }
 
 -(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:SHEETS_TABLE];

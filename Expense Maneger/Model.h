@@ -21,9 +21,10 @@
 -(void)updateExpense:(Expense*)exp;
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
+-(void)getAllRelevantExpensesAsync;
 
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
-//-(NSString*)getCurrentUser;
+-(NSString*)getCurrentUser;
 
 @end
 
@@ -50,9 +51,10 @@
 -(void)getExpensesAsynch:(void(^)(NSArray*))blockListener;
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block;
 -(void)saveExpenseImage:(Expense*)exp image:(UIImage*)image block:(void(^)(NSError*))block;
-
+-(NSString*)getCurrentUser;
 -(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
+-(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block;
 
 
 @end
