@@ -16,6 +16,7 @@
 +(void)deleteExpense:(sqlite3*)database exp:(Expense*)exp;
 +(Expense*)getExpense:(sqlite3*)database exname:(NSString*)expenseId;
 +(NSArray*)getExpenses:(sqlite3*)database;
++(NSArray*)getExpensesForSheet:(sqlite3*)database sheetId:(NSString*)sheetId;
 
 +(BOOL)createTable:(sqlite3*)database;
 +(NSString*)getLastUpdateDate:(sqlite3*)database;

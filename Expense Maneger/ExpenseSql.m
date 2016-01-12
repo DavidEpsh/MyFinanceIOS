@@ -151,6 +151,36 @@ static NSString* IS_SAVED = @"IS_SAVED";
     return data;
 }
 
++(NSArray*)getExpensesForSheet:(sqlite3*)database sheetId:(NSString*)sheetId{
+        NSMutableArray* data = [[NSMutableArray alloc] init];
+        sqlite3_stmt *statment;
+    
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@'",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
+        
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+                
+            NSString* timeInMillisecond = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
+            NSString* exname = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,1)];
+            NSString* excategory = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,2)];
+            NSNumber* examount = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,3)];
+            NSString* exdate = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,4)];
+            NSString* eximage = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,5)];
+            NSString* userName = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,6)];
+            NSString* sheetId = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,7)];
+            NSNumber* isRepeating = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,8)];
+            NSNumber* isSaved = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,9)];
+                
+            Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:exdate eximage:eximage userName:userName sheetId:sheetId isRepeating:isRepeating isSaved:isSaved];
+            [data addObject:exp];
+        }
+    }else{
+        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        return nil;
+    }
+    return data;
+}
+
 +(void)updateExpenses:(sqlite3*)database expenses:(NSArray*)expenses{
     for (Expense* exp in expenses) {
         [ExpenseSql addExpense:database exp:exp];
