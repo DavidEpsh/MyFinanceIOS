@@ -223,21 +223,20 @@ static NSString* IS_SAVED = @"IS_SAVED";
 // Adding Sheets
 +(void)addSheet:(sqlite3 *)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId{
     
-    if([ExpenseSql hasSheetId:database sheetId:sheetId]){
+    if(![ExpenseSql hasSheetId:database sheetId:sheetId]){
         
-    }else{
         sqlite3_stmt *statment;
+        NSString* query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@,%@) values (?,?);", @"SHEETS",SHEET_ID, @"SHEET_NAME"];
         
-        const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from SHEETS WHERE SHEET_ID = '%@'", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
-        
-        if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
-            while(sqlite3_step(statment) == SQLITE_ROW){
-                sqlite3_bind_text(statment, 1, [sheetId UTF8String], -1, NULL);
-                sqlite3_bind_text(statment, 2, [sheetName UTF8String], -1, NULL);
+        if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
+            sqlite3_bind_text(statment, 1, [sheetId UTF8String],-1,NULL);
+            sqlite3_bind_text(statment, 2, [sheetName UTF8String],-1,NULL);
+            
+            if(sqlite3_step(statment) == SQLITE_DONE){
+                return;
             }
-        }else{
-            NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
         }
+        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
     }
 }
 

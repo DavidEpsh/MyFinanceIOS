@@ -65,7 +65,7 @@
     return  self;
 }
 
--(void)addExpense:(Expense *)exp{
+-(void)addExpense:(Expense*)exp withParse:(BOOL)withParse{
     [ExpenseSql addExpense:database exp:exp];
 }
 -(void)deleteExpense:(Expense *)exp{
@@ -106,6 +106,10 @@
 
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId{
     [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
+}
+
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId{
+    return [ExpenseSql getExpensesForSheet:database sheetId:sheetId];
 }
 
 

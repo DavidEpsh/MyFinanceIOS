@@ -12,7 +12,7 @@
 
 @protocol ModelProtocol <NSObject>
 
--(void)addExpense:(Expense*)exp;
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)deleteExpense:(Expense*)exp;
 -(Expense*)getExpense:(NSString*)exname;
 -(NSArray*)getExpenses;
@@ -25,6 +25,7 @@
 
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 -(NSString*)getCurrentUser;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId;
 
 @end
 
@@ -44,9 +45,8 @@
 
 +(Model*)instance;
 
--(void)addExp:(Expense*)exp;
+-(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
-
 -(void)updateExpense:(Expense*)exp;
 -(void)getExpensesAsynch:(void(^)(NSArray*))blockListener;
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block;
@@ -55,6 +55,7 @@
 -(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId;
 
 
 @end

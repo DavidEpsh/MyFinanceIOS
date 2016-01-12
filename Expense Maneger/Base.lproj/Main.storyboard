@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tr9-lu-SEE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tr9-lu-SEE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
@@ -113,6 +113,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18O-RM-WZM">
                                 <rect key="frame" x="7" y="82" width="115" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+<<<<<<< HEAD
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -173,6 +174,12 @@
                                 <rect key="frame" x="167" y="283" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
+=======
+                                <animations/>
+                                <state key="normal" image="plus-simple-7.png">
+                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+>>>>>>> 185ec29a064b5c13a2f54376ab4d6b06dfbd7d19
                                 <connections>
                                     <action selector="cancelAct:" destination="FwK-JO-ROc" eventType="touchUpInside" id="Szv-h8-JM7"/>
                                 </connections>
@@ -614,6 +621,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is repeated?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eWt-uJ-mtx">
                                 <rect key="frame" x="13" y="279" width="94" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -621,6 +629,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tkm-Fh-Y8F">
                                 <rect key="frame" x="119" y="278" width="16" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <state key="normal" image="checkbox_no.png"/>
                                 <connections>
                                     <action selector="checkBox:" destination="hZM-uR-1Ra" eventType="touchUpInside" id="Z8D-w8-sxh"/>
@@ -651,7 +660,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3r-4t-r34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="-175" y="-622"/>
+=======
+            <point key="canvasLocation" x="-196" y="-622"/>
+        </scene>
+        <!--New Trip View Controller-->
+        <scene sceneID="Lrq-m4-qjR">
+            <objects>
+                <viewController storyboardIdentifier="NewTripViewController" id="P2J-09-fZt" customClass="NewTripViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wiK-Ki-xhB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lme-yO-vY2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wyD-0y-Pwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-173" y="8"/>
+>>>>>>> 185ec29a064b5c13a2f54376ab4d6b06dfbd7d19
         </scene>
         <!--Take Picture View Controller-->
         <scene sceneID="mRl-73-9ix">
