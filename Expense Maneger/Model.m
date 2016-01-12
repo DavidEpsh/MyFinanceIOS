@@ -110,6 +110,10 @@ static Model* instance = nil;
     } );
 }
 
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId{
+    return [sqlModelImpl getExpensesForSheet:sheetId];
+}
+
 //Block Asynch implementation
 //-(void)getExpensesAsynch:(void(^)(NSArray*))blockListener{
 //    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);

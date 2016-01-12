@@ -21,5 +21,6 @@
 -(void)updateExpenses:(NSArray*)expenses;
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 -(void)updateExpense:(Expense *)expense;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId;
 
 @end

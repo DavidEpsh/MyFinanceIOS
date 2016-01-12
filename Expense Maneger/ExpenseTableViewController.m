@@ -9,6 +9,7 @@
 #import "ExpenseTableViewController.h"
 #import "ExpenseTableViewCell.h"
 #import "Model.h"
+#import "ModelSql.h"
 #import <Parse/Parse.h>
 
 @interface ExpenseTableViewController ()
@@ -22,11 +23,13 @@
     [self.activityIndicator startAnimating];
     
     
-    self.navigationItem.title = [Model instance].user;
+    self.navigationItem.title = @"My Account";
     
     expenses = [[NSArray alloc] init];
     
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
     
+        self.navigationItem.title = [Model instance].user;
 //    [[Model instance] getExpensesAsynch:^(NSArray *stArray) {
 //        expenses = stArray;
 //        [self.tableView reloadData];
@@ -104,7 +107,7 @@
 }
 
 -(void)onSave:(id)newExpense {
-//    [self.expenses addObj
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }

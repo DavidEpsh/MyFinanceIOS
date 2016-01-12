@@ -25,6 +25,7 @@
 
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 -(NSString*)getCurrentUser;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId;
 
 @end
 
@@ -55,6 +56,7 @@
 -(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId;
 
 
 @end

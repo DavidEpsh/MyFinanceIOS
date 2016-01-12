@@ -108,6 +108,10 @@
     [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
 }
 
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId{
+    return [ExpenseSql getExpensesForSheet:database sheetId:sheetId];
+}
+
 
 
 @end
