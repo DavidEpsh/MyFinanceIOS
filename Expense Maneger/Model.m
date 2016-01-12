@@ -77,6 +77,7 @@ static Model* instance = nil;
     [sqlModelImpl updateExpense:exp];
     [parseModelImpl updateExpense:exp];
 }
+
 -(void)addExp:(Expense*)exp{
     [sqlModelImpl addExpense:exp];
     [parseModelImpl addExpense:exp];

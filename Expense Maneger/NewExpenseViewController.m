@@ -16,10 +16,15 @@
 @end
 
 @implementation NewExpenseViewController
+@synthesize checkBoxBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"New Expense";
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    nonchecked = [defaults boolForKey:@"boxIsChecked"];
+    [self checkBoxBtn];
     
 //    expenses = [[NSMutableArray alloc] init];
 
@@ -67,14 +72,20 @@
 }
 */
 
-- (IBAction)takePicture:(id)sender {
-}
-
 - (IBAction)cancelAct:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)saveAct:(id)sender {
+   
+    Expense* exp = [[Expense alloc] init];
+    [[Model instance] addExp:exp];
+    
+    exp.exname = self.expenseName.text;
+    exp.excategory = self.category.text;
+    
+    NSString* st_examount = [NSString stringWithFormat:@"%@", exp.examount];
+    st_examount = self.amount.text;
 
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
     NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
@@ -102,6 +113,21 @@
 
 
 - (IBAction)toTakePhotoViewContr:(id)sender {
+}
+- (IBAction)checkBox:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (!nonchecked) {
+        [checkBoxBtn setImage:[UIImage imageNamed:@"checkbox_yes.png"] forState:UIControlStateNormal];
+        nonchecked = YES;
+        [defaults setBool:nonchecked forKey:@"boxIsChecked"];
+        
+    }
+    else if (nonchecked){
+        [checkBoxBtn setImage:[UIImage imageNamed:@"checkbox_no.png"] forState:UIControlStateNormal];
+        nonchecked = NO;
+        [defaults setBool:nonchecked forKey:@"boxIsChecked"];
+    }
+    [defaults synchronize];
 }
 @end
 
