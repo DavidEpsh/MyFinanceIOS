@@ -113,7 +113,8 @@
 
 +(void)makeToast:(NSString*)toastMsg {
     NSString *message = toastMsg;
-    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    UIAlertView *toast = [[UIAlertView alloc]initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    
     [toast show];
     int duration = 1; // in seconds
     

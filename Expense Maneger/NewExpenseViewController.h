@@ -10,36 +10,37 @@
 #import "Expense.h"
 
 @protocol NewExpenseDelegate <NSObject>
-
 -(void)onSave:(Expense*)newExpense;
-
 @end
 
+@protocol CheckBoxDelegate <NSObject>
+-(void)onSavebox;
+@end
 
 @interface NewExpenseViewController : UIViewController
 {
     UIDatePicker *datePicker;
-//    NSMutableArray* expenses;
+    BOOL nonchecked;
 }
 
-@property id<NewExpenseDelegate> delegate;
+@property id<NewExpenseDelegate, CheckBoxDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *expenseName;
 @property (weak, nonatomic) IBOutlet UITextField *category;
 @property (weak, nonatomic) IBOutlet UITextField *amount;
 @property (weak, nonatomic) IBOutlet UITextField *date;
 
-- (IBAction)takePicture:(id)sender;
-
 - (IBAction)cancelAct:(id)sender;
 
 - (IBAction)saveAct:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *takePicturBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 - (IBAction)toTakePhotoViewContr:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *checkBoxBtn;
+- (IBAction)checkBox:(id)sender;
 
 
 @end

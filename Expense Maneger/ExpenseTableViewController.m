@@ -89,19 +89,19 @@
  
     return cell;
 }
-
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toNewExpense"]) {
         NewExpenseViewController* nextVC = segue.destinationViewController;
         nextVC.delegate = self;
     }
-    /*
+    
     else if ([segue.identifier isEqualToString:@"toDetail"]){
         DetailViewController* DetailVC = segue.destinationViewController;
         DetailVC.student = [self.data objectAtIndex:[(UIButton*)sender tag]];
     }
-     */
 }
+*/
 
 -(void)onSave:(id)newExpense {
  //   [self.expenses addObj
