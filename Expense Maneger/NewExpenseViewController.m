@@ -83,10 +83,10 @@
     NSString* currentUser = [[Model instance]getCurrentUser];
     NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:@"haha" examount:examount exdate:st_exdate eximage:nil userName:currentUser sheetId:@"My Account" isRepeating:@(0) isSaved:@(1)];
+    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:@"haha" examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Account" isRepeating:@(0) isSaved:@(1)];
     
     [self.delegate onSave:exp];
-    
+    [[Model instance]addExp:exp];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
