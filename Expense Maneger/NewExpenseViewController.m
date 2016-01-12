@@ -69,7 +69,7 @@
     if ([segue.identifier isEqualToString:@"toTakePicture"]) {
         toTakePictureViewConntroller nextVC = segue.destinationViewController;
         nextVC.delegate = self;
-}
+}  	
 */
 
 - (IBAction)cancelAct:(id)sender {
