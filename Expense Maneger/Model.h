@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Expense.h"
+#import <sqlite3.h>
 #import <UIKit/UIKit.h>
 
 @protocol ModelProtocol <NSObject>
@@ -22,10 +23,12 @@
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
 -(void)getAllRelevantExpensesAsync;
-
--(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
+-(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;
 -(NSString*)getCurrentUser;
 -(NSArray*)getExpensesForSheet:(NSString*)sheetId;
+-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
+-(BOOL)checkHasLocalUserSheet:(NSString *)sheetId;
+-(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId;
 
 @end
 
@@ -39,6 +42,7 @@
 @interface Model : NSObject{
     id<ModelProtocol> parseModelImpl;
     id<ModelProtocol> sqlModelImpl;
+    
 }
 
 @property NSString* user;
@@ -56,7 +60,10 @@
 -(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block;
 -(NSArray*)getExpensesForSheet:(NSString*)sheetId;
-
+-(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;
+-(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId;
+-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
+-(BOOL)checkHasLocalUserSheet:(NSString *)sheetId;
 
 @end
 

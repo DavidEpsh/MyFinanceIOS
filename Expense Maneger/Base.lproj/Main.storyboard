@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tr9-lu-SEE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -35,11 +36,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="C1h-JA-5tt">
-                            <rect key="frame" x="0.0" y="202" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripsCell" rowHeight="110" id="RK6-Fh-kcN" customClass="TripsTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="320" height="110"/>
@@ -93,15 +89,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Trips" id="5TE-XV-t8a">
-                        <barButtonItem key="rightBarButtonItem" image="plus-simple-7.png" id="UFu-kI-IHp">
-                            <color key="tintColor" red="0.1233719418" green="0.096546806030000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="FwK-JO-ROc" kind="push" identifier="toNewTrip" id="aYe-5i-N9U"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="plus-simple-7.png" id="UFu-kI-IHp">
+                                <color key="tintColor" red="0.1233719418" green="0.096546806030000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="FwK-JO-ROc" kind="push" identifier="toNewTrip" id="aYe-5i-N9U"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="second" id="T3b-Kl-i0W">
+                                <connections>
+                                    <action selector="newUser:" destination="xpd-bb-UiI" id="bB9-ck-IEG"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="C1h-JA-5tt" id="TiG-zV-dAf"/>
                         <outlet property="toNewTripBtn" destination="UFu-kI-IHp" id="kar-zO-PJK"/>
                     </connections>
                 </tableViewController>
@@ -428,7 +430,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Home" id="lLV-RS-PYB">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="YKG-gh-sVo"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="plus-simple-7.png" id="YKG-gh-sVo"/>
+                            <barButtonItem title="Item" id="Jkd-Zg-fV1"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ekl-bN-je2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,11 +485,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Nqe-jH-z4i">
-                            <rect key="frame" x="0.0" y="215" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ExpenseTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="expenseCell" rowHeight="123" id="Mst-ee-Brk" customClass="ExpenseTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="320" height="123"/>
@@ -545,9 +545,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="activityIndicator" destination="Nqe-jH-z4i" id="lVl-wO-emr"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YW-OW-Lu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -683,22 +680,6 @@
             </objects>
             <point key="canvasLocation" x="-196" y="-622"/>
         </scene>
-        <!--New Trip View Controller-->
-        <scene sceneID="Lrq-m4-qjR">
-            <objects>
-                <viewController storyboardIdentifier="NewTripViewController" id="P2J-09-fZt" customClass="NewTripViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wiK-Ki-xhB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="lme-yO-vY2"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wyD-0y-Pwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-173" y="8"/>
-        </scene>
         <!--Take Picture View Controller-->
         <scene sceneID="mRl-73-9ix">
             <objects>
@@ -773,5 +754,6 @@
         <image name="home-7.png" width="30" height="30"/>
         <image name="photo-7.png" width="30" height="30"/>
         <image name="plus-simple-7.png" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
     </resources>
 </document>

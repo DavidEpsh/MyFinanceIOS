@@ -19,9 +19,7 @@
 @implementation ExpenseTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.activityIndicator startAnimating];
-    
+    [super viewDidLoad];  
     
     self.navigationItem.title = @"My Account";
 

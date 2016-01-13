@@ -12,6 +12,7 @@
 
 @interface ExpenseTableViewController : UITableViewController<NewExpenseDelegate>{
    NSArray* expenses;
+    NSString* sheetId;
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 

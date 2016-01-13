@@ -9,6 +9,7 @@
 #import "ModelSql.h"
 #import "ExpenseSql.h"
 #import "LastUpdateSql.h"
+#import <sqlite3.h>
 
 
 @implementation ModelSql
@@ -65,6 +66,17 @@
     return  self;
 }
 
+-(void)newExpense:(Expense*)exp withParse:(BOOL)withParse{
+    [ExpenseSql addExpense:database exp:exp];
+}
+-(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId{
+    [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
+}
+
+-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
+    [ExpenseSql addUserSheet:database userName:userName sheetId:sheetId];
+}
+
 -(void)addExpense:(Expense*)exp withParse:(BOOL)withParse{
     [ExpenseSql addExpense:database exp:exp];
 }
@@ -112,6 +124,9 @@
     return [ExpenseSql getExpensesForSheet:database sheetId:sheetId];
 }
 
+-(BOOL)checkHasLocalUserSheet:(NSString*)sheetId{
+    return [ExpenseSql hasLocalUserSheet:database sheetId:sheetId];
+}
 
 
 @end

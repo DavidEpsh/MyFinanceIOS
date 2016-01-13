@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Expense.h"
+#import <sqlite3.h>
 
 @protocol NewExpenseDelegate <NSObject>
 -(void)onSave:(Expense*)newExpense;
@@ -21,6 +22,7 @@
 {
     UIDatePicker *datePicker;
     BOOL nonchecked;
+    sqlite3* database;
 }
 
 @property id<NewExpenseDelegate, CheckBoxDelegate> delegate;

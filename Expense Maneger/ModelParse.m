@@ -2,7 +2,6 @@
 #import "ModelParse.h"
 #import <Parse/Parse.h>
 #import "ModelSql.h"
-#import "ModelSql.h"
 #import "ExpenseSql.h"
 
 static NSString* currUser;
@@ -46,8 +45,7 @@ static NSString* IS_SAVED = @"isSaved";
 
 -(BOOL)login:(NSString*)user pwd:(NSString*)pwd{
     NSError* error;
-    PFUser* puser = [PFUser logInWithUsername:user password:pwd error:&error];
-    if (error == nil && puser != nil) {
+    PFUser* puser = [PFUser logInWithUsername:user password:pwd error:&error];    if (error == nil && puser != nil) {
         return YES;
     }
     return NO;
@@ -126,10 +124,12 @@ static NSString* IS_SAVED = @"isSaved";
                     [ModelParse addUserSheetsToParse:currUser sheetId:currUser];
                     [arrayUserNames addObject:currUser];
                     [arraySheetId addObject:currUser];
+                    [[Model instance] addUserSheetToSQL:currUser sheetId:currUser];
                 }else{
                     for (PFObject* object in objects){
                         [arrayUserNames addObject:object[USER_NAME]];
-                        [arraySheetId addObject:SHEET_ID];
+                        [arraySheetId addObject:object[SHEET_ID]];
+                        [[Model instance] addUserSheetToSQL:object[USER_NAME] sheetId:object[SHEET_ID]];
                     }
             }
             
@@ -139,12 +139,11 @@ static NSString* IS_SAVED = @"isSaved";
             [queryExpenses findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 //Now we got all Expenses -> inserting to SQL
                 if (error == nil) {
-
                     for (PFObject* obj in objects){
-                        Expense* expense = nil;
-                        expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"]   userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
+                        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
                     
                         [[Model instance] addExp:expense withParse:NO];
+                        
                     }
                     
                     PFQuery* queryFindSheets = [PFQuery queryWithClassName:SHEETS_TABLE];

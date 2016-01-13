@@ -29,6 +29,7 @@ static NSString* USER_NAME = @"USER_NAME";
 static NSString* SHEET_ID = @"SHEET_ID";
 static NSString* IS_REPEATING = @"IS_REPEATING";
 static NSString* IS_SAVED = @"IS_SAVED";
+static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 
 +(BOOL)createTable:(sqlite3*)database{
@@ -59,7 +60,6 @@ static NSString* IS_SAVED = @"IS_SAVED";
     
   
     if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
-        
         NSString* st_timeInMillisecond = [NSString stringWithFormat:@"%@", exp.timeInMillisecond];
         sqlite3_bind_text(statment, 1, [st_timeInMillisecond UTF8String],-1,NULL);
         sqlite3_bind_text(statment, 2, [exp.exname UTF8String],-1,NULL);
@@ -247,13 +247,64 @@ static NSString* IS_SAVED = @"IS_SAVED";
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
-            return true;
+            return YES;
         }
     }else{
         NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
-        return nil;
+        return NO;
     }
-    return false;
+    return NO;
+}
+
++(void)addUserSheet:(sqlite3 *)database userName:(NSString *)userName sheetId:(NSString *)sheetId{
+    
+    if(![ExpenseSql hasUserSheet:database sheetId:sheetId] && ![ExpenseSql hasLocalUserSheet:database sheetId:sheetId]){
+        
+        sqlite3_stmt *statment;
+        NSString* query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@,%@) values (?,?);", USER_SHEETS,USER_NAME, SHEET_ID];
+        
+        if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
+            sqlite3_bind_text(statment, 1, [userName UTF8String],-1,NULL);
+            sqlite3_bind_text(statment, 2, [sheetId UTF8String],-1,NULL);
+            
+            if(sqlite3_step(statment) == SQLITE_DONE){
+                return;
+            }
+        }
+        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+    }
+}
+
++(BOOL)hasUserSheet:(sqlite3*)database sheetId:(NSString*)sheetId{
+    sqlite3_stmt *statment;
+    NSString* userName = [Model instance].user;
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from USERS_SHEETS WHERE SHEET_ID = '%@' AND USER_NAME = '%@'", sheetId, userName] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            return YES;
+        }
+    }else{
+        NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
+        return NO;
+    }
+    return NO;
+}
+
++(BOOL)hasLocalUserSheet:(sqlite3*)database sheetId:(NSString*)sheetId{
+    sqlite3_stmt *statment;
+    NSString* userName = [Model instance].user;
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from USERS_SHEETS WHERE SHEET_ID = '%@' AND USER_NAME = '%@'", sheetId, userName] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            return YES;
+        }
+    }else{
+        NSLog(@"ERROR: check sheet failed %s",sqlite3_errmsg(database));
+        return NO;
+    }
+    return NO;
 }
 
 

@@ -75,13 +75,13 @@
     NSString* currentUser = [[Model instance]getCurrentUser];
     NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];	
     NSNumber* isRepeating;
-    if(nonchecked == YES){
+    if(nonchecked == NO){
         isRepeating = [NSNumber numberWithInt:1];
     }
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Account" isRepeating:isRepeating isSaved:@(1)];
+    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:[[Model instance]getCurrentUser] isRepeating:isRepeating isSaved:@(1)];
     
-    [[Model instance]addExp:exp withParse:true];
+    [[Model instance]addExp:exp withParse:YES];
     [self.delegate onSave:exp];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

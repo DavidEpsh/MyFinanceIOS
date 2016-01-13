@@ -11,10 +11,9 @@
 #import "PNChart.h"
 
 
-@interface TripsTableViewController : UITableViewController
-
-<NewTripDelegate>{
+@interface TripsTableViewController : UITableViewController<NewTripDelegate>{
     NSArray* expenses;
+    NSString* sheetId;
 }
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

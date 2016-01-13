@@ -19,12 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.activityIndicator startAnimating];
 
-    self.navigationItem.title = [Model instance].user;
-//    expenses = [[NSArray alloc] init];
+    self.navigationItem.title = @"Trip";
 
+    if(sheetId == nil ){
+        sheetId = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    }
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -87,6 +87,28 @@
 -(void)onSave:(id)newExpense {
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)newUser:(id)sender {
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Hello!" message:@"Please enter your name:" delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+    alertTextField.placeholder = @"Enter your name";
+    [alert show];
+    
+    
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    NSString* input = [[alertView textFieldAtIndex:0] text];
+        if(sheetId != nil){
+            sheetId = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+            [[Model instance] addSheet:@"Trip" sheetId:sheetId];
+            [[Model instance] addUserSheetToSQL:input sheetId:sheetId];
+        }
 }
 
 /*

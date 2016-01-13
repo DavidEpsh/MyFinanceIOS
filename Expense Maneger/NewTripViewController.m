@@ -75,7 +75,7 @@
     NSString* currentUser = [[Model instance]getCurrentUser];
     NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
     NSNumber* isRepeating;
-    if(nonchecked == YES){
+    if(nonchecked == NO){
         isRepeating = [NSNumber numberWithInt:1];
     }
     

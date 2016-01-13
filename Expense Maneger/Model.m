@@ -9,6 +9,7 @@
 #import "Model.h"
 #import <sqlite3.h>
 #import "ModelSql.h"
+#import "ExpenseSql.h"
 #import "ModelParse.h"
 #import "LastUpdateSql.h"
 
@@ -79,11 +80,16 @@ static Model* instance = nil;
 }
 
 -(void)addExp:(Expense*)exp withParse:(BOOL)withParse{
-    [sqlModelImpl addExp:exp withParse:NO];
+    
+    [sqlModelImpl newExpense:exp withParse:NO];
     if (withParse) {
         [parseModelImpl addExp:exp withParse:NO];
     }
 }
+//
+//-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
+//    [sqlModelImpl addUserSheetToSQL:userName sheetId:sheetId];
+//}
 
 
 -(void)deleteExpense:(Expense*)exp;{
@@ -96,9 +102,12 @@ static Model* instance = nil;
 }
 
 -(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
-    [sqlModelImpl addSheet:sheetName sheetId:sheetId];
+    [sqlModelImpl addSheetToSql:sheetName sheetId:sheetId];
 }
 
+-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
+    [sqlModelImpl addUserSheetToSQL:userName sheetId:sheetId];
+}
 
 -(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block{
     dispatch_queue_t myQueue = dispatch_queue_create("myQueueName", NULL);
@@ -116,64 +125,6 @@ static Model* instance = nil;
 -(NSArray*)getExpensesForSheet:(NSString*)sheetId{
     return [sqlModelImpl getExpensesForSheet:sheetId];
 }
-
-//Block Asynch implementation
-//-(void)getExpensesAsynch:(void(^)(NSArray*))blockListener{
-//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-//    
-//    dispatch_async(myQueue, ^{
-//        //long operation
-//        NSArray* data = [parseModelImpl getExpenses];
-//        
-//        //end of long operation - update display in the main Q
-//        dispatch_queue_t mainQ = dispatch_get_main_queue();
-//        dispatch_async(mainQ, ^{
-//            blockListener(data);
-//        });
-//    } );
-//}
-
-/*
-//Block Asynch implementation
--(void)getExpensesAsynch:(void(^)(NSArray*))blockListener{
-    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-    dispatch_async(myQueue, ^{
-        //long operation
-       NSMutableArray* data = (NSMutableArray*)[sqlModelImpl getExpenses];
-        NSString* lastUpdate = [sqlModelImpl getExpensesLastUpdateDate];
-       NSMutableArray* updatedData;
-       if (lastUpdate != nil){
-           updatedData = (NSMutableArray*)[parseModelImpl
-                                          getExpensesFromDate:lastUpdate];
-          }else{
-          updatedData = (NSMutableArray*)[parseModelImpl getExpenses];
-}
- //       if (updatedData.count > 0) {
- //           [sqlModelImpl updateExpenses:updatedData];
- //           [sqlModelImpl setExpensesLastUpdateDate:[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]]];
-  //          data = (NSMutableArray*)[sqlModelImpl getExpenses];
- //       }
-
-        
-        //end of long operation - update display in the main Q
-//        dispatch_queue_t mainQ = dispatch_get_main_queue();
- //       dispatch_async(mainQ, ^{
-  //          blockListener(data);
-//        });
- //  } );
-}
-*/
-//-(void)deleteExpense:(Expense*)exp block:(void(^)())block{
-//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-//    
-//    dispatch_async(myQueue, ^{
-//        [parseModelImpl deleteExpense:exp];
-//        dispatch_queue_t mainQ = dispatch_get_main_queue();
-//        dispatch_async(mainQ, ^{
-//            block();
-//        });
-//    } );
-//}
 
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block{
     dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
