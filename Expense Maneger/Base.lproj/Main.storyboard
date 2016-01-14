@@ -27,89 +27,99 @@
             </objects>
             <point key="canvasLocation" x="-1309" y="-24"/>
         </scene>
-        <!--Trips-->
-        <scene sceneID="mMn-l7-vTw">
+        <!--Accounts View Controller-->
+        <scene sceneID="AWx-cp-H0Q">
             <objects>
-                <tableViewController storyboardIdentifier="TripsTableViewController" id="xpd-bb-UiI" customClass="TripsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" id="RT7-ec-Pj3">
+                <viewController storyboardIdentifier="AccountsViewController" id="6hg-Cx-tvQ" customClass="AccountsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uf5-YD-hTB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="Dgk-UT-iDz">
+                                <rect key="frame" x="0.0" y="91" width="320" height="145"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6hg-Cx-tvQ" id="fLC-h4-QEt"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zvf-aB-GV0">
+                                <rect key="frame" x="0.0" y="65" width="320" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.33051459849999998" green="0.59066771600000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="126" sectionHeaderHeight="28" sectionFooterHeight="28" id="d87-pj-gHY">
+                                <rect key="frame" x="0.0" y="244" width="320" height="318"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.82094269740000003" green="0.96261828100000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="AccountsTableViewCell" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="AccountsCell" rowHeight="126" id="Hyv-YX-Nlz" customClass="AccountsTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="126"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hyv-YX-Nlz" id="Tlf-Ie-oci">
+                                            <rect key="frame" x="0.0" y="0.0" width="253" height="125"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="r0b-lo-2GR">
+                                                    <rect key="frame" x="52" y="53" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zXe-6D-4Zt">
+                                                    <rect key="frame" x="140" y="8" width="161" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gkx-Th-pCs">
+                                                    <rect key="frame" x="145" y="37" width="156" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jpl-Jh-fek">
+                                                    <rect key="frame" x="140" y="74" width="161" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="n0X-xm-PuS">
+                                                    <rect key="frame" x="8" y="7" width="109" height="110"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="r0b-lo-2GR" id="oDk-wu-p3g"/>
+                                            <outlet property="category" destination="Gkx-Th-pCs" id="Zvg-zF-dsG"/>
+                                            <outlet property="date" destination="jpl-Jh-fek" id="fGJ-A6-9Y3"/>
+                                            <outlet property="exName" destination="zXe-6D-4Zt" id="y6y-d1-Uw0"/>
+                                            <outlet property="imageView" destination="n0X-xm-PuS" id="9iY-Kn-9If"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="6hg-Cx-tvQ" id="fsT-c2-lMj"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripsCell" rowHeight="110" id="RK6-Fh-kcN" customClass="TripsTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="110"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RK6-Fh-kcN" id="ESQ-83-cTq">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u9y-Tr-4Eb">
-                                            <rect key="frame" x="8" y="8" width="96" height="90"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mCp-iw-LZ9">
-                                            <rect key="frame" x="119" y="13" width="180" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="2Ji-5K-SDo">
-                                            <rect key="frame" x="46" y="45" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                        </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UNL-sL-I0G">
-                                            <rect key="frame" x="119" y="45" width="159" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                                <color key="backgroundColor" red="0.75248221575670327" green="0.95337868843041118" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="activityIndicator" destination="2Ji-5K-SDo" id="drB-LB-DIO"/>
-                                    <outlet property="category" destination="UNL-sL-I0G" id="ZgN-HE-bmn"/>
-                                    <outlet property="imageViewTrip" destination="u9y-Tr-4Eb" id="9QW-vB-6Gy"/>
-                                    <outlet property="trName" destination="mCp-iw-LZ9" id="gpf-k8-vBg"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="xpd-bb-UiI" id="GWG-mf-Iz5"/>
-                            <outlet property="delegate" destination="xpd-bb-UiI" id="Rr0-bd-f5h"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Trips" id="5TE-XV-t8a">
-                        <rightBarButtonItems>
-                            <barButtonItem image="plus-simple-7.png" id="UFu-kI-IHp">
-                                <color key="tintColor" red="0.1233719418" green="0.096546806030000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="FwK-JO-ROc" kind="push" identifier="toNewTrip" id="aYe-5i-N9U"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="second" id="T3b-Kl-i0W">
-                                <connections>
-                                    <action selector="newUser:" destination="xpd-bb-UiI" id="bB9-ck-IEG"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    </view>
+                    <navigationItem key="navigationItem" id="KWq-IW-hXE"/>
                     <connections>
-                        <outlet property="toNewTripBtn" destination="UFu-kI-IHp" id="kar-zO-PJK"/>
+                        <outlet property="label" destination="zvf-aB-GV0" id="5L0-15-6QI"/>
+                        <outlet property="myTableView" destination="d87-pj-gHY" id="UCC-J0-quz"/>
+                        <outlet property="pickerData" destination="Dgk-UT-iDz" id="fou-tn-ecd"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yWd-ex-zjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IDl-Cr-rru" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-540" y="8"/>
+            <point key="canvasLocation" x="-467" y="43"/>
         </scene>
         <!--New Trip View Controller-->
         <scene sceneID="j6v-mJ-Zjb">
@@ -239,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v96-aa-F8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-170" y="8"/>
+            <point key="canvasLocation" x="-92" y="25"/>
         </scene>
         <!--Take Picture2 View Controller-->
         <scene sceneID="enT-i4-Hgs">
@@ -283,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJT-vb-IAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="8"/>
+            <point key="canvasLocation" x="246" y="25"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="OE7-pc-Gts">
@@ -440,11 +450,11 @@
             </objects>
             <point key="canvasLocation" x="-535" y="693"/>
         </scene>
-        <!--Home-->
+        <!--About-->
         <scene sceneID="OwZ-oG-q4l">
             <objects>
                 <navigationController id="XdE-1N-JvV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home-7.png" id="IE8-oh-joK"/>
+                    <tabBarItem key="tabBarItem" title="About" id="IE8-oh-joK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qd2-8R-WW4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -458,18 +468,18 @@
             </objects>
             <point key="canvasLocation" x="-899" y="693"/>
         </scene>
-        <!--Trips-->
+        <!--Share Account-->
         <scene sceneID="kJD-g2-6iY">
             <objects>
                 <navigationController storyboardIdentifier="SecondViewController" id="Qf4-vC-Oct" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trips" image="airplane-symbol-7.png" id="ohf-A6-1Ma"/>
+                    <tabBarItem key="tabBarItem" title="Share Account" image="connect-arrow-left-right-7.png" id="ohf-A6-1Ma"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VCN-bq-ntX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
                     <connections>
-                        <segue destination="xpd-bb-UiI" kind="relationship" relationship="rootViewController" id="A7S-XY-QqC"/>
+                        <segue destination="6hg-Cx-tvQ" kind="relationship" relationship="rootViewController" id="pnM-AZ-Pi2"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxa-Ng-sLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -487,7 +497,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ExpenseTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="expenseCell" rowHeight="123" id="Mst-ee-Brk" customClass="ExpenseTableViewCell">
-                                <rect key="frame" x="0.0" y="28" width="320" height="123"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="123"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mst-ee-Brk" id="K84-io-VAF">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
@@ -748,12 +758,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="airplane-symbol-7.png" width="30" height="30"/>
         <image name="business-bag-7.png" width="30" height="30"/>
         <image name="checkbox_no.png" width="16" height="16"/>
-        <image name="home-7.png" width="30" height="30"/>
+        <image name="connect-arrow-left-right-7.png" width="29" height="30"/>
         <image name="photo-7.png" width="30" height="30"/>
         <image name="plus-simple-7.png" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
     </resources>
 </document>

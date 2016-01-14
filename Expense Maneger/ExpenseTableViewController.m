@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];  
     
-    self.navigationItem.title = @"My Account";
 
     expenses = [[NSArray alloc] init];
     
