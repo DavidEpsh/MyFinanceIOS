@@ -77,7 +77,7 @@
         }];
         
     }else{
-        cell.imageViewTrip.image = [UIImage imageNamed:@"troll.jpg"];
+        cell.imageViewTrip.image = [UIImage imageNamed:@"images.jpeg"];
     }
 
     return cell;

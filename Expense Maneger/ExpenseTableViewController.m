@@ -25,7 +25,7 @@
 
     expenses = [[NSArray alloc] init];
     
-    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user]];
 
 }
 
@@ -75,7 +75,7 @@
             }
         }];
     }else{
-        cell.imageView.image = [UIImage imageNamed:@"troll.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"images.jpeg"];
     }
  
     return cell;

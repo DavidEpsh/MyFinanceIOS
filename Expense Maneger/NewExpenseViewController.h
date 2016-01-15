@@ -22,7 +22,6 @@
 {
     UIDatePicker *datePicker;
     BOOL nonchecked;
-    sqlite3* database;
 }
 
 @property id<NewExpenseDelegate, CheckBoxDelegate> delegate;
