@@ -93,11 +93,6 @@ static Model* instance = nil;
         [parseModelImpl addExp:exp withParse:NO];
     }
 }
-//
-//-(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
-//    [sqlModelImpl addUserSheetToSQL:userName sheetId:sheetId];
-//}
-
 
 -(void)deleteExpense:(Expense*)exp;{
     [sqlModelImpl deleteExpense:exp];
@@ -108,12 +103,20 @@ static Model* instance = nil;
     return [parseModelImpl getCurrentUser];
 }
 
--(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
-    [sqlModelImpl addSheetToSql:sheetName sheetId:sheetId];
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId withParse:(BOOL)withParse{
+    [sqlModelImpl addSheet:sheetName sheetId:sheetId];
+    
+    if (withParse) {
+        [parseModelImpl addSheet:sheetName sheetId:sheetId];
+    }
 }
 
--(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
+-(void)addUserSheet:(NSString *)userName sheetId:(NSString *)sheetId withParse:(BOOL)withParse{
     [sqlModelImpl addUserSheetToSQL:userName sheetId:sheetId];
+    
+    if(withParse){
+        [parseModelImpl addUserSheetsToParse:userName sheetId:sheetId];
+    }
 }
 
 -(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block{

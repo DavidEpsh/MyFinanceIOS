@@ -23,6 +23,9 @@
 -(NSString*)getCurrentUser;
 -(void)updateExpense:(Expense *)exp;
 -(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
+
 -(void)addUserSheetsToParse:(NSString*)userNmae sheetId:(NSString*)sheetId;
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId;
+
 
 @end

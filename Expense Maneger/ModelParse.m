@@ -90,14 +90,7 @@ static NSString* IS_SAVED = @"isSaved";
     Expense* expense = nil;
     PFQuery* query = [PFQuery queryWithClassName:@"Expense"];
     [query whereKey:@"exdate" equalTo:exdate];
-    
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* comps = [calendar components:NSCalendarUnitYearForWeekOfYear |NSCalendarUnitYear |NSCalendarUnitMonth|NSCalendarUnitWeekOfMonth |NSCalendarUnitWeekday fromDate:exdate];
-    [comps setWeekday:1]; // 2: monday
-    NSDate *firstDayOfTheWeek = [calendar dateFromComponents:comps];
-    [comps setWeekday:7]; // 7: saturday
-    NSDate *lastDayOfTheWeek = [calendar dateFromComponents:comps];
-    
+
     NSArray* res = [query findObjects];
     if (res.count == 1) {
         PFObject* obj = [res objectAtIndex:0];
@@ -124,12 +117,12 @@ static NSString* IS_SAVED = @"isSaved";
                     [ModelParse addUserSheetsToParse:currUser sheetId:currUser];
                     [arrayUserNames addObject:currUser];
                     [arraySheetId addObject:currUser];
-                    [[Model instance] addUserSheetToSQL:currUser sheetId:currUser];
+                    [[Model instance] addUserSheet:currUser sheetId:currUser withParse:YES];
                 }else{
                     for (PFObject* object in objects){
                         [arrayUserNames addObject:object[USER_NAME]];
                         [arraySheetId addObject:object[SHEET_ID]];
-                        [[Model instance] addUserSheetToSQL:object[USER_NAME] sheetId:object[SHEET_ID]];
+                        [[Model instance] addUserSheet:object[USER_NAME] sheetId:object[SHEET_ID] withParse:NO];
                     }
             }
             
@@ -151,11 +144,11 @@ static NSString* IS_SAVED = @"isSaved";
                     [queryFindSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                         if(error == nil){
                             if (objects == nil || [objects count] == 0) {
-                                [[Model instance]addSheet:@"My Account" sheetId:currUser];
+                                [[Model instance]addSheet:@"My Account" sheetId:currUser withParse:YES];
                                 [ModelParse addSheet:@"My Account" sheetId:currUser];
                             }
                             for(PFObject* obj in objects){
-                                [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID]];
+                                [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID] withParse:NO];
                             }
                             
                         }

@@ -318,8 +318,10 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
         while(sqlite3_step(statment) == SQLITE_ROW){
             
             NSString* sheetName = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
-
-            [data addObject:sheetName];
+            
+            if(![sheetName isEqualToString:@"My Account"]){
+                [data addObject:sheetName];
+            }
         }
     }else{
         NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));

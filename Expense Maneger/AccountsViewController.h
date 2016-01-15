@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *addNewAccount;
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 

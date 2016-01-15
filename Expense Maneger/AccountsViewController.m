@@ -140,6 +140,29 @@
     return cell;
 }
 
++(void)makeToast:(NSString*)toastMsg {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add new user" message:@"Enter user email" preferredStyle:UIAlertControllerStyleAlert];
+
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Username");
+     }];
+
+}
+
+- (void)alertTextFieldDidChange:(UITextField *)sender
+{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    if (alertController)
+    {
+        UITextField *login = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.lastObject;
+        okAction.enabled = login.text.length > 2;
+    }
+}
+- (IBAction)addNewAccount:(id)sender {
+    
+}
 
 /*
 -(void)onSave:(id)newExpense {

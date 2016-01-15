@@ -27,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="-1309" y="-24"/>
         </scene>
-        <!--Accounts View Controller-->
+        <!--Shared Accounts-->
         <scene sceneID="AWx-cp-H0Q">
             <objects>
                 <viewController storyboardIdentifier="AccountsViewController" id="6hg-Cx-tvQ" customClass="AccountsViewController" sceneMemberID="viewController">
@@ -55,6 +55,9 @@
                                 <rect key="frame" x="224" y="65" width="46" height="46"/>
                                 <animations/>
                                 <state key="normal" title="Button" image="IconAddAccount"/>
+                                <connections>
+                                    <action selector="addNewAccount:" destination="6hg-Cx-tvQ" eventType="touchUpInside" id="MC6-nu-psR"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d87-pj-gHY">
                                 <rect key="frame" x="0.0" y="48" width="320" height="471"/>
@@ -143,7 +146,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KWq-IW-hXE"/>
+                    <navigationItem key="navigationItem" title="Shared Accounts" id="KWq-IW-hXE"/>
                     <connections>
                         <outlet property="myTableView" destination="d87-pj-gHY" id="UCC-J0-quz"/>
                         <outlet property="pickerData" destination="Dgk-UT-iDz" id="fou-tn-ecd"/>
@@ -151,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IDl-Cr-rru" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-467" y="43"/>
+            <point key="canvasLocation" x="-540" y="8"/>
         </scene>
         <!--New Trip View Controller-->
         <scene sceneID="j6v-mJ-Zjb">
@@ -273,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v96-aa-F8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92" y="25"/>
+            <point key="canvasLocation" x="-46" y="8"/>
         </scene>
         <!--Take Picture2 View Controller-->
         <scene sceneID="enT-i4-Hgs">
@@ -318,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJT-vb-IAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="246" y="25"/>
+            <point key="canvasLocation" x="323" y="8"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="OE7-pc-Gts">
@@ -676,7 +679,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3r-4t-r34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-196" y="-622"/>
+            <point key="canvasLocation" x="-46" y="-622"/>
         </scene>
         <!--Take Picture View Controller-->
         <scene sceneID="mRl-73-9ix">
@@ -721,7 +724,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gV-cF-owN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="-622"/>
+            <point key="canvasLocation" x="323" y="-622"/>
         </scene>
         <!--My Account-->
         <scene sceneID="9VN-Wx-DpF">

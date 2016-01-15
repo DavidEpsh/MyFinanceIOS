@@ -69,7 +69,7 @@
 -(void)newExpense:(Expense*)exp withParse:(BOOL)withParse{
     [ExpenseSql addExpense:database exp:exp];
 }
--(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId{
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
 }
 
@@ -114,10 +114,6 @@
 
 -(BOOL)signup:(NSString*)user pwd:(NSString*)pwd{
     return  NO;
-}
-
--(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId{
-    [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
 }
 
 -(NSArray*)getExpensesForSheet:(NSString*)sheetId{

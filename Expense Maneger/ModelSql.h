@@ -27,7 +27,6 @@
 -(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;
 //-(void)addUserSheet:(NSString *)userName sheetId:(NSString *)sheetId;
 -(BOOL)checkHasLocalUserSheet:(NSString*)sheetId;
--(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId;
 -(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
 -(NSArray*)getAllSheetNames;
 
