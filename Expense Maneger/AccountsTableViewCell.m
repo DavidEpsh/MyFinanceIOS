@@ -1,14 +1,16 @@
 //
-//  TripsTableViewCell.m
+//  AccountsTableViewCell.m
 //  Expense Maneger
 //
-//  Created by Admin on 1/12/16.
+//  Created by Admin on 1/14/16.
 //  Copyright © 2016 elena. All rights reserved.
 //
 
-#import "TripsTableViewCell.h"
+#import "AccountsTableViewCell.h"
 
-@implementation TripsTableViewCell
+@implementation AccountsTableViewCell
+
+@synthesize imageView;
 
 - (void)awakeFromNib {
     // Initialization code

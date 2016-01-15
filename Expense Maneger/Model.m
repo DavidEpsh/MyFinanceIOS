@@ -13,7 +13,10 @@
 #import "ModelParse.h"
 #import "LastUpdateSql.h"
 
-@implementation Model
+@implementation Model{
+    ModelParse* parseModelImpl;
+    ModelSql* sqlModelImpl;
+}
 
 static Model* instance = nil;
 

@@ -10,8 +10,13 @@
 #import "Model.h"
 #import <UIKit/UIKit.h>
 
-@interface ModelParse : NSObject <ModelProtocol>
+@interface ModelParse : NSObject
 
+-(void)deleteExpense:(Expense*)exp;
+-(void)saveImage:(UIImage*)image withName:(NSString*)eximage;
+-(UIImage*)getImage:(NSString*)eximage;
+-(BOOL)login:(NSString*)user pwd:(NSString*)pwd;
+-(BOOL)signup:(NSString*)user pwd:(NSString*)pwd;
 -(NSArray*)getExpensesFromDate:(NSString*)date;
 -(NSArray*)getAllRelevantExpenses;
 -(void)getAllRelevantExpensesAsync;

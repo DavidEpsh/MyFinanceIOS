@@ -11,11 +11,12 @@
 #import "Model.h"
 #import "Expense.h"
 
-@interface ModelSql : NSObject<ModelProtocol>{
+@interface ModelSql : NSObject{
 
    sqlite3* database;
 }
 
+-(void)deleteExpense:(Expense*)exp;
 -(NSString*)getExpensesLastUpdateDate;
 -(void)setExpensesLastUpdateDate:(NSString*)date;
 -(void)updateExpenses:(NSArray*)expenses;

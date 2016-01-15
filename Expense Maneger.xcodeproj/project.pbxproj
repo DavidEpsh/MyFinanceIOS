@@ -10,8 +10,6 @@
 		63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4232D1C44F3AC0095B620 /* AccountsSql.m */; };
 		63E423301C45013D0095B620 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E4232F1C45013D0095B620 /* UIKit.framework */; };
 		63E423321C4501FA0095B620 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E423311C4501FA0095B620 /* Foundation.framework */; };
-		63E4233A1C45EDE10095B620 /* ic_person_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 63E423391C45EDE10095B620 /* ic_person_add.png */; };
-		63E4233E1C4689E60095B620 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 63E4233D1C4689E60095B620 /* images.jpeg */; };
 		840502791C2BE9B4004D4A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840502781C2BE9B4004D4A69 /* main.m */; };
 		8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405027B1C2BE9B4004D4A69 /* AppDelegate.m */; };
 		840502851C2BE9B4004D4A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840502831C2BE9B4004D4A69 /* Main.storyboard */; };
@@ -47,11 +45,11 @@
 		84501A811C444F90003EB227 /* photo-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 84501A801C444F90003EB227 /* photo-7.png */; };
 		847CC1481C4421C60067BF5B /* home-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 847CC1471C4421C60067BF5B /* home-7.png */; };
 		847CC14A1C4423440067BF5B /* airplane-symbol-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 847CC1491C4423440067BF5B /* airplane-symbol-7.png */; };
+		84C8A0C51C48211100FDECCF /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C8A0C41C48211100FDECCF /* AccountsViewController.m */; };
+		84C8A0C91C48343000FDECCF /* AccountsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C8A0C81C48343000FDECCF /* AccountsTableViewCell.m */; };
 		84D87A621C453DC90041B915 /* checkbox_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D87A611C453DC90041B915 /* checkbox_no.png */; };
 		84D87A641C453DD30041B915 /* checkbox_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D87A631C453DD30041B915 /* checkbox_yes.png */; };
-		84D87A721C456D150041B915 /* TripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A711C456D150041B915 /* TripsTableViewCell.m */; };
 		84D87A781C4592300041B915 /* NewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A771C4592300041B915 /* NewTripViewController.m */; };
-		84D87A7B1C45941C0041B915 /* TripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7A1C45941C0041B915 /* TripsTableViewController.m */; };
 		84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */; };
 		84D87A821C45A4AC0041B915 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A811C45A4AC0041B915 /* HomeTableViewController.m */; };
 		84D87A851C45A5620041B915 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D87A841C45A5620041B915 /* HomeTableViewCell.m */; };
@@ -87,8 +85,6 @@
 		63E4232D1C44F3AC0095B620 /* AccountsSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsSql.m; sourceTree = "<group>"; };
 		63E4232F1C45013D0095B620 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		63E423311C4501FA0095B620 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		63E423391C45EDE10095B620 /* ic_person_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_person_add.png; path = ../../ic_person_add_black_24dp/ios/ic_person_add.imageset/ic_person_add.png; sourceTree = "<group>"; };
-		63E4233D1C4689E60095B620 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = images.jpeg; path = ../../images.jpeg; sourceTree = "<group>"; };
 		840502741C2BE9B4004D4A69 /* Expense Maneger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Maneger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840502781C2BE9B4004D4A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8405027A1C2BE9B4004D4A69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -141,14 +137,14 @@
 		84501A801C444F90003EB227 /* photo-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-7.png"; sourceTree = "<group>"; };
 		847CC1471C4421C60067BF5B /* home-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-7.png"; sourceTree = "<group>"; };
 		847CC1491C4423440067BF5B /* airplane-symbol-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airplane-symbol-7.png"; sourceTree = "<group>"; };
+		84C8A0C31C48211100FDECCF /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		84C8A0C41C48211100FDECCF /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		84C8A0C71C48343000FDECCF /* AccountsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsTableViewCell.h; sourceTree = "<group>"; };
+		84C8A0C81C48343000FDECCF /* AccountsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsTableViewCell.m; sourceTree = "<group>"; };
 		84D87A611C453DC90041B915 /* checkbox_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_no.png; sourceTree = "<group>"; };
 		84D87A631C453DD30041B915 /* checkbox_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_yes.png; sourceTree = "<group>"; };
-		84D87A701C456D150041B915 /* TripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsTableViewCell.h; sourceTree = "<group>"; };
-		84D87A711C456D150041B915 /* TripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsTableViewCell.m; sourceTree = "<group>"; };
 		84D87A761C4592300041B915 /* NewTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTripViewController.h; sourceTree = "<group>"; };
 		84D87A771C4592300041B915 /* NewTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTripViewController.m; sourceTree = "<group>"; };
-		84D87A791C45941C0041B915 /* TripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsTableViewController.h; sourceTree = "<group>"; };
-		84D87A7A1C45941C0041B915 /* TripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsTableViewController.m; sourceTree = "<group>"; };
 		84D87A7C1C459F9F0041B915 /* TakePicture2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePicture2ViewController.h; sourceTree = "<group>"; };
 		84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePicture2ViewController.m; sourceTree = "<group>"; };
 		84D87A801C45A4AC0041B915 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
@@ -234,8 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				84D87A7F1C45A47B0041B915 /* HomeGroup */,
-				84D87A6F1C454D210041B915 /* AccountGroup */,
-				84D87A6E1C454CD50041B915 /* TripsGroup */,
+				84D87A6F1C454D210041B915 /* MyExpenseGroup */,
+				84D87A6E1C454CD50041B915 /* AccountsGroup */,
 				84DE7E471C411A0E0098E85E /* graphics */,
 				840502B41C2C0674004D4A69 /* images */,
 				840502B01C2BEAD3004D4A69 /* Model */,
@@ -304,8 +300,6 @@
 		840502B41C2C0674004D4A69 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				63E4233D1C4689E60095B620 /* images.jpeg */,
-				63E423391C45EDE10095B620 /* ic_person_add.png */,
 				84D87A631C453DD30041B915 /* checkbox_yes.png */,
 				84D87A611C453DC90041B915 /* checkbox_no.png */,
 				84501A801C444F90003EB227 /* photo-7.png */,
@@ -339,22 +333,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		84D87A6E1C454CD50041B915 /* TripsGroup */ = {
+		84C8A0CA1C4858CB00FDECCF /* To Change */ = {
 			isa = PBXGroup;
 			children = (
-				84D87A791C45941C0041B915 /* TripsTableViewController.h */,
-				84D87A7A1C45941C0041B915 /* TripsTableViewController.m */,
-				84D87A701C456D150041B915 /* TripsTableViewCell.h */,
-				84D87A711C456D150041B915 /* TripsTableViewCell.m */,
 				84D87A761C4592300041B915 /* NewTripViewController.h */,
 				84D87A771C4592300041B915 /* NewTripViewController.m */,
 				84D87A7C1C459F9F0041B915 /* TakePicture2ViewController.h */,
 				84D87A7D1C459F9F0041B915 /* TakePicture2ViewController.m */,
 			);
-			name = TripsGroup;
+			name = "To Change";
 			sourceTree = "<group>";
 		};
-		84D87A6F1C454D210041B915 /* AccountGroup */ = {
+		84D87A6E1C454CD50041B915 /* AccountsGroup */ = {
+			isa = PBXGroup;
+			children = (
+				84C8A0CA1C4858CB00FDECCF /* To Change */,
+				84C8A0C31C48211100FDECCF /* AccountsViewController.h */,
+				84C8A0C41C48211100FDECCF /* AccountsViewController.m */,
+				84C8A0C71C48343000FDECCF /* AccountsTableViewCell.h */,
+				84C8A0C81C48343000FDECCF /* AccountsTableViewCell.m */,
+			);
+			name = AccountsGroup;
+			sourceTree = "<group>";
+		};
+		84D87A6F1C454D210041B915 /* MyExpenseGroup */ = {
 			isa = PBXGroup;
 			children = (
 				840502B91C2C11D1004D4A69 /* ExpenseTableViewController.h */,
@@ -366,7 +368,7 @@
 				84501A7D1C4447B3003EB227 /* TakePictureViewController.h */,
 				84501A7E1C4447B3003EB227 /* TakePictureViewController.m */,
 			);
-			name = AccountGroup;
+			name = MyExpenseGroup;
 			sourceTree = "<group>";
 		};
 		84D87A7F1C45A47B0041B915 /* HomeGroup */ = {
@@ -507,13 +509,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63E4233A1C45EDE10095B620 /* ic_person_add.png in Resources */,
 				84501A811C444F90003EB227 /* photo-7.png in Resources */,
 				840502B61C2C0694004D4A69 /* business-bag-7.png in Resources */,
 				84E242351C411B440079B736 /* messi.jpg in Resources */,
 				84D87A621C453DC90041B915 /* checkbox_no.png in Resources */,
 				847CC1481C4421C60067BF5B /* home-7.png in Resources */,
-				63E4233E1C4689E60095B620 /* images.jpeg in Resources */,
 				840502B81C2C06DC004D4A69 /* connect-arrow-left-right-7.png in Resources */,
 				8405028A1C2BE9B5004D4A69 /* LaunchScreen.storyboard in Resources */,
 				840502871C2BE9B5004D4A69 /* Assets.xcassets in Resources */,
@@ -597,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E2423F1C41A2180079B736 /* LastUpdateSql.m in Sources */,
+				84C8A0C91C48343000FDECCF /* AccountsTableViewCell.m in Sources */,
 				84D87A781C4592300041B915 /* NewTripViewController.m in Sources */,
 				8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */,
 				840502C91C2F04BD004D4A69 /* FirstViewController.m in Sources */,
@@ -604,15 +605,14 @@
 				840502BE1C2C12E8004D4A69 /* NewExpenseViewController.m in Sources */,
 				840502791C2BE9B4004D4A69 /* main.m in Sources */,
 				84501A7F1C4447B3003EB227 /* TakePictureViewController.m in Sources */,
-				84D87A721C456D150041B915 /* TripsTableViewCell.m in Sources */,
 				843ED9161C3D41E100672C73 /* ModelParse.m in Sources */,
 				84D87A7E1C459F9F0041B915 /* TakePicture2ViewController.m in Sources */,
 				84D87A851C45A5620041B915 /* HomeTableViewCell.m in Sources */,
 				840502AF1C2BEAC4004D4A69 /* Model.m in Sources */,
 				843ED9191C3E9DCE00672C73 /* ExpenseTableViewCell.m in Sources */,
 				84E2423C1C4184BF0079B736 /* LoginViewController.m in Sources */,
+				84C8A0C51C48211100FDECCF /* AccountsViewController.m in Sources */,
 				63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */,
-				84D87A7B1C45941C0041B915 /* TripsTableViewController.m in Sources */,
 				84D87A821C45A4AC0041B915 /* HomeTableViewController.m in Sources */,
 				840502BB1C2C11D1004D4A69 /* ExpenseTableViewController.m in Sources */,
 				840502C31C2DD328004D4A69 /* ModelSql.m in Sources */,
