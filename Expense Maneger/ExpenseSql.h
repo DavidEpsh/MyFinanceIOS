@@ -25,7 +25,9 @@
 +(void)addSheet:(sqlite3 *)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId;
 +(void)addUserSheet:(sqlite3 *)database userName:(NSString *)userName sheetId:(NSString *)sheetId;
 +(BOOL)hasLocalUserSheet:(sqlite3*)database sheetId:(NSString*)sheetId;
--(void)addNewSheet:(NSString*)sheetName sheetId:(NSString*)sheetId;
++(void)addNewSheet:(NSString*)sheetName sheetId:(NSString*)sheetId;
+
++(NSArray*)getAllSheetNames:(sqlite3*)database;
 
 
 @end

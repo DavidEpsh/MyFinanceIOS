@@ -40,6 +40,10 @@ static Model* instance = nil;
     return self;
 }
 
+-(NSArray*)getAllSheetNames{
+    return [sqlModelImpl getAllSheetNames];
+}
+
 -(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block{
     dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
     

@@ -38,8 +38,8 @@
 */
     
     //Title for Rows of Picker
-    _pickerData = [[NSArray alloc]initWithObjects:@"Row1", @"Row 2", @"Row3", @"Row 4", nil];
-    
+    //_pickerData = [[NSArray alloc]initWithObjects:@"Row1", @"Row 2", @"Row3", @"Row 4", nil];
+    _pickerData = [[NSArray alloc]initWithArray:[[Model instance] getAllSheetNames]];
     // Do any additional setup after loading the view.
 }
 
@@ -111,7 +111,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-        AccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccountsCell" forIndexPath:indexPath];
+    AccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccountsCell" forIndexPath:indexPath];
 
     Expense* exp = [expenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;

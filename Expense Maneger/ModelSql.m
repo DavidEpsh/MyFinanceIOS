@@ -128,5 +128,9 @@
     return [ExpenseSql hasLocalUserSheet:database sheetId:sheetId];
 }
 
+-(NSArray*)getAllSheetNames{
+    return [ExpenseSql getAllSheetNames:database];
+}
+
 
 @end

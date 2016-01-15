@@ -29,5 +29,6 @@
 -(BOOL)checkHasLocalUserSheet:(NSString*)sheetId;
 -(void)addSheetToSql:(NSString*)sheetName sheetId:(NSString*)sheetId;
 -(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
+-(NSArray*)getAllSheetNames;
 
 @end

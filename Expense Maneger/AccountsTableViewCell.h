@@ -17,8 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *category;
 
-
-
 @property (weak, nonatomic) IBOutlet UILabel *date;
 
 

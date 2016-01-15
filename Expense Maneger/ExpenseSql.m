@@ -26,11 +26,11 @@ static NSString* EXPENSE_AMOUNT = @"AMOUNT";
 static NSString* EXPENSE_DATE = @"DATE";
 static NSString* EXPENSE_IMAGE = @"EXPENSE_IMAGE";
 static NSString* USER_NAME = @"USER_NAME";
-static NSString* SHEET_ID = @"SHEET_ID";
 static NSString* IS_REPEATING = @"IS_REPEATING";
 static NSString* IS_SAVED = @"IS_SAVED";
-static NSString* USER_SHEETS= @"USERS_SHEETS";
 
+static NSString* SHEET_ID = @"SHEET_ID";
+static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 +(BOOL)createTable:(sqlite3*)database{
     char* errormsg;
@@ -305,6 +305,27 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
         return NO;
     }
     return NO;
+}
++(NSArray*)getAllSheetNames:(sqlite3*)database{
+    NSMutableArray* data = [[NSMutableArray alloc] init];
+    sqlite3_stmt *statment;
+    
+    NSString* currUser = [Model instance].user;
+    
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEET_NAME from SHEETS JOIN USERS_SHEETS ON (USERS_SHEETS.SHEET_ID = SHEETS.SHEET_ID) WHERE USERS_SHEETS.USER_NAME = '%@'",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            
+            NSString* sheetName = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
+
+            [data addObject:sheetName];
+        }
+    }else{
+        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        return nil;
+    }
+    return data;
 }
 
 
