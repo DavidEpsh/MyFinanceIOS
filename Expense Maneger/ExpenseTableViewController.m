@@ -19,13 +19,22 @@
 @implementation ExpenseTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];  
+    [super viewDidLoad];
     
-
     expenses = [[NSArray alloc] init];
+    [self.activityIndicator startAnimating];
     
-    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
-
+    [[Model instance]getAllRelevantExpensesAsync:^{
+        expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
+        [self.tableView reloadData];
+        [self.activityIndicator stopAnimating];
+        self.activityIndicator.hidden = YES;
+    }];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor grayColor];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
 }
 
  
@@ -99,11 +108,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)onRefresh{
+    [[Model instance]getAllRelevantExpensesAsync:^{
+        expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"editExpenseNew"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NewExpenseViewController *destViewController = segue.destinationViewController;
         destViewController.currExpense = [expenses objectAtIndex:indexPath.row];
+        destViewController.editMode = [NSNumber numberWithInt:1];
 //        destViewController.expenseAmountText = [[expenses objectAtIndex:indexPath.row] examount];
 //        destViewController.expenseCategoryText = [[expenses objectAtIndex:indexPath.row] excategory];
 //        destViewController.expenseDateText = [[expenses objectAtIndex:indexPath.row] exdate];

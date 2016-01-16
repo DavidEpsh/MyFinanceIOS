@@ -36,6 +36,10 @@
         _currentSheet = [_pickerData objectAtIndex:0];
         expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
     }
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.myTableView addSubview:refreshControl];
 }
 
 //The void statment to configue the REST of a pickerView
@@ -190,12 +194,22 @@
         NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
         NewExpenseViewController *destViewController = segue.destinationViewController;
         destViewController.currExpense = [expenses objectAtIndex:indexPath.row];
+        destViewController.editMode = [NSNumber numberWithInt:1];
         
     }else if ([segue.identifier isEqualToString:@"toNewExpenseFromSheet"]) {
         NewExpenseViewController *destViewController = segue.destinationViewController;
         NSString* sheet = [[Model instance]getSheetId:_currentSheet];
         destViewController.sheetId = sheet;
     }
+}
+
+-(void)onRefresh:(UIRefreshControl *)refreshControl{
+    [[Model instance]getAllRelevantExpensesAsync:^{
+        expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+        [self.myTableView reloadData];
+        [refreshControl endRefreshing];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 @end

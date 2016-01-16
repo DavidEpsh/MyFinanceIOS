@@ -15,5 +15,5 @@
     NSString* sheetId;
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
+-(void)onRefresh;
 @end

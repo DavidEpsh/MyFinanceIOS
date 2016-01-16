@@ -104,9 +104,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="delegate" destination="6hg-Cx-tvQ" id="fsT-c2-lMj"/>
-                                </connections>
                             </tableView>
                             <pickerView contentMode="scaleToFill" id="Dgk-UT-iDz">
                                 <rect key="frame" x="0.0" y="64" width="216" height="47"/>
@@ -435,6 +432,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="pLL-yR-NDs">
+                            <rect key="frame" x="0.0" y="215" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ExpenseTableViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="expenseCell" rowHeight="123" id="Mst-ee-Brk" customClass="ExpenseTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="320" height="123"/>
@@ -485,7 +487,6 @@
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="bev-2x-Rr0" id="tDR-4p-9CP"/>
-                            <outlet property="delegate" destination="bev-2x-Rr0" id="1sZ-3q-uvr"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Account" id="KUs-ca-iRM">
@@ -496,6 +497,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="pLL-yR-NDs" id="WqZ-kd-WEK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YW-OW-Lu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -708,6 +712,6 @@
         <image name="plus-simple-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="257-rN-BdT"/>
+        <segue reference="EQP-km-QbC"/>
     </inferredMetricsTieBreakers>
 </document>

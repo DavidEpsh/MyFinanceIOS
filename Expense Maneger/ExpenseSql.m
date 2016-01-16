@@ -81,7 +81,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 +(void)deleteExpense:(sqlite3 *)database exp:(Expense *)exp{
     sqlite3_stmt *statment;
-    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = '%@' WHERE TIMEINMILLISECOND = '%@'", @(0), exp.userName];
+    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = %d WHERE TIMEINMILLISECOND = '%@'", 0, exp.timeInMillisecond];
     
     if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
         if(sqlite3_step(statment) == SQLITE_DONE){
@@ -130,7 +130,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
     NSString* currUser = [Model instance].user;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@'",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@' AND IS_SAVED = 1",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
@@ -168,7 +168,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
         sheetId = [ExpenseSql getSheetId:database sheetName:sheetId];
     }
     
-    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@'",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
+    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@' AND IS_SAVED = 1",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
 
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
@@ -189,7 +189,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             [data addObject:exp];
         }
     }else{
-        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        NSLog(@"ERROR: Get expenses for sheet failed %s",sqlite3_errmsg(database));
         return nil;
     }
     return data;
@@ -203,28 +203,16 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 +(void)updateExpense:(sqlite3*)database expense:(Expense *)exp{
     sqlite3_stmt *statment;
-    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = '%@' WHERE TIMEINMILLISECOND = '%@'", @(0), exp.userName];
+    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET NAME='%s', CATEGORY='%s', AMOUNT=%d, DATE='%s', EXPENSE_IMAGE='%s', IS_REPEATING=%d WHERE TIMEINMILLISECOND = '%s'",[exp.exname UTF8String],[exp.excategory UTF8String],[exp.examount intValue],[exp.exdate UTF8String], [exp.eximage UTF8String], [exp.isRepeating intValue], [exp.timeInMillisecond UTF8String]];
     
-    if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
-            
-        sqlite3_bind_text(statment, 1, [exp.timeInMillisecond UTF8String],-1,NULL);
-        sqlite3_bind_text(statment, 2, [exp.exname UTF8String],-1,NULL);
-        sqlite3_bind_text(statment, 3, [exp.excategory UTF8String],-1,NULL);
-        sqlite3_bind_int(statment, 4, [exp.examount intValue]);
-        sqlite3_bind_text(statment, 5, [exp.exdate UTF8String],-1,NULL);
-        sqlite3_bind_text(statment, 6, [exp.eximage UTF8String],-1,NULL);
-        sqlite3_bind_text(statment, 7, [exp.userName UTF8String],-1,NULL);
-        sqlite3_bind_text(statment, 8, [exp.sheetId UTF8String],-1,NULL);
-        sqlite3_bind_int(statment, 9, [exp.isRepeating intValue]);
-        sqlite3_bind_int(statment, 10, [exp.isSaved intValue]);
-        
-        char* errmsg;
-        sqlite3_exec(database, "COMMIT", NULL, NULL, &errmsg);
-        return;
-        
+    if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){      
+        if(sqlite3_step(statment) == SQLITE_DONE){
+            return;
+        }else{
+            NSLog(@"ERROR: update expense failed %s",sqlite3_errmsg(database));
+        }
     }
-    NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
-    }
+}
 
 
 
@@ -242,9 +230,10 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             
             if(sqlite3_step(statment) == SQLITE_DONE){
                 return;
-            }
+            }else{
+            NSLog(@"ERROR: add sheet failed %s",sqlite3_errmsg(database));
         }
-        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+    }
     }
 }
 
@@ -279,7 +268,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
                 return;
             }
         }
-        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        NSLog(@"ERROR: add user sheet failed %s",sqlite3_errmsg(database));
     }
 }
 
@@ -331,7 +320,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             }
         }
     }else{
-        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        NSLog(@"ERROR: get all sheet names failed %s",sqlite3_errmsg(database));
         return nil;
     }
     return data;
@@ -351,7 +340,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             
         }
     }else{
-        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        NSLog(@"ERROR: get sheet id failed %s",sqlite3_errmsg(database));
         return nil;
     }
     return nil;

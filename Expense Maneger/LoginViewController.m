@@ -54,11 +54,10 @@
 
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         if (res) {
-            [[Model instance] getAllRelevantExpensesAsync :^(NSError* res){
-                [self.activityIndicator stopAnimating];
-                self.activityIndicator.hidden = YES;
+            //[[Model instance] getAllRelevantExpensesAsync :^(NSError* res){
+//                [self.activityIndicator stopAnimating];
+//                self.activityIndicator.hidden = YES;
                 [self performSegueWithIdentifier:@"toApp" sender:self];
-            }];
         }
     }];
     }else if([self validEmail:self.userTV.text] == NO){

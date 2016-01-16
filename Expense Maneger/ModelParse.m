@@ -14,7 +14,7 @@ static NSString* SHEET_NAME = @"sheetName";
 static NSString* TIMEINMILLISECOND = @"timeInMillisecond";
 static NSString* EXPENSE_NAME = @"exname";
 static NSString* EXPENSE_CATEGORY = @"excategory";
-static NSString* EXPENSE_ID = @"expenseId";
+static NSString* EXPENSE_ID = @"timeInMillisecond";
 static NSString* EXPENSE_AMOUNT = @"examount";
 static NSString* EXPENSE_DATE = @"exdate";
 static NSString* EXPENSE_IMAGE = @"eximage";
@@ -100,67 +100,57 @@ static NSString* IS_SAVED = @"isSaved";
 }
 
 -(void)getAllRelevantExpensesAsync{
-//    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
-//    dispatch_async(myQueue, ^{
-        //long operation
-        NSMutableArray* arrayUserNames = [[NSMutableArray alloc] init];
-        NSMutableArray* arraySheetId = [[NSMutableArray alloc] init];
+    //    dispatch_queue_t myQueue =    dispatch_queue_create("myQueueName", NULL);
+    //    dispatch_async(myQueue, ^{
+    //long operation
+    NSMutableArray* arrayUserNames = [[NSMutableArray alloc] init];
+    NSMutableArray* arraySheetId = [[NSMutableArray alloc] init];
     
-        currUser = [Model instance].user;
-
-        PFQuery* queryFindUsersSheets = [PFQuery queryWithClassName:USERS_SHEETS_TABLE];
-        [queryFindUsersSheets whereKey:USER_NAME equalTo:currUser];
-        [queryFindUsersSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            //Now we got all USERS_SHEETS -> Get all expense + get all sheets
-            if (error == nil) {
-                if (objects  == nil || [objects count] == 0) {
-                    [arrayUserNames addObject:currUser];
-                    [arraySheetId addObject:currUser];
-                    [[Model instance] addUserSheet:currUser sheetId:currUser withParse:YES];
-                }else{
-                    for (PFObject* object in objects){
-                        [arrayUserNames addObject:object[USER_NAME]];
-                        [arraySheetId addObject:object[SHEET_ID]];
-                        [[Model instance] addUserSheet:object[USER_NAME] sheetId:object[SHEET_ID] withParse:NO];
-                    }
+    currUser = [Model instance].user;
+    
+    PFQuery* queryFindUsersSheets = [PFQuery queryWithClassName:USERS_SHEETS_TABLE];
+    [queryFindUsersSheets whereKey:USER_NAME equalTo:currUser];
+    NSArray* res = [queryFindUsersSheets findObjects];
+    if ([res count] == 0) {
+        [arrayUserNames addObject:currUser];
+        [arraySheetId addObject:currUser];
+        [[Model instance] addUserSheet:currUser sheetId:currUser withParse:YES];
+    }else{
+        for (PFObject* object in res){
+            [arrayUserNames addObject:object[USER_NAME]];
+            [arraySheetId addObject:object[SHEET_ID]];
+            [[Model instance] addUserSheet:object[USER_NAME] sheetId:object[SHEET_ID] withParse:NO];
+        }
+    }
+    
+    PFQuery* queryExpenses = [PFQuery queryWithClassName:EXPENSE_TABLE];
+    [queryExpenses whereKey:USER_NAME containedIn:arrayUserNames];
+    [queryExpenses whereKey:SHEET_ID containedIn:arraySheetId];
+    [queryExpenses whereKey:IS_SAVED equalTo:@(1)];
+    NSArray* result = [queryExpenses findObjects];
+    for (PFObject* obj in result){
+        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
+        
+        [[Model instance] addExp:expense withParse:NO];
+    }
+    
+    PFQuery* queryFindSheets = [PFQuery queryWithClassName:SHEETS_TABLE];
+    [queryFindSheets whereKey:SHEET_ID containedIn:arraySheetId];
+    [queryFindSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error == nil){
+            if (objects == nil || [objects count] == 0) {
+                [[Model instance]addSheet:@"My Account" sheetId:currUser withParse:YES];
+            }
+            for(PFObject* obj in objects){
+                [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID] withParse:NO];
             }
             
-            PFQuery* queryExpenses = [PFQuery queryWithClassName:EXPENSE_TABLE];
-            [queryExpenses whereKey:USER_NAME containedIn:arrayUserNames];
-            [queryExpenses whereKey:SHEET_ID containedIn:arraySheetId];
-            [queryExpenses findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                //Now we got all Expenses -> inserting to SQL
-                if (error == nil) {
-                    for (PFObject* obj in objects){
-                        Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
-                    
-                        [[Model instance] addExp:expense withParse:NO];
-                    }
-                    
-                    PFQuery* queryFindSheets = [PFQuery queryWithClassName:SHEETS_TABLE];
-                    [queryFindSheets whereKey:SHEET_ID containedIn:arraySheetId];
-                    [queryFindSheets findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                        if(error == nil){
-                            if (objects == nil || [objects count] == 0) {
-                                [[Model instance]addSheet:@"My Account" sheetId:currUser withParse:YES];
-                            }
-                            for(PFObject* obj in objects){
-                                [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID] withParse:NO];
-                            }
-                            
-                        }
-                    }];
-                    
-                }
-            }];
-            
-//            dispatch_queue_t mainQ = dispatch_get_main_queue();
-//            dispatch_async(mainQ, ^{
-//                block();
-//            });
         }
-        }];
-    }
+    }];
+    
+}
+
+
 
 -(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:SHEETS_TABLE];
@@ -222,7 +212,6 @@ static NSString* IS_SAVED = @"isSaved";
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         for (PFObject* obj in objects){
-            obj[@"timeInMillisecond"] = exp.timeInMillisecond;
             obj[@"exname"] = exp.exname;
             obj[@"excategory"] = exp.excategory;
             obj[@"examount"] = exp.examount;

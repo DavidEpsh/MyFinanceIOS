@@ -28,7 +28,7 @@
 -(void)saveExpenseImage:(Expense*)exp image:(UIImage*)image block:(void(^)(NSError*))block;
 -(void)login:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
 -(void)signup:(NSString*)user pwd:(NSString*)pwd block:(void(^)(BOOL))block;
--(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block;
+-(void)getAllRelevantExpensesAsync:(void(^)())block;
 -(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)updateExpense:(Expense*)exp;
 //-(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;

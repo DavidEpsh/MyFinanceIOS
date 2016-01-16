@@ -36,21 +36,20 @@
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [self.date setInputAccessoryView:toolBar];
     
-    expenseName.text = _expenseNameText;
-    category.text = _expenseCategoryText;
-    date.text = _expenseDateText;
     
-    if(_expenseAmountText != nil){
-        amount.text = [NSString stringWithFormat:@"%@", _expenseAmountText];
+    if(_currExpense != nil){
+        expenseName.text = [_currExpense exname];
+        category.text = [_currExpense excategory];
+        date.text = [_currExpense exdate];
+        amount.text = [NSString stringWithFormat:@"%@", [_currExpense examount]];
+        _sheetId = [_currExpense sheetId];
+        
+        if ([[_currExpense isRepeating] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            [checkBoxBtn setImage:[UIImage imageNamed:@"checkbox_yes.png"] forState:UIControlStateNormal];
+            nonchecked = YES;
+            [defaults setBool:nonchecked forKey:@"boxIsChecked"];
+        }
     }
-    
-    if (_expenseRepeatingText == [NSNumber numberWithInt:1]) {
-        [checkBoxBtn setImage:[UIImage imageNamed:@"checkbox_yes.png"] forState:UIControlStateNormal];
-        nonchecked = YES;
-        [defaults setBool:nonchecked forKey:@"boxIsChecked"];
-    }
-    
-
 }
 
 -(void)ShowSelectedDate
@@ -88,7 +87,7 @@
     NSNumber* examount = [NSNumber numberWithInt:[self.amount.text intValue]];
     NSString* st_exdate = [NSString stringWithFormat:@"%@", self.date.text];
     NSString* currentUser = [[Model instance]getCurrentUser];
-    NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];	
+    
     NSNumber* isRepeating;
     if(nonchecked == YES){
         isRepeating = [NSNumber numberWithInt:1];
@@ -99,10 +98,17 @@
     if (_sheetId == nil) {
         _sheetId = [[Model instance]getCurrentUser];
     }
+    Expense* exp = [Expense alloc];
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+    if ([_editMode isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        exp = [[Expense alloc] init:_currExpense.timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+        [[Model instance]updateExpense:exp];
+    }else{
+        NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+        [[Model instance]addExp:exp withParse:YES];
+    }
     
-    [[Model instance]addExp:exp withParse:YES];
     [self.delegate onSave:exp];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

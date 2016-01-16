@@ -124,15 +124,14 @@ static Model* instance = nil;
     }
 }
 
--(void)getAllRelevantExpensesAsync:(void(^)(NSError*))block{
+-(void)getAllRelevantExpensesAsync:(void(^)())block {
     dispatch_queue_t myQueue = dispatch_queue_create("myQueueName", NULL);
-    
     dispatch_async(myQueue, ^{
         [parseModelImpl getAllRelevantExpensesAsync];
         
         dispatch_queue_t mainQ = dispatch_get_main_queue();
         dispatch_async(mainQ, ^{
-            block(nil);
+            block();
         });
     } );
 }

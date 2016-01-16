@@ -30,12 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *category;
 @property (weak, nonatomic) IBOutlet UITextField *amount;
 @property (weak, nonatomic) IBOutlet UITextField *date;
-@property (weak, nonatomic) NSString *expenseNameText;
-@property (weak, nonatomic) NSString *expenseCategoryText;
-@property (weak, nonatomic) NSNumber *expenseAmountText;
-@property (weak, nonatomic) NSString *expenseDateText;
+@property (weak, nonatomic) NSNumber *editMode;
 @property (weak, nonatomic) NSNumber *expenseRepeatingText;
-@property (weak, nonatomic) NSString *expenseImagePath;
 @property (weak, nonatomic) NSString *sheetId;
 @property (weak, nonatomic) Expense *currExpense;
 
