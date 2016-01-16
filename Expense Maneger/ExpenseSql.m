@@ -159,12 +159,18 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     return data;
 }
 
-+(NSArray*)getExpensesForSheet:(sqlite3*)database sheetId:(NSString*)sheetId{
++(NSArray*)getExpensesForSheet:(sqlite3*)database sheetId:(NSString*)sheetId useSheetName:(BOOL)useSheetName{
         NSMutableArray* data = [[NSMutableArray alloc] init];
         sqlite3_stmt *statment;
+    const char *sqlStatement;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@'",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
-        
+    if(useSheetName){
+        sheetId = [ExpenseSql getSheetId:database sheetName:sheetId];
+    }
+    
+    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@'",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
+
+    
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
                 
@@ -220,6 +226,8 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
     }
 
+
+
 // Adding Sheets
 +(void)addSheet:(sqlite3 *)database sheetName:(NSString *)sheetName sheetId:(NSString *)sheetId{
     
@@ -256,9 +264,9 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     return NO;
 }
 
-+(void)addUserSheet:(sqlite3 *)database userName:(NSString *)userName sheetId:(NSString *)sheetId{
++(void)addUserSheet:(sqlite3 *)database userName:(NSString *)userName sheetId:(NSString *)sheetId {
     
-    if(![ExpenseSql hasUserSheet:database sheetId:sheetId] && ![ExpenseSql hasLocalUserSheet:database sheetId:sheetId]){
+    if(![ExpenseSql hasUserSheet:database userName:userName sheetId:sheetId]){
         
         sqlite3_stmt *statment;
         NSString* query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@,%@) values (?,?);", USER_SHEETS,USER_NAME, SHEET_ID];
@@ -275,9 +283,8 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     }
 }
 
-+(BOOL)hasUserSheet:(sqlite3*)database sheetId:(NSString*)sheetId{
++(BOOL)hasUserSheet:(sqlite3*)database userName:(NSString*)userName sheetId:(NSString*)sheetId{
     sqlite3_stmt *statment;
-    NSString* userName = [Model instance].user;
     const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from USERS_SHEETS WHERE SHEET_ID = '%@' AND USER_NAME = '%@'", sheetId, userName] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
@@ -312,7 +319,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     
     NSString* currUser = [Model instance].user;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEET_NAME from SHEETS JOIN USERS_SHEETS ON (USERS_SHEETS.SHEET_ID = SHEETS.SHEET_ID) WHERE USERS_SHEETS.USER_NAME = '%@'",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEETS.SHEET_NAME from SHEETS JOIN USERS_SHEETS ON (USERS_SHEETS.SHEET_ID = SHEETS.SHEET_ID) WHERE USERS_SHEETS.USER_NAME = '%@'",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
@@ -330,5 +337,24 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     return data;
 }
 
++(NSString*)getSheetId:(sqlite3*)database sheetName:(NSString*)sheetName{
+    sqlite3_stmt *statment;
+    
+//    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEETS.SHEET_ID from SHEETS JOIN USERS_SHEETS ON (USERS_SHEETS.SHEET_ID = SHEETS.SHEET_ID) WHERE SHEETS.SHEET_NAME = '%@'",sheetName ] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEET_ID from SHEETS WHERE SHEET_NAME = '%@'",sheetName ] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            
+            return [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
+            
+        }
+    }else{
+        NSLog(@"ERROR: addExpense failed %s",sqlite3_errmsg(database));
+        return nil;
+    }
+    return nil;
+}
 
 @end

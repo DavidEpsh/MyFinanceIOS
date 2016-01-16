@@ -60,7 +60,7 @@ static NSString* IS_SAVED = @"isSaved";
 }
 
 
--(void)addExp:(Expense*)exp withParse:(BOOL)withParse{
+-(void)addExp:(Expense*)exp{
     PFObject *obj = [PFObject objectWithClassName:@"Expense"];
     obj[@"timeInMillisecond"] = exp.timeInMillisecond;
     obj[@"exname"] = exp.exname;
@@ -114,7 +114,6 @@ static NSString* IS_SAVED = @"isSaved";
             //Now we got all USERS_SHEETS -> Get all expense + get all sheets
             if (error == nil) {
                 if (objects  == nil || [objects count] == 0) {
-                    [ModelParse addUserSheetsToParse:currUser sheetId:currUser];
                     [arrayUserNames addObject:currUser];
                     [arraySheetId addObject:currUser];
                     [[Model instance] addUserSheet:currUser sheetId:currUser withParse:YES];
@@ -136,7 +135,6 @@ static NSString* IS_SAVED = @"isSaved";
                         Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
                     
                         [[Model instance] addExp:expense withParse:NO];
-                        
                     }
                     
                     PFQuery* queryFindSheets = [PFQuery queryWithClassName:SHEETS_TABLE];
@@ -145,7 +143,6 @@ static NSString* IS_SAVED = @"isSaved";
                         if(error == nil){
                             if (objects == nil || [objects count] == 0) {
                                 [[Model instance]addSheet:@"My Account" sheetId:currUser withParse:YES];
-                                [ModelParse addSheet:@"My Account" sheetId:currUser];
                             }
                             for(PFObject* obj in objects){
                                 [[Model instance] addSheet:obj[SHEET_NAME] sheetId:obj[SHEET_ID] withParse:NO];
@@ -165,17 +162,17 @@ static NSString* IS_SAVED = @"isSaved";
         }];
     }
 
-+(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
+-(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:SHEETS_TABLE];
     obj[SHEET_ID] = sheetId;
     obj[SHEET_NAME] = sheetName;
     [obj saveInBackground];
 }
 
-+(void)addUserSheetsToParse:(NSString*)userNmae sheetId:(NSString*)sheetId{
+-(void)addUserSheetsToParse:(NSString*)userName sheetId:(NSString*)sheetId{
     PFObject *obj = [PFObject objectWithClassName:USERS_SHEETS_TABLE];
     obj[SHEET_ID] = sheetId;
-    obj[USER_NAME] = userNmae;
+    obj[USER_NAME] = userName;
     [obj saveInBackground];
 }
 

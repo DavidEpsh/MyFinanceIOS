@@ -20,7 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signupBtn;
-+(BOOL) validEmail:(NSString*) emailString;
-+(void)makeToast:(NSString*)toastMsg;
+
+-(BOOL) validEmail:(NSString*) emailString;
+-(void)makeToast:(NSString*)toastMsg;
 
 @end

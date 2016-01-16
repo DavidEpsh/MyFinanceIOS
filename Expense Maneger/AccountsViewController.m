@@ -8,6 +8,7 @@
 
 #import "AccountsViewController.h"
 #import "AccountsTableViewCell.h"
+#import "NewExpenseViewController.h"
 #import "ModelSql.h"
 #import "Model.h"
 #import <Parse/Parse.h>
@@ -24,23 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-/*
-    self.navigationItem.title = @"Share Accouts";
+
+    myTableView.dataSource=self;
+    myTableView.delegate=self;
     
+    _pickerData = [[NSArray alloc]initWithArray:[[Model instance] getAllSheetNames]];
     expenses = [[NSArray alloc] init];
     
-    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"Share Accouts"]];
-
-    if(sheetId == nil ){
-        sheetId = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    if ([_pickerData count] > 0) {
+        _currentSheet = [_pickerData objectAtIndex:0];
+        expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
     }
-
-*/
-    
-    //Title for Rows of Picker
-    //_pickerData = [[NSArray alloc]initWithObjects:@"Row1", @"Row 2", @"Row3", @"Row 4", nil];
-    _pickerData = [[NSArray alloc]initWithArray:[[Model instance] getAllSheetNames]];
-    // Do any additional setup after loading the view.
 }
 
 //The void statment to configue the REST of a pickerView
@@ -58,22 +53,10 @@
 }
 
  -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-     int select = (int)row;
-     if (select == 0) {
-     self.label.text = @"Row 1 was selected";
-     }
-     if (select == 1) {
-         self.label.text = @"Row 2 was selected";
-         
-     }
-     if (select == 2) {
-         self.label.text = @"Row 3 was selected";
-         
-     }
-     if (select == 3) {
-         self.label.text = @"Row 4 was selected";
-         
-     }
+     _currentSheet = [_pickerData objectAtIndex:row];
+     expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+     [self.myTableView reloadData];
+     //[self.myTableView popViewControllerAnimated:YES];
      
  }- (void)didReceiveMemoryWarning {
      [super didReceiveMemoryWarning];
@@ -86,28 +69,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"numberOfRowsInSection");
-    return 5;
-    //expenses.count;
+    return expenses.count;
 }
-
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- NSLog(@"cellForRowAtIndexPath");
- 
-    AccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccountsCell"];
-     
- //AccountsTableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:@"AccountsCell"];
- 
- NSLog(@"cellForRowAtIndexPath");
- 
- cell.textLabel.text = @"Test";
- 
- return cell;
- }
-*/
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -140,16 +103,6 @@
     return cell;
 }
 
-+(void)makeToast:(NSString*)toastMsg {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add new user" message:@"Enter user email" preferredStyle:UIAlertControllerStyleAlert];
-
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
-     {
-         textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Username");
-     }];
-
-}
-
 - (void)alertTextFieldDidChange:(UITextField *)sender
 {
     UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
@@ -160,50 +113,89 @@
         okAction.enabled = login.text.length > 2;
     }
 }
+
 - (IBAction)addNewAccount:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add New user" message:@"Enter username" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:nil];
     
+    [alert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *textField = alert.textFields[0];
+        
+        if ([AccountsViewController validEmail:textField.text]) {
+            NSString* currentSheetId = [[Model instance] getSheetId:_currentSheet];
+            [[Model instance]addUserSheet:textField.text sheetId:currentSheetId withParse:YES];
+            
+        }else{
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Invalid input" message: @"Please enter a valid email address" preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss" style: UIAlertActionStyleDestructive handler: ^(UIAlertAction *action) {
+            }];
+            [controller addAction: alertAction];
+            [self presentViewController:controller animated:YES completion:nil];
+        }
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
-/*
--(void)onSave:(id)newExpense {
-    [self.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-*/
-/*
-- (IBAction)newUser:(id)sender {
-    
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Hello!" message:@"Please enter your name:" delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    UITextField * alertTextField = [alert textFieldAtIndex:0];
-    alertTextField.keyboardType = UIKeyboardTypeNumberPad;
-    alertTextField.placeholder = @"Enter your name";
-    [alert show];
-    
-    
-    
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
++(BOOL) validEmail:(NSString*) emailString {
     
-    NSString* input = [[alertView textFieldAtIndex:0] text];
-    if(sheetId != nil){
-        sheetId = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-        [[Model instance] addSheet:@"Trip" sheetId:sheetId];
-        [[Model instance] addUserSheetToSQL:input sheetId:sheetId];
+    if([emailString length]==0){
+        return NO;
+    }
+    NSString *regExPattern = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSUInteger regExMatches = [regEx numberOfMatchesInString:emailString options:0 range:NSMakeRange(0, [emailString length])];
+    
+    if (regExMatches == 0) {
+        return NO;
+    } else {
+        return YES;
     }
 }
 
-*/
-
-
-//#pragma mark - Navigation
-/*
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)addSheet:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add New Shared Account" message:@"Enter Account Name" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:nil];
+    
+    [alert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *textField = alert.textFields[0];
+        NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        NSString* formattedTime = [timeInMillisecond substringToIndex:9];
+        _currentSheet = textField.text;
+        [[Model instance]addSheet:_currentSheet sheetId:formattedTime withParse:YES];
+        [[Model instance]addUserSheet:[[Model instance] user] sheetId:formattedTime withParse:YES];
+        _pickerData = [[NSArray alloc]initWithArray:[[Model instance] getAllSheetNames]];
+        
+        [self.myTableView reloadData];
+        [self.pickerData reloadAllComponents];
+        [self.navigationController popViewControllerAnimated:YES];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"editExpenseFromSheet"]) {
+        NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
+        NewExpenseViewController *destViewController = segue.destinationViewController;
+        destViewController.currExpense = [expenses objectAtIndex:indexPath.row];
+        
+    }else if ([segue.identifier isEqualToString:@"toNewExpenseFromSheet"]) {
+        NewExpenseViewController *destViewController = segue.destinationViewController;
+        NSString* sheet = [[Model instance]getSheetId:_currentSheet];
+        destViewController.sheetId = sheet;
+    }
+}
 
 @end

@@ -24,7 +24,7 @@
 
     expenses = [[NSArray alloc] init];
     
-    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user]];
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
 
 }
 
@@ -94,9 +94,23 @@
 */
 
 -(void)onSave:(id)newExpense {
-    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"]];
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"] useSheetName:NO];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"editExpenseNew"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NewExpenseViewController *destViewController = segue.destinationViewController;
+        destViewController.currExpense = [expenses objectAtIndex:indexPath.row];
+//        destViewController.expenseAmountText = [[expenses objectAtIndex:indexPath.row] examount];
+//        destViewController.expenseCategoryText = [[expenses objectAtIndex:indexPath.row] excategory];
+//        destViewController.expenseDateText = [[expenses objectAtIndex:indexPath.row] exdate];
+//        destViewController.expenseImagePath = [[expenses objectAtIndex:indexPath.row] eximage];
+//        destViewController.expenseRepeatingText = [[expenses objectAtIndex:indexPath.row] isRepeating];
+//        destViewController.sheetId = [Model instance].user;
+    }
 }
     
 /*

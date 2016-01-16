@@ -10,6 +10,7 @@
 		63E4232E1C44F3AC0095B620 /* AccountsSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4232D1C44F3AC0095B620 /* AccountsSql.m */; };
 		63E423301C45013D0095B620 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E4232F1C45013D0095B620 /* UIKit.framework */; };
 		63E423321C4501FA0095B620 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E423311C4501FA0095B620 /* Foundation.framework */; };
+		63E423401C4973690095B620 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 63E4233F1C4973690095B620 /* images.jpeg */; };
 		840502791C2BE9B4004D4A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840502781C2BE9B4004D4A69 /* main.m */; };
 		8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405027B1C2BE9B4004D4A69 /* AppDelegate.m */; };
 		840502851C2BE9B4004D4A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840502831C2BE9B4004D4A69 /* Main.storyboard */; };
@@ -85,6 +86,7 @@
 		63E4232D1C44F3AC0095B620 /* AccountsSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsSql.m; sourceTree = "<group>"; };
 		63E4232F1C45013D0095B620 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		63E423311C4501FA0095B620 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		63E4233F1C4973690095B620 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		840502741C2BE9B4004D4A69 /* Expense Maneger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Maneger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840502781C2BE9B4004D4A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8405027A1C2BE9B4004D4A69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		840502B41C2C0674004D4A69 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				63E4233F1C4973690095B620 /* images.jpeg */,
 				84D87A631C453DD30041B915 /* checkbox_yes.png */,
 				84D87A611C453DC90041B915 /* checkbox_no.png */,
 				84501A801C444F90003EB227 /* photo-7.png */,
@@ -514,6 +517,7 @@
 				84E242351C411B440079B736 /* messi.jpg in Resources */,
 				84D87A621C453DC90041B915 /* checkbox_no.png in Resources */,
 				847CC1481C4421C60067BF5B /* home-7.png in Resources */,
+				63E423401C4973690095B620 /* images.jpeg in Resources */,
 				840502B81C2C06DC004D4A69 /* connect-arrow-left-right-7.png in Resources */,
 				8405028A1C2BE9B5004D4A69 /* LaunchScreen.storyboard in Resources */,
 				840502871C2BE9B5004D4A69 /* Assets.xcassets in Resources */,

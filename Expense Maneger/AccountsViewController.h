@@ -14,17 +14,21 @@
     NSArray* expenses;
     NSString* sheetId;
     NSArray* _pickerData;
+    NSString* _currentSheet;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerData;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *label;
-
-
-@property (weak, nonatomic) IBOutlet UIButton *addNewAccount;
-
+@property (weak, nonatomic) IBOutlet UIButton *addNewUser;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UIButton *addNewSheet;
+
+@property (weak, nonatomic) NSString *sheetIdString;
+
+
+
+
++(BOOL) validEmail:(NSString*) emailString;
 
 
 @end

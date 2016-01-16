@@ -22,12 +22,13 @@
 -(void)updateExpenses:(NSArray*)expenses;
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId;
 -(void)updateExpense:(Expense *)expense;
--(NSArray*)getExpensesForSheet:(NSString*)sheetId;
--(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
--(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId useSheetName:(BOOL)useSheetName;
+//-(void)addExp:(Expense*)exp;
+-(void)newExpense:(Expense*)exp;
 //-(void)addUserSheet:(NSString *)userName sheetId:(NSString *)sheetId;
 -(BOOL)checkHasLocalUserSheet:(NSString*)sheetId;
 -(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
 -(NSArray*)getAllSheetNames;
+-(NSString*)getSheetId:(NSString*)sheetName;
 
 @end

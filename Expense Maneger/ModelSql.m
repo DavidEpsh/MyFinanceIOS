@@ -66,20 +66,20 @@
     return  self;
 }
 
--(void)newExpense:(Expense*)exp withParse:(BOOL)withParse{
+-(void)newExpense:(Expense*)exp{
     [ExpenseSql addExpense:database exp:exp];
 }
 -(void)addSheet:(NSString*)sheetName sheetId:(NSString*)sheetId{
     [ExpenseSql addSheet:database sheetName:sheetName sheetId:sheetId];
+}
+-(NSString*)getSheetId:(NSString*)sheetName{
+    return [ExpenseSql getSheetId:database sheetName:sheetName];
 }
 
 -(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId{
     [ExpenseSql addUserSheet:database userName:userName sheetId:sheetId];
 }
 
--(void)addExpense:(Expense*)exp withParse:(BOOL)withParse{
-    [ExpenseSql addExpense:database exp:exp];
-}
 -(void)deleteExpense:(Expense *)exp{
     [ExpenseSql deleteExpense:database exp:exp];
 }
@@ -116,8 +116,8 @@
     return  NO;
 }
 
--(NSArray*)getExpensesForSheet:(NSString*)sheetId{
-    return [ExpenseSql getExpensesForSheet:database sheetId:sheetId];
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId useSheetName:(BOOL)useSheetName{
+    return [ExpenseSql getExpensesForSheet:database sheetId:sheetId useSheetName:useSheetName];
 }
 
 -(BOOL)checkHasLocalUserSheet:(NSString*)sheetId{

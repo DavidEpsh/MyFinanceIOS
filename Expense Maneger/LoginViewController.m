@@ -50,7 +50,7 @@
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
     
-    if([LoginViewController validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
+    if([self validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
 
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         if (res) {
@@ -61,12 +61,12 @@
             }];
         }
     }];
-    }else if([LoginViewController validEmail:self.userTV.text] == NO){
+    }else if([self validEmail:self.userTV.text] == NO){
         self.activityIndicator.hidden = YES;
-        [LoginViewController makeToast:@"Incorrect Email"];
+        [self makeToast:@"Incorrect Email"];
     }else{
         self.activityIndicator.hidden = YES;
-        [LoginViewController makeToast:@"Password must be more than 4 charaters"];
+        [self makeToast:@"Password must be more than 4 charaters"];
     }
     
     
@@ -76,7 +76,7 @@
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
     
-    if([LoginViewController validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
+    if([self validEmail:self.userTV.text] && self.PasswordTV.text.length >= 4){
         
     [[Model instance] signup:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         self.activityIndicator.hidden = YES;
@@ -84,16 +84,16 @@
             [self performSegueWithIdentifier:@"toApp" sender:self];
         }
     }];
-    }else if([LoginViewController validEmail:self.userTV.text] == NO){
+    }else if([self validEmail:self.userTV.text] == NO){
         self.activityIndicator.hidden = YES;
-        [LoginViewController makeToast:@"Incorrect Email"];
+        [self makeToast:@"Incorrect Email"];
     }else{
         self.activityIndicator.hidden = YES;
-        [LoginViewController makeToast:@"Password must be more than 4 charaters"];
+        [self makeToast:@"Password must be more than 4 charaters"];
     }
 }
 
-+(BOOL) validEmail:(NSString*) emailString {
+-(BOOL) validEmail:(NSString*) emailString {
     
     if([emailString length]==0){
         return NO;
@@ -111,16 +111,12 @@
     }
 }
 
-+(void)makeToast:(NSString*)toastMsg {
-    NSString *message = toastMsg;
-    UIAlertView *toast = [[UIAlertView alloc]initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    
-    [toast show];
-    int duration = 1; // in seconds
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [toast dismissWithClickedButtonIndex:0 animated:YES];
-    });
+-(void)makeToast:(NSString*)toastMsg {
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Invalid input" message: toastMsg preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss" style: UIAlertActionStyleDestructive handler: ^(UIAlertAction *action) {
+    }];
+    [controller addAction: alertAction];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 

@@ -69,7 +69,7 @@
 
 - (IBAction)saveAct:(id)sender {
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
-    NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
+    NSString* currCategory = [NSString stringWithFormat:@"%@", self.category.text];
     NSNumber* examount = [NSNumber numberWithInt:[self.amount.text intValue]];
     NSString* st_exdate = [NSString stringWithFormat:@"%@", self.date.text];
     NSString* currentUser = [[Model instance]getCurrentUser];
@@ -79,7 +79,7 @@
         isRepeating = [NSNumber numberWithInt:1];
     }
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Trip" isRepeating:isRepeating isSaved:@(1)];
+    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Trip" isRepeating:isRepeating isSaved:@(1)];
     
     [self.delegate onSave:exp];
     [[Model instance]addExp:exp withParse:YES];

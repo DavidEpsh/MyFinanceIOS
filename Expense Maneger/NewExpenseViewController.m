@@ -35,6 +35,21 @@
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [self.date setInputAccessoryView:toolBar];
+    
+    expenseName.text = _expenseNameText;
+    category.text = _expenseCategoryText;
+    date.text = _expenseDateText;
+    
+    if(_expenseAmountText != nil){
+        amount.text = [NSString stringWithFormat:@"%@", _expenseAmountText];
+    }
+    
+    if (_expenseRepeatingText == [NSNumber numberWithInt:1]) {
+        [checkBoxBtn setImage:[UIImage imageNamed:@"checkbox_yes.png"] forState:UIControlStateNormal];
+        nonchecked = YES;
+        [defaults setBool:nonchecked forKey:@"boxIsChecked"];
+    }
+    
 
 }
 
@@ -69,17 +84,23 @@
 - (IBAction)saveAct:(id)sender {
     
     NSString* exname = [NSString stringWithFormat:@"%@", self.expenseName.text];
-    NSString* category = [NSString stringWithFormat:@"%@", self.category.text];
+    NSString* currCategory = [NSString stringWithFormat:@"%@", self.category.text];
     NSNumber* examount = [NSNumber numberWithInt:[self.amount.text intValue]];
     NSString* st_exdate = [NSString stringWithFormat:@"%@", self.date.text];
     NSString* currentUser = [[Model instance]getCurrentUser];
     NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];	
     NSNumber* isRepeating;
-    if(nonchecked == NO){
+    if(nonchecked == YES){
         isRepeating = [NSNumber numberWithInt:1];
+    }else{
+        isRepeating = [NSNumber numberWithInt:0];
     }
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:category examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:[[Model instance]getCurrentUser] isRepeating:isRepeating isSaved:@(1)];
+    if (_sheetId == nil) {
+        _sheetId = [[Model instance]getCurrentUser];
+    }
+    
+    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
     
     [[Model instance]addExp:exp withParse:YES];
     [self.delegate onSave:exp];

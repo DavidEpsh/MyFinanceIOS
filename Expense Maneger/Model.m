@@ -88,9 +88,9 @@ static Model* instance = nil;
 
 -(void)addExp:(Expense*)exp withParse:(BOOL)withParse{
     
-    [sqlModelImpl newExpense:exp withParse:NO];
+    [sqlModelImpl newExpense:exp];
     if (withParse) {
-        [parseModelImpl addExp:exp withParse:NO];
+        [parseModelImpl addExp:exp];
     }
 }
 
@@ -99,6 +99,11 @@ static Model* instance = nil;
     [parseModelImpl deleteExpense:exp];
 
 }
+
+-(NSString*)getSheetId:(NSString*)sheetName{
+    return [sqlModelImpl getSheetId:sheetName];
+}
+
 -(NSString*)getCurrentUser{
     return [parseModelImpl getCurrentUser];
 }
@@ -132,8 +137,8 @@ static Model* instance = nil;
     } );
 }
 
--(NSArray*)getExpensesForSheet:(NSString*)sheetId{
-    return [sqlModelImpl getExpensesForSheet:sheetId];
+-(NSArray*)getExpensesForSheet:(NSString*)sheetId useSheetName:(BOOL)useSheetName{
+    return [sqlModelImpl getExpensesForSheet:sheetId useSheetName:useSheetName];
 }
 
 -(void)getExpenseImage:(Expense*)exp block:(void(^)(UIImage*))block{
