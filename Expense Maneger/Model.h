@@ -13,7 +13,7 @@
 
 @protocol GetExpensesListener <NSObject>
 
--(void)done:(NSArray*)data;
+//-(void)done:(NSArray*)data;
 
 @end
 
@@ -35,7 +35,7 @@
 -(NSString*)getCurrentUser;
 -(void)addUserSheet:(NSString *)userName sheetId:(NSString *)sheetId withParse:(BOOL)withParse;
 //-(BOOL)checkHasLocalUserSheet:(NSString *)sheetId;
--(void)done:(NSArray*)data;
+//-(void)done:(NSArray*)data;
 
 -(NSArray*)getExpensesForSheet:(NSString*)sheetId useSheetName:(BOOL)useSheetName;
 -(void)addSheet:(NSString *)sheetName sheetId:(NSString *)sheetId withParse:(BOOL)withParse;
