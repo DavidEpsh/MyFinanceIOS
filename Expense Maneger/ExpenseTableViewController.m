@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     expenses = [[NSArray alloc] init];
+    NSMutableArray* currentExpenses = [[NSMutableArray alloc] init];
     [self.activityIndicator startAnimating];
     
     [[Model instance]getAllRelevantExpensesAsync:^{
@@ -29,6 +30,11 @@
         [self.tableView reloadData];
         [self.activityIndicator stopAnimating];
         self.activityIndicator.hidden = YES;
+        
+        for (int i=0; i < expenses.count % 7; i++) {
+            [currentExpenses addObject:[expenses objectAtIndex:i]];
+        }
+        
     }];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -62,7 +68,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"expenseCell" forIndexPath:indexPath];
-    
+
     Expense* exp = [expenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
@@ -85,22 +91,21 @@
     }else{
         cell.imageView.image = [UIImage imageNamed:@"images.jpeg"];
     }
- 
+
     return cell;
 }
-/*
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"toNewExpense"]) {
-        NewExpenseViewController* nextVC = segue.destinationViewController;
-        nextVC.delegate = self;
-    }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    else if ([segue.identifier isEqualToString:@"toDetail"]){
-        DetailViewController* DetailVC = segue.destinationViewController;
-        DetailVC.student = [self.data objectAtIndex:[(UIButton*)sender tag]];
+    // when reaching bottom, load more
+    
+    float offs = (scrollView.contentOffset.y+scrollView.bounds.size.height);
+    float val = (scrollView.contentSize.height);
+    if (offs==val)
+    {
+        //add more data on your data array
     }
 }
-*/
 
 -(void)onSave:(id)newExpense {
     expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"] useSheetName:NO];
@@ -117,7 +122,7 @@
     }];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"editExpenseNew"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NewExpenseViewController *destViewController = segue.destinationViewController;
