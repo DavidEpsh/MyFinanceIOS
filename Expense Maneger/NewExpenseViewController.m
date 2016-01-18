@@ -110,7 +110,8 @@
         [[Model instance]updateExpense:exp];
     }else{
         NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-        exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:imageName userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+        NSString* formattedTime = [timeInMillisecond substringToIndex:9];
+        exp = [[Expense alloc] init:formattedTime exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:imageName userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
         [[Model instance]addExp:exp withParse:YES];
     }
     

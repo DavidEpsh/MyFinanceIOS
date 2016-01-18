@@ -43,6 +43,9 @@
 -(NSArray*)getAllSheetNames;
 -(NSString*)getSheetId:(NSString*)sheetName;
 
+-(NSString*)getLastUpdateDate;
+-(void)setLastUpdateDate:(NSString*)date;
+
 @end
 
 

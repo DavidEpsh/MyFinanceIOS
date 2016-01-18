@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *exName;
 @property (weak, nonatomic) IBOutlet UILabel *category;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 
 @property NSString* imageName;
 

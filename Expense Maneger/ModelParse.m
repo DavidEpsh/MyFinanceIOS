@@ -22,6 +22,7 @@ static NSString* USER_NAME = @"userName";
 static NSString* SHEET_ID = @"sheetId";
 static NSString* IS_REPEATING = @"isRepeating";
 static NSString* IS_SAVED = @"isSaved";
+static NSString* UPDATED_AT = @"updatedAt";
 
 @implementation ModelParse
 
@@ -127,6 +128,11 @@ static NSString* IS_SAVED = @"isSaved";
     [queryExpenses whereKey:USER_NAME containedIn:arrayUserNames];
     [queryExpenses whereKey:SHEET_ID containedIn:arraySheetId];
     [queryExpenses whereKey:IS_SAVED equalTo:@(1)];
+    
+    if ([[Model instance]getLastUpdateDate] != nil) {
+        [queryExpenses whereKey:UPDATED_AT greaterThan:[[Model instance] getLastUpdateDate]]; //Using updatedAt to retrieve relavent expenses
+    }
+    
     NSArray* result = [queryExpenses findObjects];
     for (PFObject* obj in result){
         Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
@@ -148,6 +154,18 @@ static NSString* IS_SAVED = @"isSaved";
         }
     }];
     
+    PFQuery* queryLastUpdate = [PFQuery queryWithClassName:EXPENSE_TABLE];
+    [queryLastUpdate orderByDescending:UPDATED_AT];
+    [queryLastUpdate getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object != nil) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+            [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"];
+            [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+            NSDate* lastUpdatedDate = [object updatedAt];
+            NSString* formattedDate =[formatter stringFromDate:lastUpdatedDate];
+            [[Model instance] setLastUpdateDate: formattedDate];
+        }
+    }];
 }
 
 

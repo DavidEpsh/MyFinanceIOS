@@ -211,4 +211,13 @@ static Model* instance = nil;
     return pngData;
 }
 
+-(NSString*)getLastUpdateDate{
+    return [sqlModelImpl getExpensesLastUpdateDate];
+}
+
+-(void)setLastUpdateDate:(NSString*)date{
+    [sqlModelImpl setExpensesLastUpdateDate:date];
+}
+
+
 @end

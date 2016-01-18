@@ -130,7 +130,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
     NSString* currUser = [Model instance].user;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@' AND IS_SAVED = 1 ORDER BY TIMEINMILLISECOND DESC",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@' AND IS_SAVED = 1 ORDER BY TIMEINMILLISECOND ASC",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
@@ -168,7 +168,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
         sheetId = [ExpenseSql getSheetId:database sheetName:sheetId];
     }
     
-    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@' AND IS_SAVED = 1",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
+    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@' AND IS_SAVED = 1 ORDER BY TIMEINMILLISECOND DESC",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
 
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
@@ -345,5 +345,6 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     }
     return nil;
 }
+
 
 @end

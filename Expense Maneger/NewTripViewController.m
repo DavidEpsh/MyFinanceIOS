@@ -74,12 +74,13 @@
     NSString* st_exdate = [NSString stringWithFormat:@"%@", self.date.text];
     NSString* currentUser = [[Model instance]getCurrentUser];
     NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    NSString* formattedTime = [timeInMillisecond substringToIndex:9];
     NSNumber* isRepeating;
     if(nonchecked == NO){
         isRepeating = [NSNumber numberWithInt:1];
     }
     
-    Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Trip" isRepeating:isRepeating isSaved:@(1)];
+    Expense* exp = [[Expense alloc] init:formattedTime exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:@"My Trip" isRepeating:isRepeating isSaved:@(1)];
     
     [self.delegate onSave:exp];
     [[Model instance]addExp:exp withParse:YES];

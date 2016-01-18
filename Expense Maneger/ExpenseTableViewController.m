@@ -84,7 +84,7 @@
                     cell.imageView.image = image;
                     [cell.activityIndicator stopAnimating];
                 }else{
-                    cell.imageView.image = [UIImage imageNamed:@"messi.jpg"];
+                    cell.imageView.image = [UIImage imageNamed:@"images.jpeg"];
                 }
             }
         }];
@@ -96,7 +96,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= [currentExpenses count] - 1) {
+    if (indexPath.row >= [currentExpenses count] - 1 || currentExpenses.count < expenses.count) {
         if (currentExpenses.count < expenses.count) {
             int y = (int)currentExpenses.count;
             for (int i = y ; i < y + 5 ; i++) {
