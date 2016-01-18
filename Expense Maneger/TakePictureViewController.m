@@ -8,6 +8,7 @@
 
 #import "TakePictureViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "Model.h"
 
 
 @interface TakePictureViewController ()
@@ -18,6 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (_imageName != nil) {
+        [self.imageViewPhoto setImage:[[Model instance] readingImageFromFile:_imageName]];
+    }else{
+        _saveButton.enabled = NO;
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -55,6 +62,7 @@
     image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
     [self.imageViewPhoto setImage:image];
+    _saveButton.enabled = YES;
     
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
     {

@@ -40,7 +40,7 @@
 @property (weak, nonatomic) NSNumber *expenseRepeatingText;
 @property (weak, nonatomic) NSString *sheetId;
 //@property (weak, nonatomic) UIImage *image;
-//@property (weak, nonatomic) NSString *imageName;
+//@property (weak, nonatomic) NSString *imagePath;
 @property (weak, nonatomic) Expense *currExpense;
 
 

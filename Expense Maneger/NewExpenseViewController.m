@@ -162,15 +162,13 @@
     {
         TakePictureViewController *viewController = segue.destinationViewController;
         
+        if (_currExpense.eximage != nil && ![_currExpense.eximage isEqualToString:@""]) {
+            viewController.imageName = _currExpense.eximage;
+        }
+        
         viewController.callback = ^(UIImage *value1, NSString *value2) {
             image = value1;
             imageName = value2;
-            
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"dd-MM-yyyy"];
-            NSString *dateString = [formatter stringFromDate:[NSDate date]];
-            
-            imageName = [NSString stringWithFormat:@"%@_%@", dateString, imageName];
         };
     }
 }

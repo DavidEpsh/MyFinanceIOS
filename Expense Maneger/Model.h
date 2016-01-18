@@ -31,6 +31,7 @@
 -(void)getAllRelevantExpensesAsync:(void(^)())block;
 -(void)addExp:(Expense*)exp withParse:(BOOL)withParse;
 -(void)updateExpense:(Expense*)exp;
+-(UIImage*)readingImageFromFile:(NSString*)fileName;
 //-(void)newExpense:(Expense*)exp withParse:(BOOL)withParse;
 -(NSString*)getCurrentUser;
 -(void)addUserSheet:(NSString *)userName sheetId:(NSString *)sheetId withParse:(BOOL)withParse;

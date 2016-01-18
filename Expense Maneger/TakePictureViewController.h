@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 @property (copy) void(^callback)(UIImage *value1, NSString *value2);
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+
+@property (weak, nonatomic) NSString *imageName;
 - (IBAction)onSave:(NSString*)imagePath;
 
 @end
