@@ -666,6 +666,15 @@
                                     <action selector="choosePhoto:" destination="tEZ-4D-eTi" eventType="touchUpInside" id="cGS-4j-HOk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2jb-qj-G2U">
+                                <rect key="frame" x="137" y="467" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onSave:" destination="tEZ-4D-eTi" eventType="touchUpInside" id="68Q-oc-oQY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.96499464779999999" blue="0.98465019249999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -673,6 +682,7 @@
                     <navigationItem key="navigationItem" id="qiw-TH-QWQ"/>
                     <connections>
                         <outlet property="imageViewPhoto" destination="FuO-DS-tRN" id="tGw-Jg-RiW"/>
+                        <outlet property="saveButton" destination="2jb-qj-G2U" id="EnF-Ju-KDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gV-cF-owN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -712,6 +722,6 @@
         <image name="plus-simple-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EQP-km-QbC"/>
+        <segue reference="yLQ-Wb-d9H"/>
     </inferredMetricsTieBreakers>
 </document>

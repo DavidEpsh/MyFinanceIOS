@@ -37,6 +37,8 @@
         
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRefresh) name:@"updateParent" object:nil];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     //self.refreshControl.backgroundColor = [UIColor purpleColor];
     self.refreshControl.tintColor = [UIColor grayColor];
@@ -110,7 +112,7 @@
 -(void)onSave:(id)newExpense {
     expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",@"My Account"] useSheetName:NO];
     [self.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
+//   [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)onRefresh{
@@ -118,7 +120,7 @@
         expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

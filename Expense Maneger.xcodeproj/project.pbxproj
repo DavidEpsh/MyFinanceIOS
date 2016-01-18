@@ -11,6 +11,7 @@
 		63E423301C45013D0095B620 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E4232F1C45013D0095B620 /* UIKit.framework */; };
 		63E423321C4501FA0095B620 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E423311C4501FA0095B620 /* Foundation.framework */; };
 		63E423401C4973690095B620 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 63E4233F1C4973690095B620 /* images.jpeg */; };
+		63E423421C4C4DFB0095B620 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E423411C4C4DFB0095B620 /* AssetsLibrary.framework */; };
 		840502791C2BE9B4004D4A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840502781C2BE9B4004D4A69 /* main.m */; };
 		8405027C1C2BE9B4004D4A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405027B1C2BE9B4004D4A69 /* AppDelegate.m */; };
 		840502851C2BE9B4004D4A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840502831C2BE9B4004D4A69 /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		63E4232F1C45013D0095B620 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		63E423311C4501FA0095B620 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		63E4233F1C4973690095B620 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
+		63E423411C4C4DFB0095B620 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		840502741C2BE9B4004D4A69 /* Expense Maneger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Maneger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840502781C2BE9B4004D4A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8405027A1C2BE9B4004D4A69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E423421C4C4DFB0095B620 /* AssetsLibrary.framework in Frameworks */,
 				63E423321C4501FA0095B620 /* Foundation.framework in Frameworks */,
 				63E423301C45013D0095B620 /* UIKit.framework in Frameworks */,
 				841E4DAB1C318988005D38CB /* libz.tbd in Frameworks */,
@@ -318,6 +321,7 @@
 		841E4D951C31882F005D38CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				63E423411C4C4DFB0095B620 /* AssetsLibrary.framework */,
 				63E423311C4501FA0095B620 /* Foundation.framework */,
 				63E4232F1C45013D0095B620 /* UIKit.framework */,
 				841E4DAA1C318988005D38CB /* libz.tbd */,

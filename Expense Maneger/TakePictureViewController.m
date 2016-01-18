@@ -7,6 +7,8 @@
 //
 
 #import "TakePictureViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface TakePictureViewController ()
 
@@ -51,8 +53,19 @@
 //The void statement for picking the image and display it in.
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
     [self.imageViewPhoto setImage:image];
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
+    {
+        ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+        imagePath = [imageRep filename];
+    };
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:refURL resultBlock:resultblock failureBlock:nil];
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 
@@ -60,4 +73,12 @@
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (IBAction)onSave:(id)sender {
+    if (self.callback)
+        self.callback(image, imagePath);
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 @end

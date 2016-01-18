@@ -10,6 +10,7 @@
 #import "Model.h"
 #import "ModelSql.h"
 #import "ModelParse.h"
+#import "TakePictureViewController.h"
 
 @interface NewExpenseViewController ()
 
@@ -100,17 +101,29 @@
     }
     Expense* exp = [Expense alloc];
     
+    if (imageName == nil || image == nil) {
+        imageName = @"";
+    }
+    
     if ([_editMode isEqualToNumber:[NSNumber numberWithInt:1]]) {
-        exp = [[Expense alloc] init:_currExpense.timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+        exp = [[Expense alloc] init:_currExpense.timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:imageName userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
         [[Model instance]updateExpense:exp];
     }else{
         NSString* timeInMillisecond = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-        exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:@"" userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
+        exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:currCategory examount:examount exdate:st_exdate eximage:imageName userName:currentUser sheetId:_sheetId isRepeating:isRepeating isSaved:@(1)];
         [[Model instance]addExp:exp withParse:YES];
     }
     
-    [self.delegate onSave:exp];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (imageName != nil && image != nil) {
+        [[Model instance] saveExpenseImage:exp image:image block:^(NSError *error) {
+            
+        }];
+    }
+    
+    
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
 }
 
 @synthesize expenseName;
@@ -142,5 +155,25 @@
     }
     [defaults synchronize];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[TakePictureViewController class]])
+    {
+        TakePictureViewController *viewController = segue.destinationViewController;
+        
+        viewController.callback = ^(UIImage *value1, NSString *value2) {
+            image = value1;
+            imageName = value2;
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"dd-MM-yyyy"];
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            
+            imageName = [NSString stringWithFormat:@"%@_%@", dateString, imageName];
+        };
+    }
+}
+
 @end
 

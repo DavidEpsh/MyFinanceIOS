@@ -10,6 +10,8 @@
 #import "Expense.h"
 #import <sqlite3.h>
 
+@class NewExpenseViewController;
+
 @protocol NewExpenseDelegate <NSObject>
 -(void)onSave:(Expense*)newExpense;
 @end
@@ -18,10 +20,14 @@
 -(void)onSavebox;
 @end
 
+
+
 @interface NewExpenseViewController : UIViewController
 {
     UIDatePicker *datePicker;
     BOOL nonchecked;
+    UIImage *image;
+    NSString *imageName;
 }
 
 @property id<NewExpenseDelegate, CheckBoxDelegate> delegate;
@@ -33,7 +39,10 @@
 @property (weak, nonatomic) NSNumber *editMode;
 @property (weak, nonatomic) NSNumber *expenseRepeatingText;
 @property (weak, nonatomic) NSString *sheetId;
+//@property (weak, nonatomic) UIImage *image;
+//@property (weak, nonatomic) NSString *imageName;
 @property (weak, nonatomic) Expense *currExpense;
+
 
 - (IBAction)cancelAct:(id)sender;
 

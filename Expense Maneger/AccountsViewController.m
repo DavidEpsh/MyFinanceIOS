@@ -40,6 +40,8 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:refreshControl];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRefreshWithoutRefreshControl) name:@"updateParent" object:nil];
 }
 
 //The void statment to configue the REST of a pickerView
@@ -83,7 +85,6 @@
     Expense* exp = [expenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
-    cell.date.text = exp.exdate;
     
     cell.imageName = exp.eximage;
     cell.imageView.image = nil;
@@ -96,12 +97,12 @@
                     cell.imageView.image = image;
                     [cell.activityIndicator stopAnimating];
                 }else{
-                    cell.imageView.image = [UIImage imageNamed:@"BeautifulCat.jpg"];
+                    cell.imageView.image = [UIImage imageNamed:@"messi.jpg"];
                 }
             }
         }];
     }else{
-        cell.imageView.image = [UIImage imageNamed:@"troll.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"images.jpeg"];
     }
     
     return cell;
@@ -209,6 +210,13 @@
         [self.myTableView reloadData];
         [refreshControl endRefreshing];
         [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
+
+-(void)onRefreshWithoutRefreshControl{
+    [[Model instance]getAllRelevantExpensesAsync:^{
+        expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+        [self.myTableView reloadData];
     }];
 }
 
