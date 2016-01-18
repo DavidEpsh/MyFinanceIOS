@@ -12,6 +12,7 @@
 
 @interface AccountsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>{
     NSArray* expenses;
+    NSMutableArray* currentExpenses;
     NSString* sheetId;
     NSArray* _pickerData;
     NSString* _currentSheet;
@@ -22,8 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addNewUser;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addNewSheet;
-
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *righButton;
 @property (weak, nonatomic) NSString *sheetIdString;
+
 
 
 

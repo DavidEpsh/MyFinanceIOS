@@ -11,7 +11,8 @@
 #import "PNChart.h"
 
 @interface ExpenseTableViewController : UITableViewController<NewExpenseDelegate>{
-   NSArray* expenses;
+    NSArray* expenses;
+    NSMutableArray* currentExpenses;
     NSString* sheetId;
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

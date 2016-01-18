@@ -1,10 +1,7 @@
 //
 //  ExpenseTableViewController.m
 //  Expense Maneger
-//
-//  Created by Admin on 12/24/15.
-//  Copyright © 2015 elena. All rights reserved.
-//
+
 
 #import "ExpenseTableViewController.h"
 #import "ExpenseTableViewCell.h"
@@ -22,18 +19,19 @@
     [super viewDidLoad];
     
     expenses = [[NSArray alloc] init];
-    NSMutableArray* currentExpenses = [[NSMutableArray alloc] init];
+    currentExpenses = [[NSMutableArray alloc] init];
     [self.activityIndicator startAnimating];
     
     [[Model instance]getAllRelevantExpensesAsync:^{
         expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
-        [self.tableView reloadData];
         [self.activityIndicator stopAnimating];
         self.activityIndicator.hidden = YES;
         
         for (int i=0; i < expenses.count % 7; i++) {
             [currentExpenses addObject:[expenses objectAtIndex:i]];
         }
+        
+        [self.tableView reloadData];
         
     }];
     
@@ -60,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return expenses.count;
+    return currentExpenses.count;
 }
 /*
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -71,7 +69,7 @@
     
     ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"expenseCell" forIndexPath:indexPath];
 
-    Expense* exp = [expenses objectAtIndex:indexPath.row];
+    Expense* exp = [currentExpenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
  
@@ -97,16 +95,19 @@
     return cell;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    // when reaching bottom, load more
-    
-    float offs = (scrollView.contentOffset.y+scrollView.bounds.size.height);
-    float val = (scrollView.contentSize.height);
-    if (offs==val)
-    {
-        //add more data on your data array
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [currentExpenses count] - 1) {
+        if (currentExpenses.count < expenses.count) {
+            int y = (int)currentExpenses.count;
+            for (int i = y ; i < y + 5 ; i++) {
+                if (currentExpenses.count == expenses.count) {
+                    break;
+                }
+                [currentExpenses addObject:[expenses objectAtIndex:i]];
+            }
+        [self.tableView reloadData];
     }
+  }
 }
 
 -(void)onSave:(id)newExpense {

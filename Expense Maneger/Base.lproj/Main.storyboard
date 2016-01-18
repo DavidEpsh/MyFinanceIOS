@@ -135,8 +135,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addNewSheet" destination="OaH-U7-bWT" id="vOB-sQ-19v"/>
+                        <outlet property="addNewUser" destination="ucT-PV-dIW" id="9H0-Cb-WS8"/>
                         <outlet property="myTableView" destination="d87-pj-gHY" id="UCC-J0-quz"/>
                         <outlet property="pickerData" destination="Dgk-UT-iDz" id="fou-tn-ecd"/>
+                        <outlet property="righButton" destination="iMB-AS-Jec" id="ILP-Xx-16j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IDl-Cr-rru" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -722,6 +724,6 @@
         <image name="plus-simple-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yLQ-Wb-d9H"/>
+        <segue reference="EQP-km-QbC"/>
     </inferredMetricsTieBreakers>
 </document>

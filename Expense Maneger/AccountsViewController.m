@@ -31,11 +31,21 @@
     
     _pickerData = [[NSArray alloc]initWithArray:[[Model instance] getAllSheetNames]];
     expenses = [[NSArray alloc] init];
+    currentExpenses = [[NSMutableArray alloc] init];
     
     if ([_pickerData count] > 0) {
         _currentSheet = [_pickerData objectAtIndex:0];
         expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+        
+        for (int i=0; i < expenses.count % 7; i++) {
+            [currentExpenses addObject:[expenses objectAtIndex:i]];
+        }
+    }else{
+        _addNewUser.enabled = NO;
+        _righButton.enabled = NO;
     }
+    
+    [self.myTableView reloadData];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -61,8 +71,14 @@
  -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
      _currentSheet = [_pickerData objectAtIndex:row];
      expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+     [currentExpenses removeAllObjects];
+     
+     for (int i=0; i < expenses.count % 7; i++) {
+         [currentExpenses addObject:[expenses objectAtIndex:i]];
+     }
+     
      [self.myTableView reloadData];
-     //[self.myTableView popViewControllerAnimated:YES];
+
      
  }- (void)didReceiveMemoryWarning {
      [super didReceiveMemoryWarning];
@@ -75,14 +91,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return expenses.count;
+    return currentExpenses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     AccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccountsCell" forIndexPath:indexPath];
 
-    Expense* exp = [expenses objectAtIndex:indexPath.row];
+    Expense* exp = [currentExpenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
     
@@ -106,6 +122,21 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [currentExpenses count] - 1) {
+        if (currentExpenses.count < expenses.count) {
+            int y = (int)currentExpenses.count;
+            for (int i = y ; i < y + 5 ; i++) {
+                if (currentExpenses.count == expenses.count) {
+                    break;
+                }
+                [currentExpenses addObject:[expenses objectAtIndex:i]];
+            }
+            [self.myTableView reloadData];
+        }
+    }
 }
 
 - (void)alertTextFieldDidChange:(UITextField *)sender
@@ -179,6 +210,8 @@
         [self.myTableView reloadData];
         [self.pickerData reloadAllComponents];
         [self.navigationController popViewControllerAnimated:YES];
+        _addNewUser.enabled = YES;
+        _righButton.enabled = YES;
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
