@@ -29,5 +29,6 @@
 +(NSArray*)getAllSheetNames:(sqlite3*)database;
 +(NSArray*)getExpensesForSheet:(sqlite3*)database sheetId:(NSString*)sheetId useSheetName:(BOOL)useSheetName;
 +(NSString*)getSheetId:(sqlite3*)database sheetName:(NSString*)sheetName;
++(NSMutableDictionary*)getUsersAndSums:(sqlite3*)database sheetId:(NSString*)sheetId;
 
 @end

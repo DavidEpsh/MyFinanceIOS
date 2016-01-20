@@ -94,7 +94,7 @@ static Model* instance = nil;
     }
 }
 
--(void)deleteExpense:(Expense*)exp;{
+-(void)deleteExpense:(Expense*)exp{
     [sqlModelImpl deleteExpense:exp];
     [parseModelImpl deleteExpense:exp];
 
@@ -177,6 +177,11 @@ static Model* instance = nil;
             block(nil);
         });
     } );
+}
+
+
+-(NSMutableDictionary*)getUsersAndSums:(NSString*)sheetId{
+    return [sqlModelImpl getUsersAndSums:sheetId];
 }
 
 // Working with local files

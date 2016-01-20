@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "NewTripViewController.h"
-#import "PNChart.h"
 
 @interface AccountsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>{
     NSArray* expenses;
@@ -19,7 +17,6 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerData;
-@property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIButton *addNewUser;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addNewSheet;

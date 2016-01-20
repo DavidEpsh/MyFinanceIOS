@@ -136,7 +136,6 @@ static NSString* UPDATED_AT = @"updatedAt";
     NSArray* result = [queryExpenses findObjects];
     for (PFObject* obj in result){
         Expense* expense = [[Expense alloc] init:obj[@"timeInMillisecond"] exname:obj[@"exname"] excategory:obj[@"excategory"] examount:obj[@"examount"] exdate:obj[@"exdate"] eximage:obj[@"eximage"] userName:obj[@"userName"] sheetId:obj[@"sheetId"] isRepeating:obj[@"userName"] isSaved:obj[@"isSaved"]];
-        
         [[Model instance] addExp:expense withParse:NO];
     }
     
@@ -247,12 +246,13 @@ static NSString* UPDATED_AT = @"updatedAt";
 
 -(void)saveImage:(UIImage*)image withName:(NSString*)eximage{
     NSData* imageData = UIImageJPEGRepresentation(image,0);
-    
-    PFFile* file = [PFFile fileWithName:eximage data:imageData];
-    PFObject* fileobj = [PFObject objectWithClassName:@"Images"];
-    fileobj[@"eximage"] = eximage;
-    fileobj[@"file"] = file;
-    [fileobj save];
+    if(![eximage isEqualToString:@""]){
+        PFFile* file = [PFFile fileWithName:eximage data:imageData];
+        PFObject* fileobj = [PFObject objectWithClassName:@"Images"];
+        fileobj[@"eximage"] = eximage;
+        fileobj[@"file"] = file;
+        [fileobj save];
+    }
 }
 
 -(UIImage*)getImage:(NSString*)eximage{

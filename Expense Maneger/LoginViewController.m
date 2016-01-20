@@ -1,15 +1,8 @@
-//
-//  LoginViewController.m
-//  Expense Maneger
-//
-//  Created by Admin on 1/9/16.
-//  Copyright © 2016 elena. All rights reserved.
-//
-
 #import "LoginViewController.h"
 #import "Model.h"
 #import "ModelParse.h"
 #import "ModelSql.h"
+#import <Parse/Parse.h>
 
 @interface LoginViewController ()
 
@@ -21,12 +14,16 @@
     [super viewDidLoad];
     self.activityIndicator.hidden = YES;
 
-    // Do any additional setup after loading the view.
+
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([Model instance].user != nil) {
+    if ([PFUser currentUser] != nil) {
         [self performSegueWithIdentifier:@"toApp" sender:self];
+    }else{
+        self.activityIndicator.hidden = YES;
+        self.userTV.text = @"";
+        self.PasswordTV.text = @"";
     }
 }
 
@@ -54,10 +51,10 @@
 
     [[Model instance] login:self.userTV.text pwd:self.PasswordTV.text block:^(BOOL res) {
         if (res) {
-            //[[Model instance] getAllRelevantExpensesAsync :^(NSError* res){
-//                [self.activityIndicator stopAnimating];
-//                self.activityIndicator.hidden = YES;
-                [self performSegueWithIdentifier:@"toApp" sender:self];
+            [self performSegueWithIdentifier:@"toApp" sender:self];
+        }else{
+            [self makeToast:@"Wrong email or password"];
+            self.activityIndicator.hidden = YES;
         }
     }];
     }else if([self validEmail:self.userTV.text] == NO){

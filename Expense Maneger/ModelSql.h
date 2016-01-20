@@ -30,5 +30,6 @@
 -(void)addUserSheetToSQL:(NSString *)userName sheetId:(NSString *)sheetId;
 -(NSArray*)getAllSheetNames;
 -(NSString*)getSheetId:(NSString*)sheetName;
+-(NSMutableDictionary*)getUsersAndSums:(NSString*)sheetId;
 
 @end

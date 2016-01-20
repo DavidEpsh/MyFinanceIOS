@@ -115,14 +115,9 @@
         [[Model instance]addExp:exp withParse:YES];
     }
     
-    if (imageName != nil && image != nil) {
-        [[Model instance] saveExpenseImage:exp image:image block:^(NSError *error) {
-            
-        }];
-    }
+    [[Model instance]saveExpenseImage:exp image:image block:^(NSError *error) {
+    }];
     
-    
-    //[self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
 }
@@ -172,6 +167,13 @@
             imageName = value2;
         };
     }
+}
+- (IBAction)onDelete:(id)sender {
+    if (_currExpense != nil) {
+        [[Model instance]deleteExpense:_currExpense];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
 }
 
 @end

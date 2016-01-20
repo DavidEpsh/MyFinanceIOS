@@ -16,5 +16,7 @@
     NSString* sheetId;
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logOut;
+
 -(void)onRefresh;
 @end

@@ -60,18 +60,20 @@
 //The void statement for picking the image and display it in.
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
     [self.imageViewPhoto setImage:image];
     _saveButton.enabled = YES;
     
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
-    {
-        ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
-        imagePath = [imageRep filename];
-    };
-    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-    [assetslibrary assetForURL:refURL resultBlock:resultblock failureBlock:nil];
-    
+    if ([picker sourceType] == UIImagePickerControllerSourceTypeCamera) {
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd-hh:mm:ss"];
+        imagePath = [dateFormatter stringFromDate:[NSDate date]];
+        imagePath = [imagePath stringByAppendingString:@".jpg"];
+    } else {
+        NSURL *imagePathTemp = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+        NSString *imageName = [imagePathTemp lastPathComponent];
+        imagePath = imageName;
+    }
+
     [self dismissViewControllerAnimated:YES completion:NULL];
     
 }

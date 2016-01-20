@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userTV;
 @property (weak, nonatomic) IBOutlet UITextField *PasswordTV;

@@ -11,6 +11,7 @@
 #import "NewExpenseViewController.h"
 #import "ModelSql.h"
 #import "Model.h"
+#import "AppDelegate.h"
 #import <Parse/Parse.h>
 
 
@@ -51,7 +52,7 @@
     [refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:refreshControl];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRefreshWithoutRefreshControl) name:@"updateParent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"updateParent" object:nil];
 }
 
 //The void statment to configue the REST of a pickerView
@@ -239,18 +240,31 @@
 
 -(void)onRefresh:(UIRefreshControl *)refreshControl{
     [[Model instance]getAllRelevantExpensesAsync:^{
-        expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
-        [self.myTableView reloadData];
+        [self reloadData];
         [refreshControl endRefreshing];
-        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
 -(void)onRefreshWithoutRefreshControl{
     [[Model instance]getAllRelevantExpensesAsync:^{
-        expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
-        [self.myTableView reloadData];
+        [self reloadData];
     }];
+}
+
+-(void)reloadData{
+    expenses = [[Model instance]getExpensesForSheet:_currentSheet useSheetName:YES];
+    [currentExpenses removeAllObjects];
+    
+    if (currentExpenses.count < expenses.count) {
+        int y = (int)currentExpenses.count;
+        for (int i = y ; i < y + 5 ; i++) {
+            if (currentExpenses.count == expenses.count) {
+                break;
+            }
+            [currentExpenses addObject:[expenses objectAtIndex:i]];
+        }
+        [self.myTableView reloadData];
+    }
 }
 
 @end

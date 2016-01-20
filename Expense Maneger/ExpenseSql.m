@@ -60,8 +60,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
     
   
     if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
-        NSString* st_timeInMillisecond = [NSString stringWithFormat:@"%@", exp.timeInMillisecond];
-        sqlite3_bind_text(statment, 1, [st_timeInMillisecond UTF8String],-1,NULL);
+        sqlite3_bind_text(statment, 1, [exp.timeInMillisecond UTF8String],-1,NULL);
         sqlite3_bind_text(statment, 2, [exp.exname UTF8String],-1,NULL);
         sqlite3_bind_text(statment, 3, [exp.excategory UTF8String],-1,NULL);
         sqlite3_bind_int(statment, 4, [exp.examount intValue]);
@@ -81,7 +80,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 +(void)deleteExpense:(sqlite3 *)database exp:(Expense *)exp{
     sqlite3_stmt *statment;
-    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED = %d WHERE TIMEINMILLISECOND = '%@'", 0, exp.timeInMillisecond];
+    NSString* query = [NSString stringWithFormat:@"UPDATE EXPENSES SET IS_SAVED=%d WHERE TIMEINMILLISECOND = '%@'", 0, exp.timeInMillisecond];
     
     if (sqlite3_prepare_v2(database,[query UTF8String],-1,&statment,nil) == SQLITE_OK){
         if(sqlite3_step(statment) == SQLITE_DONE){
@@ -130,7 +129,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
     NSString* currUser = [Model instance].user;
     
-    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@' AND IS_SAVED = 1 ORDER BY TIMEINMILLISECOND ASC",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE USER_NAME = '%@' AND IS_SAVED=1 ORDER BY TIMEINMILLISECOND DESC",currUser ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
         while(sqlite3_step(statment) == SQLITE_ROW){
@@ -145,9 +144,6 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             NSString* sheetId = [NSString stringWithFormat:@"%s",sqlite3_column_text(statment,7)];
             NSNumber* isRepeating = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,8)];
             NSNumber* isSaved = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,9)];
-            //NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];
-            //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-            //NSString* my_exdate = [dateFormat dateFromString:exdate];
             
             Expense* exp = [[Expense alloc] init:timeInMillisecond exname:exname excategory:excategory examount:examount exdate:exdate eximage:eximage userName:userName sheetId:sheetId isRepeating:isRepeating isSaved:isSaved];
             [data addObject:exp];
@@ -168,7 +164,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
         sheetId = [ExpenseSql getSheetId:database sheetName:sheetId];
     }
     
-    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@' AND IS_SAVED = 1 ORDER BY TIMEINMILLISECOND DESC",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
+    sqlStatement =[[NSString stringWithFormat:@"SELECT * from EXPENSES WHERE SHEET_ID = '%@' AND IS_SAVED=1 ORDER BY TIMEINMILLISECOND DESC",sheetId ] cStringUsingEncoding:NSUTF8StringEncoding];
 
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
@@ -212,6 +208,34 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
             NSLog(@"ERROR: update expense failed %s",sqlite3_errmsg(database));
         }
     }
+}
+
++(NSMutableDictionary*)getUsersAndSums:(sqlite3*)database sheetId:(NSString*)sheetId{
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc]init];
+    sqlite3_stmt *statment;
+    const char* sqlStatement;
+    
+    if (sheetId == nil || [sheetId isEqualToString:[Model instance].user]) {
+        sheetId = [Model instance].user;
+        sqlStatement =[[NSString stringWithFormat:@"SELECT CATEGORY,SUM(AMOUNT) FROM EXPENSES WHERE SHEET_ID='%@' AND IS_SAVED=1 GROUP BY CATEGORY", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
+    }else{
+        sqlStatement =[[NSString stringWithFormat:@"SELECT USER_NAME,SUM(AMOUNT) FROM EXPENSES WHERE SHEET_ID='%@' AND IS_SAVED=1 GROUP BY USER_NAME", sheetId] cStringUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){
+        while(sqlite3_step(statment) == SQLITE_ROW){
+            
+            NSString* userName = [NSString stringWithFormat:@"%s", sqlite3_column_text(statment,0)];
+            NSNumber* exname = [NSNumber numberWithInt:(int)sqlite3_column_int(statment,1)];
+
+            [dictionary setObject:exname forKey:userName];
+        }
+    }else{
+        NSLog(@"ERROR: get users and sums failed %s",sqlite3_errmsg(database));
+        return nil;
+    }
+    return dictionary;
+    
 }
 
 
@@ -328,9 +352,7 @@ static NSString* USER_SHEETS= @"USERS_SHEETS";
 
 +(NSString*)getSheetId:(sqlite3*)database sheetName:(NSString*)sheetName{
     sqlite3_stmt *statment;
-    
-//    const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEETS.SHEET_ID from SHEETS JOIN USERS_SHEETS ON (USERS_SHEETS.SHEET_ID = SHEETS.SHEET_ID) WHERE SHEETS.SHEET_NAME = '%@'",sheetName ] cStringUsingEncoding:NSUTF8StringEncoding];
-    
+
     const char *sqlStatement =[[NSString stringWithFormat:@"SELECT SHEET_ID from SHEETS WHERE SHEET_NAME = '%@'",sheetName ] cStringUsingEncoding:NSUTF8StringEncoding];
     
     if (sqlite3_prepare_v2(database, sqlStatement, -1,&statment,nil) == SQLITE_OK){

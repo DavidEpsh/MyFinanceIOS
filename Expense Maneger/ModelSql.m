@@ -25,7 +25,7 @@
         
         NSURL* directoryUrl = [paths objectAtIndex:0];
         
-        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.sqlite"];
+        NSURL* fileUrl = [directoryUrl URLByAppendingPathComponent:@"database.db"];
 
         //Open the database
         NSString* filePath = [fileUrl path];
@@ -126,6 +126,10 @@
 
 -(NSArray*)getAllSheetNames{
     return [ExpenseSql getAllSheetNames:database];
+}
+
+-(NSMutableDictionary*)getUsersAndSums:(NSString*)sheetId{
+    return [ExpenseSql getUsersAndSums:database sheetId:sheetId];
 }
 
 

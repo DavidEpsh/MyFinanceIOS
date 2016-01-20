@@ -8,6 +8,8 @@
 #import "Model.h"
 #import "ModelSql.h"
 #import <Parse/Parse.h>
+#import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface ExpenseTableViewController ()
 
@@ -35,7 +37,7 @@
         
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRefresh) name:@"updateParent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"updateParent" object:nil];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     //self.refreshControl.backgroundColor = [UIColor purpleColor];
@@ -72,7 +74,7 @@
     Expense* exp = [currentExpenses objectAtIndex:indexPath.row];
     cell.exName.text = exp.exname;
     cell.category.text = exp.excategory;
- 
+    cell.date.text = exp.exdate;
     cell.imageName = exp.eximage;
     cell.imageView.image = nil;
     [cell.activityIndicator startAnimating];
@@ -118,11 +120,26 @@
 
 -(void)onRefresh{
     [[Model instance]getAllRelevantExpensesAsync:^{
-        expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
-        [self.tableView reloadData];
+        [self reloadData:@"onRefresh"];
         [self.refreshControl endRefreshing];
-        //[self.navigationController popViewControllerAnimated:YES];
     }];
+}
+
+-(void)reloadData:(id)sender{
+    //[self.tableView reloadData];
+    expenses = [[Model instance]getExpensesForSheet:[NSString stringWithFormat:@"%@",[Model instance].user] useSheetName:NO];
+    [currentExpenses removeAllObjects];
+    
+    if (currentExpenses.count < expenses.count) {
+        int y = (int)currentExpenses.count;
+        for (int i = y ; i < y + 5 ; i++) {
+            if (currentExpenses.count == expenses.count) {
+                break;
+            }
+            [currentExpenses addObject:[expenses objectAtIndex:i]];
+        }
+        [self.tableView reloadData];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -131,15 +148,17 @@
         NewExpenseViewController *destViewController = segue.destinationViewController;
         destViewController.currExpense = [expenses objectAtIndex:indexPath.row];
         destViewController.editMode = [NSNumber numberWithInt:1];
-//        destViewController.expenseAmountText = [[expenses objectAtIndex:indexPath.row] examount];
-//        destViewController.expenseCategoryText = [[expenses objectAtIndex:indexPath.row] excategory];
-//        destViewController.expenseDateText = [[expenses objectAtIndex:indexPath.row] exdate];
-//        destViewController.expenseImagePath = [[expenses objectAtIndex:indexPath.row] eximage];
-//        destViewController.expenseRepeatingText = [[expenses objectAtIndex:indexPath.row] isRepeating];
-//        destViewController.sheetId = [Model instance].user;
     }
 }
-    
+- (IBAction)logOut:(id)sender {
+    [PFUser logOut];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

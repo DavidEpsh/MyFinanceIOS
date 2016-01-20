@@ -1,12 +1,6 @@
-//
-//  TakePictureViewController.h
-//  Expense Maneger
-//
-//  Created by Admin on 1/11/16.
-//  Copyright © 2016 elena. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
+#import "Expense.h"
 @class TakePictureViewController;
 
 @interface TakePictureViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate> {
@@ -24,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 @property (copy) void(^callback)(UIImage *value1, NSString *value2);
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) Expense *currExpense;
 
 @property (weak, nonatomic) NSString *imageName;
 - (IBAction)onSave:(NSString*)imagePath;

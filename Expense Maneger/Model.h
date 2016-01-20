@@ -45,6 +45,9 @@
 
 -(NSString*)getLastUpdateDate;
 -(void)setLastUpdateDate:(NSString*)date;
+-(void)savingImageToFile:(UIImage*)image fileName:(NSString*)fileName;
+-(NSMutableDictionary*)getUsersAndSums:(NSString*)sheetId;
+-(void)deleteExpense:(Expense*)exp;
 
 @end
 

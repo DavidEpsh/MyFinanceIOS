@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *category;
 @property (weak, nonatomic) IBOutlet UITextField *amount;
 @property (weak, nonatomic) IBOutlet UITextField *date;
+@property (weak, nonatomic) IBOutlet UIButton *buttonDelete;
 @property (weak, nonatomic) NSNumber *editMode;
 @property (weak, nonatomic) NSNumber *expenseRepeatingText;
 @property (weak, nonatomic) NSString *sheetId;
